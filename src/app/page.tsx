@@ -533,7 +533,7 @@ export default function Home() {
                 delay: 500
               },              
               {
-                title: "Sample Porject",
+                title: "Mobile Application",
                 description: "Mobile application for tracking workouts, nutrition, and progress with personalized recommendations.",
                 tags: ["React Native", "GraphQL", "AWS"],
                 image: "",
