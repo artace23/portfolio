@@ -215,6 +215,8 @@ const ClientAnimatedBackground = () => {
   return <AnimatedBackground />;
 };
 
+
+
 // Project card component
 const ProjectCard = ({ 
   title, 
@@ -237,12 +239,16 @@ const ProjectCard = ({
   };
 }) => {
   const [tiltStyle, setTiltStyle] = useState({ transform: 'perspective(1000px)' });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
+    
+    // Update mouse position for gradient
+    setMousePosition({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
     
     const multiplier = 20;
     const rotateX = ((y - rect.height / 2) / rect.height) * multiplier;
@@ -255,56 +261,84 @@ const ProjectCard = ({
   
   const handleMouseLeave = () => {
     setTiltStyle({ transform: 'perspective(1000px)' });
+    setMousePosition({ x: 0, y: 0 });
   };
   
   return (
     <div 
-      className="project-card bg-gray-800 rounded-xl overflow-hidden flex flex-col h-full relative transition-all duration-300"
+      className="relative group"
       style={{ 
-        ...tiltStyle,
         animationDelay: `${delay}ms`,
-        opacity: 0,
-        animation: 'fade-in 0.5s ease-out forwards, card-float 3s ease-in-out infinite',
       }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
-      {banner && (
-        <div className={`absolute top-4 right-0 z-20 ${banner.color} text-white text-xs py-1 px-3 rounded-l-full shadow-lg transform -skew-x-12`}>
-          {banner.text}
+      {/* Modified glow effect that follows cursor */}
+      <div 
+        className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-75 transition-opacity duration-300 ease-in-out"
+        style={{
+          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgb(52, 211, 153), rgb(59, 130, 246))`,
+          filter: 'blur(8px)',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+          perspective: '1000px',
+          willChange: 'filter'
+        }}
+      ></div>
+      <div 
+        className="relative bg-gray-800 rounded-xl overflow-hidden flex flex-col h-full transition-all duration-300 ease-in-out z-10"
+        style={{
+          ...tiltStyle,
+          backfaceVisibility: 'hidden',
+          transform: `${tiltStyle.transform} translateZ(0)`,
+          WebkitFontSmoothing: 'subpixel-antialiased'
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        {banner && (
+          <div className={`absolute top-4 right-0 z-20 ${banner.color} text-white text-xs py-1 px-3 rounded-l-full shadow-lg transform -skew-x-12`}>
+            {banner.text}
+          </div>
+        )}
+        <div className="relative h-48 overflow-hidden group-hover:h-56 transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-blue-500/20 z-10"></div>
+          <div className="w-full h-full bg-gray-700 flex items-center justify-center text-4xl font-bold text-gray-600 overflow-hidden">
+            {image ? (
+              <div className="w-full h-full relative overflow-hidden rounded-t-xl">
+                <img 
+                  src={image} 
+                  alt={title} 
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" 
+                  style={{
+                    backfaceVisibility: 'hidden',
+                    perspective: '1000px',
+                    WebkitFontSmoothing: 'antialiased'
+                  }}
+                />
+              </div>
+            ) : (
+              <span className="transform group-hover:scale-110 transition-transform duration-300">
+                {title.substring(0, 2).toUpperCase()}
+              </span>
+            )}
+          </div>
         </div>
-      )}
-      <div className="relative h-48 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-blue-500/20 z-10"></div>
-        <div className="w-full h-full bg-gray-700 flex items-center justify-center text-4xl font-bold text-gray-600">
-          {image ? (
-            <img src={image} alt={title} className="w-full h-full object-cover" />
-          ) : (
-            <span>{title.substring(0, 2).toUpperCase()}</span>
-          )}
+        
+        <div className="p-6 flex flex-col flex-grow backdrop-blur-sm">
+          <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text group-hover:bg-gradient-to-l transition-all duration-300">
+            {title}
+          </h3>
+          <p className="text-gray-300 mb-4 flex-grow">{description}</p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {tags.map((tag, index) => (
+              <span 
+                key={index} 
+                className="text-xs px-2 py-1 rounded-full bg-gray-700 text-emerald-400 group-hover:bg-emerald-400/10 transition-colors duration-300"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-      
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text">
-          {title}
-        </h3>
-        <p className="text-gray-300 mb-4 flex-grow">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag, index) => (
-            <span key={index} className="text-xs px-2 py-1 rounded-full bg-gray-700 text-emerald-400">
-              {tag}
-            </span>
-          ))}
-        </div>
-        {/* <a 
-          href={link} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="rounded-full border border-solid border-emerald-400/30 transition-colors flex items-center justify-center hover:bg-emerald-400/10 font-medium text-sm h-10 px-4 w-full"
-        >
-          View Project
-        </a> */}
       </div>
     </div>
   );
