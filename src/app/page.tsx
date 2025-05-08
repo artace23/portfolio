@@ -144,6 +144,7 @@ const AnimateOnScroll = ({
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentRef = elementRef.current; // Store ref in a variable
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -157,13 +158,13 @@ const AnimateOnScroll = ({
       }
     );
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -223,7 +224,6 @@ const ProjectCard = ({
   description, 
   tags, 
   image, 
-  link, 
   delay,
   banner 
 }: { 
@@ -231,7 +231,6 @@ const ProjectCard = ({
   description: string; 
   tags: string[]; 
   image: string; 
-  link: string;
   delay: number;
   banner?: {
     text: string;
@@ -304,10 +303,11 @@ const ProjectCard = ({
           <div className="w-full h-full bg-gray-700 flex items-center justify-center text-4xl font-bold text-gray-600 overflow-hidden">
             {image ? (
               <div className="w-full h-full relative overflow-hidden rounded-t-xl">
-                <img 
+                <Image 
                   src={image} 
                   alt={title} 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" 
+                  fill
+                  className="object-cover transform group-hover:scale-110 transition-transform duration-300" 
                   style={{
                     backfaceVisibility: 'hidden',
                     perspective: '1000px',
