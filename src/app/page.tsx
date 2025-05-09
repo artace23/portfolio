@@ -425,7 +425,6 @@ const DesktopDecorations = () => {
 // Add these new animations to your tailwind.config.js
 // In your Home component, add the FloatingElements component:
 export default function Home() {
-  // Add theme handling
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -434,9 +433,25 @@ export default function Home() {
   const aboutRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
   
-  // Handle initial mount
   useEffect(() => {
+    // Add loading class to body
+    document.body.classList.add('loading');
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+    
     setMounted(true);
+    
+    // Remove loading class after mounting
+    const timeoutId = setTimeout(() => {
+      document.body.classList.remove('loading');
+    }, 1000); // Adjust timing as needed
+    
+    return () => {
+      setMounted(false);
+      clearTimeout(timeoutId);
+      document.body.classList.remove('loading');
+    };
   }, []);
 
   // Scroll to section function
@@ -444,15 +459,10 @@ export default function Home() {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Theme toggle function
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
   if (!mounted) return null;
   
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden bg-white dark:bg-gray-900 text-white transition-colors duration-300">
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden bg-gray-900 text-white transition-colors duration-300">
       {/* Background that adapts to theme */}
       <div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-gray-800 z-0 transition-colors duration-300"></div>
       <ClientAnimatedBackground />
@@ -589,9 +599,9 @@ export default function Home() {
                 delay: 500
               },              
               {
-                title: "Mobile Application",
-                description: "Mobile application for tracking workouts, nutrition, and progress with personalized recommendations.",
-                tags: ["React Native", "GraphQL", "AWS"],
+                title: "Car Navigation App",
+                description: "A currently under develop car mobile application that allows users to navigate their car using voice commands. It leverages Google's speech recognition API to convert spoken commands into actionable instructions for the car's navigation system.",
+                tags: ["React Native", "Firebase", "Google Speech API", "Google Maps API"],
                 image: "",
                 link: "https://github.com/artace23",
                 delay: 900
@@ -665,10 +675,6 @@ export default function Home() {
                   <div className="bg-gray-800/50 p-4 rounded-lg border border-emerald-400/20">
                     <h4 className="font-medium text-emerald-400">Recognition</h4>
                     <p className="text-gray-300">Awarded "Best Innovation" for developing an AI-powered task management system</p>
-                  </div>
-                  <div className="bg-gray-800/50 p-4 rounded-lg border border-emerald-400/20">
-                    <h4 className="font-medium text-emerald-400">Leadership</h4>
-                    <p className="text-gray-300">Led a team of 5 developers in delivering enterprise-level applications</p>
                   </div>
                 </div>
               </div>
