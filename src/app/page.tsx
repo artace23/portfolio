@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
+// Add theme context
+import { useTheme } from 'next-themes';
+
 // Animated background component (keep your existing code)
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -144,12 +147,17 @@ const AnimateOnScroll = ({
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const currentRef = elementRef.current; // Store ref in a variable
+    const currentRef = elementRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          setHasAnimated(true);
+        // Only set visibility if we haven't animated yet
+        if (!hasAnimated) {
+          setIsVisible(entry.isIntersecting);
+          if (entry.isIntersecting) {
+            setHasAnimated(true);
+            // Once animated, disconnect the observer
+            observer.disconnect();
+          }
         }
       },
       {
@@ -167,7 +175,7 @@ const AnimateOnScroll = ({
         observer.unobserve(currentRef);
       }
     };
-  }, []);
+  }, [hasAnimated]); // Add hasAnimated to dependency array
 
   const animationClasses = {
     'fade-up': {
@@ -188,11 +196,9 @@ const AnimateOnScroll = ({
     <div
       ref={elementRef}
       className={`transform transition-all duration-1000 ease-out will-change-transform ${
-        isVisible 
+        isVisible || hasAnimated
           ? animationClasses[animation].visible
-          : hasAnimated 
-            ? animationClasses[animation].hidden
-            : 'opacity-0'
+          : animationClasses[animation].hidden
       } ${className}`}
       style={{
         transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -419,20 +425,36 @@ const DesktopDecorations = () => {
 // Add these new animations to your tailwind.config.js
 // In your Home component, add the FloatingElements component:
 export default function Home() {
+  // Add theme handling
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
   // Refs for scroll functionality
   const projectsRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
   
+  // Handle initial mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Scroll to section function
   const scrollToSection = (ref: React.RefObject<HTMLElement>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Theme toggle function
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  if (!mounted) return null;
   
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden">
-      {/* Full-page background that extends to all sections */}
-      <div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-gray-800 z-0"></div>
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden bg-white dark:bg-gray-900 text-white transition-colors duration-300">
+      {/* Background that adapts to theme */}
+      <div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-gray-800 z-0 transition-colors duration-300"></div>
       <ClientAnimatedBackground />
       <FloatingElements />
       
@@ -473,7 +495,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 mt-8 animate-slide-up" style={{ animationDelay: "0.5s" }}>
             <button
               onClick={() => projectsRef.current && scrollToSection(projectsRef as React.RefObject<HTMLElement>)}
-              className="rounded-full border border-solid border-transparent transition-all duration-300 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-blue-600 text-white gap-2 hover:from-emerald-600 hover:to-blue-700 hover:scale-105 font-medium text-sm sm:text-base h-12 px-8 group"
+              className="rounded-full border border-solid border-transparent transition-all duration-300 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-blue-600 text-white gap-2 hover:from-emerald-600 hover:to-blue-700 hover:scale-105 font-medium text-sm sm:text-base h-12 px-8 group cursor-pointer"
             >
               View My Work
               <svg className="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -482,7 +504,7 @@ export default function Home() {
             </button>
             <button
               onClick={() => contactRef.current && scrollToSection(contactRef as React.RefObject<HTMLElement>)}
-              className="rounded-full border border-solid border-emerald-400/30 transition-all duration-300 flex items-center justify-center hover:bg-emerald-400/10 hover:scale-105 font-medium text-sm sm:text-base h-12 px-8"
+              className="rounded-full border border-solid border-emerald-400/30 transition-all duration-300 flex items-center justify-center hover:bg-emerald-400/10 hover:scale-105 font-medium text-sm sm:text-base h-12 px-8 cursor-pointer"
             >
               Contact Me
             </button>

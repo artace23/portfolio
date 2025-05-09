@@ -49,7 +49,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   }, [onLoadingComplete]);
   
   return (
-    <div className="fixed inset-0 bg-gray-900 flex justify-center items-center z-50 font-mono text-white">
+    <div className="fixed inset-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50 font-mono text-gray-900 dark:text-white transition-colors duration-300">
       <div className="w-4/5 max-w-2xl flex flex-col items-center gap-8">
         <div className="text-4xl font-bold tracking-widest flex items-center animate-pulse">
           <span className="text-emerald-400 mx-2">[</span>
@@ -57,7 +57,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           <span className="text-emerald-400 mx-2">]</span>
         </div>
         
-        <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden relative">
+        <div className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden relative">
           <div 
             className="h-full bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full transition-all duration-300 relative overflow-hidden"
             style={{ width: `${progress}%` }}
@@ -66,7 +66,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           </div>
         </div>
         
-        <div className="w-full flex justify-between text-sm text-gray-400">
+        <div className="w-full flex justify-between text-sm text-gray-500 dark:text-gray-400">
           <div className="relative pl-5">
             <span className="absolute left-0 text-emerald-400 animate-blink">&gt;</span>
             {loadingText}

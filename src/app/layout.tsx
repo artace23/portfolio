@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import './globals.css';
 import ClientLoadingWrapper from '@/components/ClientLoadingWrapper';
+import { Providers } from './providers';
 
 export const metadata = {
   title: 'Art III Dela Cruz - Portfolio',
@@ -13,13 +14,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-gray-900 text-white">
-        <Suspense fallback={null}>
-          <ClientLoadingWrapper>
-            {children}
-          </ClientLoadingWrapper>
-        </Suspense>
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+        <Providers>
+          <Suspense fallback={null}>
+            <ClientLoadingWrapper>
+              {children}
+            </ClientLoadingWrapper>
+          </Suspense>
+        </Providers>
       </body>
     </html>
   );
