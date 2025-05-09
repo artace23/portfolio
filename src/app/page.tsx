@@ -276,7 +276,7 @@ const ProjectCard = ({
 
   return (
     <div 
-      className="relative group h-full"
+      className="relative group"
       style={{ 
         animationDelay: `${delay}ms`,
       }}
@@ -432,6 +432,122 @@ const DesktopDecorations = () => {
         <div className="absolute top-1/2 left-1/3 w-1 h-1 bg-emerald-400/40 rounded-full animate-float-slow"></div>
       </div>
     </div>
+  );
+};
+
+const CertificationCard = ({ 
+  title, 
+  issuer, 
+  date, 
+  image, 
+  link 
+}: { 
+  title: string;
+  issuer: string;
+  date: string;
+  image: string;
+  link: string;
+}) => {
+  return (
+    <div className="relative group min-w-[300px] h-[400px] mx-4 transition-all duration-300 hover:scale-110 hover:z-10">
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+      <div className="relative h-full bg-gray-800 rounded-xl overflow-hidden">
+        <div className="h-48 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-blue-500/20 z-10"></div>
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text">
+            {title}
+          </h3>
+          <p className="text-gray-300 mb-2">{issuer}</p>
+          <p className="text-sm text-emerald-400">{date}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CertificationsSection = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer || isHovered) return;
+
+    const scroll = () => {
+      if (!scrollContainer) return;
+      scrollContainer.scrollLeft += 1;
+      if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth - scrollContainer.clientWidth)) {
+        scrollContainer.scrollLeft = 0;
+      }
+    };
+
+    const interval = setInterval(scroll, 30);
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
+  const certifications = [
+    {
+      title: "AWS Certified Solutions Architect",
+      issuer: "Amazon Web Services",
+      date: "2023",
+      image: "/images/aws-cert.jpg",
+      link: "#"
+    },
+    {
+      title: "Professional Scrum Master I",
+      issuer: "Scrum.org",
+      date: "2023",
+      image: "/images/scrum-cert.jpg",
+      link: "#"
+    },
+    {
+      title: "Meta Frontend Developer",
+      issuer: "Meta",
+      date: "2023",
+      image: "/images/meta-cert.jpg",
+      link: "#"
+    },
+    {
+      title: "Google Cloud Engineer",
+      issuer: "Google Cloud",
+      date: "2023",
+      image: "/images/google-cert.jpg",
+      link: "#"
+    },
+    // Add more certifications as needed
+  ];
+
+  return (
+    <section className="py-20 relative">
+      <SectionHeader
+        title="Certifications"
+        subtitle="Professional certifications and achievements"
+      />
+      
+      <div 
+        ref={scrollRef}
+        className="max-w-auto mx-auto overflow-x-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="flex space-x-6 py-8">
+          {[...certifications, ...certifications].map((cert, index) => (
+            <CertificationCard
+              key={index}
+              {...cert}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -760,6 +876,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <CertificationsSection />
       
       {/* Contact Section */}
       <section ref={contactRef} id="contact" className="py-20 px-4 relative">
