@@ -30,31 +30,38 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       'CALIBRATING INTERFACE',
       'FINALIZING'
     ];
-    
-    const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        const newProgress = prevProgress + 2;
-        
-        const textIndex = Math.min(
-          Math.floor(newProgress / 20),
-          loadingTexts.length - 1
-        );
-        setLoadingText(loadingTexts[textIndex]);
-        
-        if (newProgress >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            onLoadingComplete();
-          }, 500);
-          return 100;
+
+    // Simulate network requests for each loading phase
+    const simulateNetworkRequests = async () => {
+      for (let i = 0; i < loadingTexts.length; i++) {
+        try {
+          // Simulate network request with random delay between 0.5s and 1.5s
+          await new Promise(resolve => 
+            setTimeout(resolve, Math.random() * 1000 + 500)
+          );
+          
+          // Update loading text
+          setLoadingText(loadingTexts[i]);
+          
+          // Calculate progress based on completed phases
+          const progressIncrement = 100 / loadingTexts.length;
+          setProgress(prev => Math.min(100, (i + 1) * progressIncrement));
+          
+        } catch (error) {
+          console.error('Loading phase failed:', error);
         }
-        return newProgress;
-      });
-    }, 150);
+      }
+      
+      // Complete loading
+      setTimeout(() => {
+        onLoadingComplete();
+      }, 500);
+    };
+
+    simulateNetworkRequests();
     
     return () => {
       document.body.style.overflow = 'auto';
-      clearInterval(interval);
     };
   }, [onLoadingComplete]);
   

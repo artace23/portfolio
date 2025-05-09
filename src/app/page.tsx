@@ -245,6 +245,7 @@ const ProjectCard = ({
 }) => {
   const [tiltStyle, setTiltStyle] = useState({ transform: 'perspective(1000px)' });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -252,7 +253,6 @@ const ProjectCard = ({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
-    // Update mouse position for gradient
     setMousePosition({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
     
     const multiplier = 20;
@@ -267,11 +267,16 @@ const ProjectCard = ({
   const handleMouseLeave = () => {
     setTiltStyle({ transform: 'perspective(1000px)' });
     setMousePosition({ x: 0, y: 0 });
+    setIsHovered(false);
   };
-  
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
   return (
     <div 
-      className="relative group"
+      className="relative group h-full"
       style={{ 
         animationDelay: `${delay}ms`,
       }}
@@ -298,6 +303,7 @@ const ProjectCard = ({
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        onMouseEnter={handleMouseEnter}
       >
         {banner && (
           <div className={`absolute top-4 right-0 z-20 ${banner.color} text-white text-xs py-1 px-3 rounded-l-full shadow-lg transform -skew-x-12`}>
@@ -333,8 +339,15 @@ const ProjectCard = ({
           <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text group-hover:bg-gradient-to-l transition-all duration-300">
             {title}
           </h3>
-          <p className="text-gray-300 mb-4 flex-grow">{description}</p>
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="relative flex-grow">
+            <p className={`text-gray-300 mb-4 transition-all duration-300 ${isHovered ? 'line-clamp-none' : 'line-clamp-3'}`}>
+              {description}
+            </p>
+            {!isHovered && description.length > 150 && (
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-800 to-transparent"></div>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-2 mt-auto">
             {tags.map((tag, index) => (
               <span 
                 key={index} 
