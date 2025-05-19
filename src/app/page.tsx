@@ -729,7 +729,7 @@ export default function Home() {
                 delay: 100
               },
               {
-                title: "Barangay Management System",
+                title: "District Management System",
                 description: "A comprehensive web-based system designed to streamline administrative tasks and citizen records within a barangay. It includes modules for managing resident profiles, barangay clearances, certificates, and official announcements.",
                 tags: ["PHP", "Laravel", "Blade", "Tailwind CSS"],
                 image: "/images/projects/barangay_system.png",
