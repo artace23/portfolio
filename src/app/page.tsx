@@ -476,6 +476,7 @@ const CertificationCard = ({
 const CertificationsSection = () => {
   const [isHovered, setIsHovered] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [duplicateCount, setDuplicateCount] = useState(2);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -484,14 +485,22 @@ const CertificationsSection = () => {
     const scroll = () => {
       if (!scrollContainer) return;
       scrollContainer.scrollLeft += 1;
-      if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth - scrollContainer.clientWidth)) {
+
+      // Check if we need to add more items
+      const scrollPercentage = (scrollContainer.scrollLeft + scrollContainer.clientWidth) / scrollContainer.scrollWidth;
+      if (scrollPercentage > 0.75) {
+        setDuplicateCount(prev => prev + 1);
+      }
+
+      // Reset scroll position when reaching halfway to create seamless loop
+      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
         scrollContainer.scrollLeft = 0;
       }
     };
 
     const interval = setInterval(scroll, 30);
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, duplicateCount]);
 
   const certifications = [
     {
@@ -727,11 +736,19 @@ export default function Home() {
                 link: "https://github.com/artace23",
                 delay: 500
               },              
+              // {
+              //   title: "Car Navigation App",
+              //   description: "A currently under develop car mobile application that allows users to navigate their car using voice commands. It leverages Google's speech recognition API to convert spoken commands into actionable instructions for the car's navigation system.",
+              //   tags: ["React Native", "Firebase", "Google Speech API", "Google Maps API"],
+              //   image: "",
+              //   link: "https://github.com/artace23",
+              //   delay: 900
+              // },
               {
-                title: "Car Navigation App",
-                description: "A currently under develop car mobile application that allows users to navigate their car using voice commands. It leverages Google's speech recognition API to convert spoken commands into actionable instructions for the car's navigation system.",
+                title: "Easy Budget App",
+                description: "A user-friendly mobile application designed to help users manage their personal finances effectively. Built with React Native and Firebase, it offers features like expense tracking, budget planning, and financial insights to help users make informed financial decisions.",
                 tags: ["React Native", "Firebase", "Google Speech API", "Google Maps API"],
-                image: "",
+                image: "/images/projects/easybudget_project.jpg",
                 link: "https://github.com/artace23",
                 delay: 900
               },
