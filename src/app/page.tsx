@@ -747,7 +747,7 @@ export default function Home() {
               {
                 title: "Easy Budget App",
                 description: "A user-friendly mobile application designed to help users manage their personal finances effectively. Built with React Native and Firebase, it offers features like expense tracking, budget planning, and financial insights to help users make informed financial decisions.",
-                tags: ["React Native", "Firebase", "Google Speech API", "Google Maps API"],
+                tags: ["React Native", "Firebase", "Typescript"],
                 image: "/images/projects/easybudget_project.jpg",
                 link: "https://github.com/artace23",
                 delay: 900
