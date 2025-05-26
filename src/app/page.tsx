@@ -507,21 +507,21 @@ const CertificationsSection = () => {
       title: "PHP Laravel: Build Amazing Streaming Service",
       issuer: "Udemy.com",
       date: "2025",
-      image: "/images/Certificate Laravel Streaming Service.jpg",
+      image: "/images/certificates/Certificate Laravel Streaming Service.jpg",
       link: "https://www.udemy.com/certificate/UC-03444cc4-0302-407c-9c70-f19530198a19/"
     },
     {
       title: "Python for Everyone Master the Basics of Programming",
       issuer: "Udemy.com",
       date: "2025",
-      image: "/images/Certificate Python master basics programming.jpg",
+      image: "/images/certificates/Certificate Python master basics programming.jpg",
       link: "https://www.udemy.com/certificate/UC-4b209ae5-1315-4a55-b8c8-2ad59b5640a3/"
     },
     {
       title: "React JS: TypeScript, Redux, RTK & Modern Web Dev 2025",
       issuer: "Udemy.com",
       date: "2025",
-      image: "/images/Certificate React,typescript 2025.jpg",
+      image: "/images/certificates/Certificate React,typescript 2025.jpg",
       link: "https://www.udemy.com/certificate/UC-8a783253-2605-460d-bf0a-37a0544a694d/"
     },
     // {
