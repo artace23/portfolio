@@ -465,10 +465,19 @@ const CertificationCard = ({
   image: string;
   link: string;
 }) => {
+  const handleCardClick = () => {
+    if (link) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
-    <div className="relative group min-w-[300px] h-[400px] mx-4 transition-all duration-300 hover:scale-110 hover:z-10">
+    <div 
+      className="relative group min-w-[300px] h-[400px] mx-4 transition-all duration-300 hover:scale-110 hover:z-10 cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-      <div className="relative h-full bg-gray-800 overflow-hidden">
+      <div className="relative h-full bg-gray-800 overflow-hidden rounded-xl">
         <div className="h-48 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-blue-500/20 z-10"></div>
           <Image
@@ -483,7 +492,15 @@ const CertificationCard = ({
             {title}
           </h3>
           <p className="text-gray-300 mb-2">{issuer}</p>
-          <p className="text-sm text-emerald-400">{date}</p>
+          <p className="text-sm text-emerald-400 mb-3">{date}</p>
+          
+          {/* Click indicator */}
+          <div className="text-xs text-gray-500 group-hover:text-emerald-400 transition-colors duration-300 flex items-center justify-center">
+            <span>Click to view certificate</span>
+            <svg className="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -492,22 +509,21 @@ const CertificationCard = ({
 
 const CertificationsSection = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [duplicateCount, setDuplicateCount] = useState(2);
+  const animationRef = useRef<number>(null);
+  const [duplicateCount, setDuplicateCount] = useState(3);
 
+  // Auto-scroll functionality
   useEffect(() => {
     const scrollContainer = scrollRef.current;
-    if (!scrollContainer || isHovered) return;
+    if (!scrollContainer || isHovered || isDragging) return;
 
     const scroll = () => {
       if (!scrollContainer) return;
-      scrollContainer.scrollLeft += 1;
-
-      // Check if we need to add more items
-      const scrollPercentage = (scrollContainer.scrollLeft + scrollContainer.clientWidth) / scrollContainer.scrollWidth;
-      if (scrollPercentage > 0.75) {
-        setDuplicateCount(prev => prev + 1);
-      }
+      scrollContainer.scrollLeft += 0.5;
 
       // Reset scroll position when reaching halfway to create seamless loop
       if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
@@ -515,9 +531,63 @@ const CertificationsSection = () => {
       }
     };
 
-    const interval = setInterval(scroll, 30);
-    return () => clearInterval(interval);
-  }, [isHovered, duplicateCount]);
+    const startAnimation = () => {
+      scroll();
+      animationRef.current = requestAnimationFrame(startAnimation);
+    };
+
+    animationRef.current = requestAnimationFrame(startAnimation);
+    
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isHovered, isDragging]);
+
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+    setIsHovered(false);
+  };
+
+  // Touch drag handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
 
   const certifications = [
     {
@@ -540,16 +610,11 @@ const CertificationsSection = () => {
       date: "2025",
       image: "/images/certificates/Certificate React,typescript 2025.jpg",
       link: "https://www.udemy.com/certificate/UC-8a783253-2605-460d-bf0a-37a0544a694d/"
-    },
-    // {
-    //   title: "Google Cloud Engineer",
-    //   issuer: "Google Cloud",
-    //   date: "2023",
-    //   image: "/images/google-cert.jpg",
-    //   link: "#"
-    // },
-    // Add more certifications as needed
+    }
   ];
+
+  // Create multiple duplicates for seamless infinite scroll
+  const duplicatedCertifications = Array(duplicateCount).fill(certifications).flat();
 
   return (
     <section className="py-20 relative">
@@ -558,19 +623,44 @@ const CertificationsSection = () => {
         subtitle="Professional certifications and achievements"
       />
       
-      <div 
-        ref={scrollRef}
-        className="max-w-auto mx-auto overflow-x-hidden"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <div className="flex space-x-6 py-8">
-          {[...certifications, ...certifications].map((cert, index) => (
-            <CertificationCard
-              key={index}
-              {...cert}
-            />
-          ))}
+      <div className="max-w-full mx-auto">
+        {/* Instructions for mobile users */}
+        <div className="text-center mb-6 md:hidden">
+          <p className="text-sm text-gray-400">Swipe left/right to browse certificates</p>
+        </div>
+        
+        <div 
+          ref={scrollRef}
+          className={`overflow-x-auto scrollbar-hide select-none ${
+            isDragging ? 'cursor-grabbing' : 'cursor-grab'
+          }`}
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={handleMouseLeave}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="flex space-x-6 py-8 px-4">
+            {duplicatedCertifications.map((cert, index) => (
+              <CertificationCard
+                key={`${cert.title}-${index}`}
+                {...cert}
+              />
+            ))}
+          </div>
+        </div>
+        
+        {/* Desktop instructions */}
+        <div className="text-center mt-6 hidden md:block">
+          <p className="text-sm text-gray-400">Hover to pause • Drag to scroll • Click certificates to view</p>
         </div>
       </div>
     </section>
