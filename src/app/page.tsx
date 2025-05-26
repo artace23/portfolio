@@ -518,19 +518,19 @@ const CertificationsSection = () => {
       link: "https://www.udemy.com/certificate/UC-4b209ae5-1315-4a55-b8c8-2ad59b5640a3/"
     },
     {
-      title: "Meta Frontend Developer",
-      issuer: "Meta",
-      date: "2023",
-      image: "/images/meta-cert.jpg",
-      link: "#"
+      title: "React JS: TypeScript, Redux, RTK & Modern Web Dev 2025",
+      issuer: "Udemy.com",
+      date: "2025",
+      image: "/images/Certificate React,typescript 2025.jpg",
+      link: "https://www.udemy.com/certificate/UC-8a783253-2605-460d-bf0a-37a0544a694d/"
     },
-    {
-      title: "Google Cloud Engineer",
-      issuer: "Google Cloud",
-      date: "2023",
-      image: "/images/google-cert.jpg",
-      link: "#"
-    },
+    // {
+    //   title: "Google Cloud Engineer",
+    //   issuer: "Google Cloud",
+    //   date: "2023",
+    //   image: "/images/google-cert.jpg",
+    //   link: "#"
+    // },
     // Add more certifications as needed
   ];
 
