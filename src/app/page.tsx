@@ -866,8 +866,8 @@ export default function Home() {
                     <li>React / Next.js</li>
                     <li>TypeScript</li>
                     <li>Tailwind CSS</li>
-                    <li>UI/UX Design</li>
                     <li>PHP Laravel/Native</li>
+                    <li>React Native (Mobile)</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
@@ -875,7 +875,6 @@ export default function Home() {
                   <ul className="space-y-1 text-gray-300">
                     <li>Node.js / Express</li>
                     <li>MongoDB / PostgreSQL</li>
-                    <li>RESTful APIs</li>
                     <li>AWS / Firebase</li>
                   </ul>
                 </div>
