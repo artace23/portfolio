@@ -231,7 +231,8 @@ const ProjectCard = ({
   tags, 
   image, 
   delay,
-  banner 
+  banner,
+  link 
 }: { 
   title: string; 
   description: string; 
@@ -242,6 +243,7 @@ const ProjectCard = ({
     text: string;
     color: string;
   };
+  link: string;
 }) => {
   const [tiltStyle, setTiltStyle] = useState({ transform: 'perspective(1000px)' });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -274,12 +276,19 @@ const ProjectCard = ({
     setIsHovered(true);
   };
 
+  const handleCardClick = () => {
+    if (link) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div 
-      className="relative group"
+      className="relative group cursor-pointer"
       style={{ 
         animationDelay: `${delay}ms`,
       }}
+      onClick={handleCardClick}
     >
       {/* Modified glow effect that follows cursor */}
       <div 
@@ -294,7 +303,7 @@ const ProjectCard = ({
         }}
       ></div>
       <div 
-        className="relative bg-gray-800 rounded-xl overflow-hidden flex flex-col h-full transition-all duration-300 ease-in-out z-10"
+        className="relative bg-gray-800 rounded-xl overflow-hidden flex flex-col h-full transition-all duration-300 ease-in-out z-10 hover:shadow-2xl"
         style={{
           ...tiltStyle,
           backfaceVisibility: 'hidden',
@@ -356,6 +365,14 @@ const ProjectCard = ({
                 {tag}
               </span>
             ))}
+          </div>
+          
+          {/* Click indicator */}
+          <div className="mt-3 text-xs text-gray-500 group-hover:text-emerald-400 transition-colors duration-300 flex items-center justify-center">
+            <span>Click to view project</span>
+            <svg className="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
           </div>
         </div>
       </div>
@@ -451,7 +468,7 @@ const CertificationCard = ({
   return (
     <div className="relative group min-w-[300px] h-[400px] mx-4 transition-all duration-300 hover:scale-110 hover:z-10">
       <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-      <div className="relative h-full bg-gray-800 rounded-xl overflow-hidden">
+      <div className="relative h-full bg-gray-800 overflow-hidden">
         <div className="h-48 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-blue-500/20 z-10"></div>
           <Image
@@ -725,7 +742,7 @@ export default function Home() {
                 description: "A full-featured queue management system designed to streamline service flow in offices or service centers. It includes modules for managing staff accounts, service windows, and customer transactions, ensuring efficient queuing and real-time updates.",
                 tags: ["Laravel", "PHP", "MySQL", "Blade"],
                 image: "/images/projects/queue_project.png",
-                link: "https://github.com/artace23",
+                link: "https://github.com/artace23/QMS_development",
                 delay: 100
               },
               {
@@ -733,7 +750,7 @@ export default function Home() {
                 description: "A comprehensive web-based system designed to streamline administrative tasks and citizen records within a barangay. It includes modules for managing resident profiles, barangay clearances, certificates, and official announcements.",
                 tags: ["PHP", "Laravel", "Blade", "Tailwind CSS"],
                 image: "/images/projects/barangay_system.png",
-                link: "https://github.com/artace23",
+                link: "http://sk-buhangin-district.great-site.net/",
                 delay: 500
               },              
               // {
@@ -749,7 +766,7 @@ export default function Home() {
                 description: "A user-friendly mobile application designed to help users manage their personal finances effectively. Built with React Native and Firebase, it offers features like expense tracking, budget planning, and financial insights to help users make informed financial decisions.",
                 tags: ["React Native", "Firebase", "Typescript"],
                 image: "/images/projects/easybudget_project.jpg",
-                link: "https://github.com/artace23",
+                link: "https://github.com/artace23/EasyBudget-App",
                 delay: 900
               },
               {
@@ -757,7 +774,7 @@ export default function Home() {
                 description: "This very website! A showcase of my skills and projects built with modern web technologies.",
                 tags: ["Next.js", "TypeScript", "Tailwind CSS"],
                 image: "",
-                link: "https://github.com/artace23",
+                link: "https://github.com/artace23/portfolio",
                 delay: 1100
               }
             ].map((project, index) => (
