@@ -505,17 +505,17 @@ const CertificationsSection = () => {
   const certifications = [
     {
       title: "PHP Laravel: Build Amazing Streaming Service",
-      issuer: "Udemy",
+      issuer: "Udemy.com",
       date: "2025",
       image: "/images/Certificate Laravel Streaming Service.jpg",
       link: "https://www.udemy.com/certificate/UC-03444cc4-0302-407c-9c70-f19530198a19/"
     },
     {
-      title: "Professional Scrum Master I",
-      issuer: "Scrum.org",
-      date: "2023",
-      image: "/images/scrum-cert.jpg",
-      link: "#"
+      title: "Python for Everyone Master the Basics of Programming",
+      issuer: "Udemy.com",
+      date: "2025",
+      image: "/images/Certificate Python master basics programming.jpg",
+      link: "https://www.udemy.com/certificate/UC-4b209ae5-1315-4a55-b8c8-2ad59b5640a3/"
     },
     {
       title: "Meta Frontend Developer",
