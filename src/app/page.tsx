@@ -504,11 +504,11 @@ const CertificationsSection = () => {
 
   const certifications = [
     {
-      title: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      image: "/images/aws-cert.jpg",
-      link: "#"
+      title: "PHP Laravel: Build Amazing Streaming Service",
+      issuer: "Udemy",
+      date: "2025",
+      image: "/images/Certificate Laravel Streaming Service.jpg",
+      link: "https://www.udemy.com/certificate/UC-03444cc4-0302-407c-9c70-f19530198a19/"
     },
     {
       title: "Professional Scrum Master I",
