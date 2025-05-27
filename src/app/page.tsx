@@ -861,10 +861,10 @@ export default function Home() {
               },
               {
                 title: "Portfolio Website",
-                description: "This very website! A showcase of my skills and projects built with modern web technologies.",
+                description: "This very website! A showcase of my skills and projects built with modern web technologies. Built using Next.js 14 with TypeScript for type safety, styled with Tailwind CSS for a responsive design, and featuring smooth animations and interactive elements. The site includes a dynamic particle background, project cards with 3D hover effects, and sections for showcasing my projects, skills, and certifications. All components are custom-built with performance and accessibility in mind.",
                 tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-                image: "",
-                link: "https://github.com/artace23/portfolio",
+                image: "/images/projects/portfolio.png",
+                link: "https://artdelacruz.vercel.app",
                 delay: 1100
               }
             ].map((project, index) => (
@@ -927,7 +927,7 @@ export default function Home() {
                   </div>
                   <div className="bg-gray-800/50 p-4 rounded-lg border border-emerald-400/20">
                     <h4 className="font-medium text-emerald-400">Recognition</h4>
-                    <p className="text-gray-300">Awarded "Best Innovation" for developing an AI-powered task management system</p>
+                    <p className="text-gray-300">Awarded "Best Presenter" for presenting the capstone project during the Research Parallel 1 - Data Innovation</p>
                   </div>
                 </div>
               </div>
