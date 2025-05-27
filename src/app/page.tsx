@@ -915,19 +915,173 @@ export default function Home() {
                 user-focused experiences that solve real-world problems.
               </p>
               
-              {/* Added Achievements Section */}
+              {/* Modern Achievements Section */}
               <div className="mt-8">
-                <h3 className="text-2xl font-bold text-white mb-4">Achievements</h3>
-                <div className="space-y-4">
-                  <div className="bg-gray-800/50 p-4 rounded-lg border border-emerald-400/20">
-                    <h4 className="font-medium text-emerald-400">Capstone Project Showcase</h4>
-                    <p className="text-gray-300">
-                      Officially selected to represent Holy Cross of Davao College at the CCCIS 2025 Conference in Hong Kong, China.
-                    </p>
+                <div className="flex items-center gap-3 mb-6">
+              <h3 className="text-2xl font-bold text-white">Achievements</h3>
+                  <div className="flex-1 h-px bg-gradient-to-r from-emerald-400/20 to-transparent"></div>
+                </div>
+                
+                <div className="relative group">
+                  {/* Modern Navigation Buttons */}
+                  <button 
+                    onClick={() => {
+                      const container = document.getElementById('achievements-container');
+                      if (container) {
+                        container.scrollBy({ left: -320, behavior: 'smooth' });
+                      }
+                    }}
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 border border-white/20 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-400/25 opacity-0 group-hover:opacity-100"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  
+                  <button 
+                    onClick={() => {
+                      const container = document.getElementById('achievements-container');
+                      if (container) {
+                        container.scrollBy({ left: 320, behavior: 'smooth' });
+                      }
+                    }}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 border border-white/20 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-400/25 opacity-0 group-hover:opacity-100"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                  
+                  {/* Modern Scrollable Container */}
+                  <div 
+                    id="achievements-container"
+                    className="overflow-x-auto scrollbar-hide px-4"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  >
+                    <div className="flex gap-6 pb-6" style={{ width: 'max-content' }}>
+                      {/* Modern Achievement Cards */}
+                      <div className="group/card relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-2xl border border-white/10 min-w-[320px] max-w-[380px] flex-shrink-0 hover:border-emerald-400/30 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-400/10">
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-blue-500/5 rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+                        
+                        {/* Icon */}
+                        <div className="relative mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </div>
+                        </div>
+                        
+                        <div className="relative">
+                          <h4 className="font-semibold text-lg text-white mb-2 group-hover/card:text-emerald-400 transition-colors duration-300">Capstone Project Showcase</h4>
+                          <p className="text-gray-300 text-sm leading-relaxed">
+                            Officially selected to represent Holy Cross of Davao College at the CCCIS 2025 Conference in Hong Kong, China.
+                          </p>
+                        </div>
+                        
+                        {/* Decorative elements */}
+                        <div className="absolute top-4 right-4 w-2 h-2 bg-emerald-400 rounded-full opacity-60"></div>
+                        <div className="absolute bottom-4 right-6 w-1 h-1 bg-blue-500 rounded-full opacity-40"></div>
+                      </div>
+                      
+                      <div className="group/card relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-2xl border border-white/10 min-w-[320px] max-w-[380px] flex-shrink-0 hover:border-emerald-400/30 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-400/10">
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-blue-500/5 rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div className="relative mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                            </svg>
+                          </div>
+                        </div>
+                        
+                        <div className="relative">
+                          <h4 className="font-semibold text-lg text-white mb-2 group-hover/card:text-emerald-400 transition-colors duration-300">Recognition</h4>
+                          <p className="text-gray-300 text-sm leading-relaxed">
+                            Awarded "Best Presenter" for presenting the capstone project titled "SmarTrax" in Parallel 1 - Data Innovation.
+                          </p>
+                        </div>
+                        
+                        <div className="absolute top-4 right-4 w-2 h-2 bg-emerald-400 rounded-full opacity-60"></div>
+                        <div className="absolute bottom-4 right-6 w-1 h-1 bg-blue-500 rounded-full opacity-40"></div>
+                      </div>
+                      
+                      <div className="group/card relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-2xl border border-white/10 min-w-[320px] max-w-[380px] flex-shrink-0 hover:border-emerald-400/30 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-400/10">
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-blue-500/5 rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div className="relative mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                          </div>
+                        </div>
+                        
+                        <div className="relative">
+                          <h4 className="font-semibold text-lg text-white mb-2 group-hover/card:text-emerald-400 transition-colors duration-300">Programming Competition</h4>
+                          <p className="text-gray-300 text-sm leading-relaxed">
+                            Secured 1st place in the Programming Competition organized by ITS organization in Holy Cross of Davao College in the year 2023.
+                          </p>
+                        </div>
+                        
+                        <div className="absolute top-4 right-4 w-2 h-2 bg-emerald-400 rounded-full opacity-60"></div>
+                        <div className="absolute bottom-4 right-6 w-1 h-1 bg-blue-500 rounded-full opacity-40"></div>
+                      </div>
+                      
+                      <div className="group/card relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-2xl border border-white/10 min-w-[320px] max-w-[380px] flex-shrink-0 hover:border-emerald-400/30 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-400/10">
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-blue-500/5 rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div className="relative mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                          </div>
+                        </div>
+                        
+                        <div className="relative">
+                          <h4 className="font-semibold text-lg text-white mb-2 group-hover/card:text-emerald-400 transition-colors duration-300">TOPCIT Level 2 Achiever</h4>
+                          <p className="text-gray-300 text-sm leading-relaxed">
+                            Attained Level 2 certification in three consecutive TOPCIT examinations in the Philippines during 2023-2024, demonstrating consistent technical proficiency.
+                          </p>
+                        </div>
+                        
+                        <div className="absolute top-4 right-4 w-2 h-2 bg-emerald-400 rounded-full opacity-60"></div>
+                        <div className="absolute bottom-4 right-6 w-1 h-1 bg-blue-500 rounded-full opacity-40"></div>
+                      </div>
+                      
+                      <div className="group/card relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-2xl border border-white/10 min-w-[320px] max-w-[380px] flex-shrink-0 hover:border-emerald-400/30 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-400/10">
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-blue-500/5 rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div className="relative mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                          </div>
+                        </div>
+                        
+                        <div className="relative">
+                          <h4 className="font-semibold text-lg text-white mb-2 group-hover/card:text-emerald-400 transition-colors duration-300">HCDC Intramurals Tabulation System</h4>
+                          <p className="text-gray-300 text-sm leading-relaxed">
+                            Developed a comprehensive tabulation system for HCDC intramural games, enabling efficient scoring and results tracking across multiple sports events
+                          </p>
+                        </div>
+                        
+                        <div className="absolute top-4 right-4 w-2 h-2 bg-emerald-400 rounded-full opacity-60"></div>
+                        <div className="absolute bottom-4 right-6 w-1 h-1 bg-blue-500 rounded-full opacity-40"></div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="bg-gray-800/50 p-4 rounded-lg border border-emerald-400/20">
-                    <h4 className="font-medium text-emerald-400">Recognition</h4>
-                    <p className="text-gray-300">Awarded "Best Presenter" for presenting the capstone project during the Research Parallel 1 - Data Innovation</p>
+                  
+                  {/* Modern Progress Indicator */}
+                  <div className="flex justify-center mt-6">
+                    <div className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                      <span className="text-xs text-gray-400 font-medium">Scroll to explore achievements</span>
+                      <div className="w-2 h-2 ybg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                    </div>
                   </div>
                 </div>
               </div>
