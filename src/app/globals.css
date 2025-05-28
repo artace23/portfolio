@@ -340,7 +340,7 @@ canvas {
 .certificates-track:hover {
   animation-play-state: paused;
 }
-/* Modern achievements styling */
+/* Mobile-friendly achievements styling */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -352,6 +352,20 @@ canvas {
 
 #achievements-container {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Touch-friendly styles */
+.touch-manipulation {
+  touch-action: manipulation; /* Prevents delay on touch devices */
+}
+
+/* Active state for mobile touch */
+@media (max-width: 768px) {
+  .group/card:active {
+    transform: scale(0.98);
+    transition: transform 0.2s;
+  }
 }
 
 /* Modern card hover effects */
