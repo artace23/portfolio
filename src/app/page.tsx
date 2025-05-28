@@ -1066,7 +1066,14 @@ export default function Home() {
                   <div className="flex justify-center mt-6">
                     <div className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
                       <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                      <span className="text-xs text-gray-400 font-medium">Scroll to explore achievements</span>
+                      <div className="text-center md:hidden">
+                        <span className="text-xs text-gray-400 font-medium">Swipe to see more</span>
+                      </div>
+                      
+                      {/* Desktop Scroll Hint - Only visible on desktop */}
+                      <div className="text-center hidden md:block">
+                        <span className="text-xs text-gray-400 font-medium">Scroll to explore achievements</span>
+                      </div>
                       <div className="w-2 h-2 ybg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
                     </div>
                   </div>
