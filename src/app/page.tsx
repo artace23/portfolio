@@ -452,7 +452,7 @@ const DesktopDecorations = () => {
   );
 };
 
-const CertificationCard = ({ 
+const CertificationCard = ({
   title, 
   issuer, 
   date, 
@@ -473,33 +473,61 @@ const CertificationCard = ({
 
   return (
     <div 
-      className="relative group min-w-[300px] h-[400px] mx-4 transition-all duration-300 hover:scale-110 hover:z-10 cursor-pointer"
+      className="relative group bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20 cursor-pointer"
       onClick={handleCardClick}
     >
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-      <div className="relative h-full bg-gray-800 overflow-hidden rounded-xl">
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
+      <div className="relative h-full">
+        {/* Certificate Image */}
         <div className="h-48 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-blue-500/20 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/10 to-blue-500/10 z-10"></div>
           <Image
             src={image}
             alt={title}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
+          {/* Verification Badge */}
+          <div className="absolute top-3 right-3 z-20">
+            <div className="bg-emerald-500/90 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full flex items-center space-x-1">
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span>Verified</span>
+            </div>
+          </div>
         </div>
+        
+        {/* Certificate Details */}
         <div className="p-6">
-          <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text">
-            {title}
-          </h3>
-          <p className="text-gray-300 mb-2">{issuer}</p>
-          <p className="text-sm text-emerald-400 mb-3">{date}</p>
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex-1">
+              <h3 className="text-lg font-bold mb-2 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text line-clamp-2 leading-tight">
+                {title}
+              </h3>
+              <div className="flex items-center space-x-2 mb-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-gray-300 font-medium">{issuer}</p>
+                  <p className="text-sm text-emerald-400">{date}</p>
+                </div>
+              </div>
+            </div>
+          </div>
           
-          {/* Click indicator */}
-          <div className="text-xs text-gray-500 group-hover:text-emerald-400 transition-colors duration-300 flex items-center justify-center">
-            <span>Click to view certificate</span>
-            <svg className="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
+          {/* Action Button */}
+          <div className="flex items-center justify-between pt-4 border-t border-gray-700/50">
+            <span className="text-xs text-gray-400">Click to view certificate</span>
+            <div className="flex items-center text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300">
+              <span className="text-sm font-medium mr-2">View</span>
+              <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -508,87 +536,6 @@ const CertificationCard = ({
 };
 
 const CertificationsSection = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>(null);
-  const [duplicateCount, setDuplicateCount] = useState(3);
-
-  // Auto-scroll functionality
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer || isHovered || isDragging) return;
-
-    const scroll = () => {
-      if (!scrollContainer) return;
-      scrollContainer.scrollLeft += 0.5;
-
-      // Reset scroll position when reaching halfway to create seamless loop
-      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-        scrollContainer.scrollLeft = 0;
-      }
-    };
-
-    const startAnimation = () => {
-      scroll();
-      animationRef.current = requestAnimationFrame(startAnimation);
-    };
-
-    animationRef.current = requestAnimationFrame(startAnimation);
-    
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [isHovered, isDragging]);
-
-  // Mouse drag handlers
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!scrollRef.current) return;
-    setIsDragging(true);
-    setStartX(e.pageX - scrollRef.current.offsetLeft);
-    setScrollLeft(scrollRef.current.scrollLeft);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
-    scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-    setIsHovered(false);
-  };
-
-  // Touch drag handlers for mobile
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (!scrollRef.current) return;
-    setIsDragging(true);
-    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
-    setScrollLeft(scrollRef.current.scrollLeft);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || !scrollRef.current) return;
-    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
-    scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
   const certifications = [
     {
       title: "PHP Laravel: Build Amazing Streaming Service",
@@ -610,57 +557,97 @@ const CertificationsSection = () => {
       date: "2025",
       image: "/images/certificates/Certificate React,typescript 2025.jpg",
       link: "https://www.udemy.com/certificate/UC-8a783253-2605-460d-bf0a-37a0544a694d/"
+    },
+    {
+      title: "PHP Laravel: Build Real Estate Manangement System",
+      issuer: "Udemy.com",
+      date: "2025",
+      image: "/images/certificates/Certificate Laravel Estate Management.jpg",
+      link: "https://www.udemy.com/certificate/UC-d5cb88b7-1ec6-45bf-976d-95bf5e133db4/"
+    },
+    {
+      title: "PHP Master Class: The Complete PHP Developer Course",
+      issuer: "Udemy.com",
+      date: "2025",
+      image: "/images/certificates/Certificate PHP Master Class.jpg",
+      link: "https://www.udemy.com/certificate/UC-110dca23-7f75-4ab1-b399-30ed78173557/"
     }
   ];
-
-  // Create multiple duplicates for seamless infinite scroll
-  const duplicatedCertifications = Array(duplicateCount).fill(certifications).flat();
 
   return (
     <section className="py-20 relative">
       <SectionHeader
         title="Certifications"
-        subtitle="Professional certifications and achievements"
+        subtitle="Professional certifications and continuous learning achievements"
       />
       
-      <div className="max-w-full mx-auto">
-        {/* Instructions for mobile users */}
-        <div className="text-center mb-6 md:hidden">
-          <p className="text-sm text-gray-400">Swipe left/right to browse certificates</p>
-        </div>
-        
-        <div 
-          ref={scrollRef}
-          className={`overflow-x-auto scrollbar-hide select-none ${
-            isDragging ? 'cursor-grabbing' : 'cursor-grab'
-          }`}
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            WebkitOverflowScrolling: 'touch'
-          }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={handleMouseLeave}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          <div className="flex space-x-6 py-8 px-4">
-            {duplicatedCertifications.map((cert, index) => (
-              <CertificationCard
-                key={`${cert.title}-${index}`}
-                {...cert}
-              />
-            ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Statistics Bar */}
+        <div className="mb-12">
+          <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="space-y-2">
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text">
+                  {certifications.length}
+                </div>
+                <div className="text-gray-400 text-sm">Certifications Earned</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text">
+                  100%
+                </div>
+                <div className="text-gray-400 text-sm">Completion Rate</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text">
+                  2025
+                </div>
+                <div className="text-gray-400 text-sm">Latest Achievement</div>
+              </div>
+            </div>
           </div>
         </div>
-        
-        {/* Desktop instructions */}
-        <div className="text-center mt-6 hidden md:block">
-          <p className="text-sm text-gray-400">Hover to pause • Drag to scroll • Click certificates to view</p>
+
+        {/* Certificates Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {certifications.map((cert, index) => (
+            <AnimateOnScroll key={index} animation="fade-up">
+              <CertificationCard {...cert} />
+            </AnimateOnScroll>
+          ))}
+        </div>
+
+        {/* Call to Action */}
+        <div className="mt-16 text-center">
+          <div className="bg-gradient-to-r from-emerald-400/10 to-blue-500/10 backdrop-blur-sm border border-emerald-400/20 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text">
+              Continuous Learning Journey
+            </h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              I believe in continuous improvement and staying updated with the latest technologies. 
+              These certifications represent my commitment to professional growth and excellence.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex items-center space-x-2 text-emerald-400">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm">Verified Credentials</span>
+              </div>
+              <div className="flex items-center space-x-2 text-emerald-400">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                </svg>
+                <span className="text-sm">Industry Recognized</span>
+              </div>
+              <div className="flex items-center space-x-2 text-emerald-400">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                </svg>
+                <span className="text-sm">Practical Skills</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
