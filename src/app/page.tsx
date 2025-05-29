@@ -1131,6 +1131,7 @@ export default function Home() {
                     <li>Node.js / Express</li>
                     <li>MongoDB / PostgreSQL</li>
                     <li>AWS / Firebase</li>
+                    <li>ASP.NET</li>
                   </ul>
                 </div>
               </div>
