@@ -735,15 +735,17 @@ export default function Home() {
           
           {/* Enhanced CTA Buttons with hover effects */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8 animate-slide-up" style={{ animationDelay: "0.5s" }}>
-            <button
-              onClick={() => projectsRef.current && scrollToSection(projectsRef as React.RefObject<HTMLElement>)}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer" 
               className="rounded-full border border-solid border-transparent transition-all duration-300 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-blue-600 text-white gap-2 hover:from-emerald-600 hover:to-blue-700 hover:scale-105 font-medium text-sm sm:text-base h-12 px-8 group cursor-pointer"
             >
-              View My Work
+              View My Resume
               <svg className="w-4 h-4 transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-            </button>
+            </a>
             <button
               onClick={() => contactRef.current && scrollToSection(contactRef as React.RefObject<HTMLElement>)}
               className="rounded-full border border-solid border-emerald-400/30 transition-all duration-300 flex items-center justify-center hover:bg-emerald-400/10 hover:scale-105 font-medium text-sm sm:text-base h-12 px-8 cursor-pointer"
@@ -775,12 +777,17 @@ export default function Home() {
         
         {/* Enhanced Scroll indicator */}
         <div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer hover:text-emerald-400 transition-colors duration-300"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer group"
           onClick={() => projectsRef.current && scrollToSection(projectsRef as React.RefObject<HTMLElement>)}
         >
-          <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+          <span className="text-gray-400 text-sm font-medium group-hover:text-emerald-400 transition-colors duration-300">
+            View Projects
+          </span>
+          <div className="animate-bounce hover:text-emerald-400 transition-colors duration-300">
+            <svg className="w-6 h-6 text-gray-400 group-hover:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
       </section>
       
@@ -807,7 +814,7 @@ export default function Home() {
                 description: "A capstone group project focused on providing a smart bike and e-bike rental solution. The app allows users to locate, unlock, and rent bikes or e-bikes using QR scanning, manage ride history, and monitor their wallet balance. It features real-time tracking, Firebase integration for authentication and data storage, and a clean, mobile-friendly UI.",
                 tags: ["React Native", "Firebase", "PHP", "MySQL"],
                 image: "/images/projects/smartrax_project.jpg",
-                link: "https://github.com/artace23",
+                link: "https://github.com/artace23/smartrax",
                 delay: 300,
                 banner: {
                   text: "Presented at Hong Kong CCCIS(2025) 5th Conference",
@@ -875,77 +882,293 @@ export default function Home() {
             subtitle="Learn more about my background, skills, and what drives me as a developer."
           />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* About image */}
-            <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
-              <div className="relative rounded-xl overflow-hidden border-2 border-emerald-400/20 shadow-lg shadow-emerald-500/10"><div className="aspect-w-4 aspect-h-3 bg-gray-800 flex items-center justify-center">
+          {/* Main About Layout - Image Left, Journey Right */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+            {/* Professional Profile Image - Left Side */}
+            <div className="lg:col-span-1 opacity-0 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+              <div className="relative rounded-2xl overflow-hidden border-2 border-emerald-400/20 shadow-2xl shadow-emerald-500/20 group">
+                <div className="aspect-square bg-gray-800 flex items-center justify-center">
                   <Image
                     src="/images/profile.jpg"
                     alt="Art III Dela Cruz"
-                    width={800}
-                    height={800}
-                    className="object-cover w-full h-full"
+                    width={400}
+                    height={400}
+                    className="object-cover object-top w-full h-full transition-transform duration-500 group-hover:scale-105"
                     quality={100}
                     priority
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 to-blue-500/10"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 to-blue-500/10 group-hover:from-emerald-500/20 group-hover:to-blue-500/20 transition-all duration-500"></div>
+                
+                {/* Professional Badge */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/20">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                      <span className="text-white text-sm font-medium">Available for hire</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             
-            {/* About content */}
-            <div className="space-y-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
-              <h3 className="text-2xl font-bold text-white">My Journey</h3>
-              <p className="text-gray-300">
-                I'm a passionate Full Stack Developer with expertise in building modern web applications. 
-                With a background in both front-end and back-end technologies, I create seamless, 
-                user-focused experiences that solve real-world problems.
-              </p>
+            {/* My Journey Content - Right Side */}
+            <div className="lg:col-span-2 space-y-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+              <div>
+                <div className="flex items-center gap-4 mb-6">
+                  <h3 className="text-3xl font-bold text-white">My Journey</h3>
+                  <div className="flex-1 h-px bg-gradient-to-r from-emerald-400/40 to-transparent"></div>
+                </div>
+                <div className="space-y-4">
+                  <p className="text-gray-300 text-lg leading-relaxed">
+                    I'm a passionate Full Stack Developer with expertise in building modern web applications. 
+                    With a background in both front-end and back-end technologies, I create seamless, 
+                    user-focused experiences that solve real-world problems.
+                  </p>
+                  <p className="text-gray-400 leading-relaxed">
+                    Currently working as a Front-End Developer Intern at Jairosoft Inc., I bring a unique blend of 
+                    academic excellence and practical experience. My journey includes representing my college at 
+                    international conferences and consistently achieving top performance in technical assessments.
+                  </p>
+                </div>
+              </div>
               
-              {/* Modern Achievements Section */}
-              <div className="mt-8">
-                <div className="flex items-center gap-3 mb-6">
-              <h3 className="text-2xl font-bold text-white">Achievements</h3>
-                  <div className="flex-1 h-px bg-gradient-to-r from-emerald-400/20 to-transparent"></div>
+              {/* Quick Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center">
+                  <div className="text-2xl font-bold text-emerald-400">3+</div>
+                  <div className="text-sm text-gray-400">Years Experience</div>
+                </div>
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center">
+                  <div className="text-2xl font-bold text-emerald-400">15+</div>
+                  <div className="text-sm text-gray-400">Projects Completed</div>
+                </div>
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center">
+                  <div className="text-2xl font-bold text-emerald-400">5+</div>
+                  <div className="text-sm text-gray-400">Achievements</div>
+                </div>
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center">
+                  <div className="text-2xl font-bold text-emerald-400">100%</div>
+                  <div className="text-sm text-gray-400">Client Satisfaction</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Professional Sections Below */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Experience Section */}
+            <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-lg flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0H8m8 0v2a2 2 0 002 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2V8" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white">Professional Experience</h3>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-emerald-400/30 transition-all duration-300">
+                  <div className="flex justify-between items-start mb-3">
+                    <h4 className="font-semibold text-lg text-emerald-400">Front-End Developer Intern</h4>
+                    <span className="text-sm text-gray-400 bg-emerald-400/10 px-3 py-1 rounded-full">Current</span>
+                  </div>
+                  <p className="text-white font-medium mb-2">Jairosoft Inc.</p>
+                  <p className="text-sm text-gray-400 mb-3">Feb 2025 - Present</p>
+                  <ul className="space-y-2 text-gray-300 text-sm">
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Designed and implemented responsive web applications using Next.js and Tailwind CSS</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Enhanced performance by 40% through efficient state management and code optimization</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Collaborated in Agile teams and contributed to code quality through regular reviews</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-emerald-400/30 transition-all duration-300">
+                  <div className="flex justify-between items-start mb-3">
+                    <h4 className="font-semibold text-lg text-emerald-400">Back-End Developer</h4>
+                    <span className="text-sm text-gray-400 bg-emerald-400/10 px-3 py-1 rounded-full">Volunteer</span>
+                  </div>
+                  <p className="text-white font-medium mb-2">HCDC SSG Executive Department</p>
+                  <p className="text-sm text-gray-400 mb-3">Sept 2024 — Nov 2024</p>
+                  <ul className="space-y-2 text-gray-300 text-sm">
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Backend Developer in charge of tabulation and backend development of the site</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Integrated Supabase and PostgreSQL to manage and enhance database functionalities</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Designed and implemented responsive user interfaces</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Technologies used: Next.js, Tailwind CSS, Supabase, PostgreSQL, Framer Motion, Vercel, Git</span>
+                    </li>
+                  </ul>
                 </div>
                 
-                <div className="relative group">
-                  {/* Modern Navigation Buttons */}
-                  <button 
-                    onClick={() => {
-                      const container = document.getElementById('achievements-container');
-                      if (container) {
-                        container.scrollBy({ left: -320, behavior: 'smooth' });
-                      }
-                    }}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 border border-white/20 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-400/25 opacity-0 group-hover:opacity-100"
-                  >
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-emerald-400/30 transition-all duration-300">
+                  <div className="flex justify-between items-start mb-3">
+                    <h4 className="font-semibold text-lg text-emerald-400">Full Stack Developer</h4>
+                    <span className="text-sm text-gray-400 bg-blue-400/10 px-3 py-1 rounded-full">Freelance</span>
+                  </div>
+                  <p className="text-white font-medium mb-2">Self-Employed</p>
+                  <p className="text-sm text-gray-400 mb-3">2021 - Present</p>
+                  <ul className="space-y-2 text-gray-300 text-sm">
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Developed and deployed client websites, custom IoT solutions, and full-stack web applications</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Implemented responsive, user-centric UI designs using modern front-end frameworks</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <span>Integrated third-party APIs, authentication systems, and payment gateways</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            {/* Skills Section */}
+            <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.9s', animationFillMode: 'forwards' }}>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-lg flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white">Technical Skills</h3>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+                  <h4 className="font-semibold text-lg text-emerald-400 mb-4 flex items-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                  </button>
-                  
-                  <button 
-                    onClick={() => {
-                      const container = document.getElementById('achievements-container');
-                      if (container) {
-                        container.scrollBy({ left: 320, behavior: 'smooth' });
-                      }
-                    }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 border border-white/20 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-400/25 opacity-0 group-hover:opacity-100"
-                  >
+                    Frontend Development
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                      <span className="text-sm">React / Next.js</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                      <span className="text-sm">TypeScript</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                      <span className="text-sm">Tailwind CSS</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                      <span className="text-sm">React Native</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                      <span className="text-sm">PHP Laravel</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+                  <h4 className="font-semibold text-lg text-blue-400 mb-4 flex items-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2" />
                     </svg>
-                  </button>
-                  
-                  {/* Modern Scrollable Container */}
-                  <div 
-                    id="achievements-container"
-                    className="overflow-x-auto scrollbar-hide px-4"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                  >
-                    <div className="flex gap-6 pb-6" style={{ width: 'max-content' }}>
+                    Backend Development
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span className="text-sm">Node.js / Express</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span className="text-sm">MongoDB</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span className="text-sm">PostgreSQL</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span className="text-sm">AWS / Firebase</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span className="text-sm">ASP.NET</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Modern Achievements Section */}
+          <div className="mt-16 opacity-0 animate-fade-in" style={{ animationDelay: '1.1s', animationFillMode: 'forwards' }}>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-lg flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-white">Key Achievements</h3>
+              <div className="flex-1 h-px bg-gradient-to-r from-emerald-400/20 to-transparent"></div>
+            </div>
+            
+            <div className="relative group">
+              {/* Modern Navigation Buttons */}
+              <button 
+                onClick={() => {
+                  const container = document.getElementById('achievements-container');
+                  if (container) {
+                    container.scrollBy({ left: -320, behavior: 'smooth' });
+                  }
+                }}
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 border border-white/20 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-400/25 opacity-0 group-hover:opacity-100"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <button 
+                onClick={() => {
+                  const container = document.getElementById('achievements-container');
+                  if (container) {
+                    container.scrollBy({ left: 320, behavior: 'smooth' });
+                  }
+                }}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 border border-white/20 hover:border-emerald-400/50 shadow-lg hover:shadow-emerald-400/25 opacity-0 group-hover:opacity-100"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              
+              {/* Modern Scrollable Container */}
+              <div 
+                id="achievements-container"
+                className="overflow-x-auto scrollbar-hide px-4"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                <div className="flex gap-6 pb-6" style={{ width: 'max-content' }}>
                       {/* Modern Achievement Cards */}
                       <div className="group/card relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-2xl border border-white/10 min-w-[320px] max-w-[380px] flex-shrink-0 hover:border-emerald-400/30 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-400/10">
                         {/* Glow effect */}
@@ -1060,91 +1283,37 @@ export default function Home() {
                         <div className="absolute bottom-4 right-6 w-1 h-1 bg-blue-500 rounded-full opacity-40"></div>
                       </div>
                     </div>
+              </div>
+              
+              {/* Modern Progress Indicator */}
+              <div className="flex justify-center mt-6">
+                <div className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                  <div className="text-center md:hidden">
+                    <span className="text-xs text-gray-400 font-medium">Swipe to see more</span>
                   </div>
                   
-                  {/* Modern Progress Indicator */}
-                  <div className="flex justify-center mt-6">
-                    <div className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
-                      <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                      <div className="text-center md:hidden">
-                        <span className="text-xs text-gray-400 font-medium">Swipe to see more</span>
-                      </div>
-                      
-                      {/* Desktop Scroll Hint - Only visible on desktop */}
-                      <div className="text-center hidden md:block">
-                        <span className="text-xs text-gray-400 font-medium">Scroll to explore achievements</span>
-                      </div>
-                      <div className="w-2 h-2 ybg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                    </div>
+                  {/* Desktop Scroll Hint - Only visible on desktop */}
+                  <div className="text-center hidden md:block">
+                    <span className="text-xs text-gray-400 font-medium">Scroll to explore achievements</span>
                   </div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
                 </div>
-              </div>
-              
-              {/* Added Experience Section */}
-              <div className="mt-8">
-                <h3 className="text-2xl font-bold text-white mb-4">Experience</h3>
-                <div className="space-y-4">
-                  <div className="bg-gray-800/50 p-4 rounded-lg border border-emerald-400/20">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-medium text-emerald-400">Front-End Developer Intern</h4>
-                      <span className="text-sm text-gray-400">Feb 2025 - Present</span>
-                    </div>
-                    <p className="text-gray-300 mb-2">Jairosoft Inc.</p>
-                    <ul className="list-disc list-inside text-gray-300 space-y-1">
-                      <li>Designed and implemented responsive web applications using Next.js and Tailwind CSS</li>
-                      <li>Enhanced performance by 40% through efficient state management and code optimization</li>
-                      <li>Collaborated in Agile teams and contributed to code quality through regular reviews</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="bg-gray-800/50 p-4 rounded-lg border border-emerald-400/20">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-medium text-emerald-400">Full Stack Developer</h4>
-                      <span className="text-sm text-gray-400">2021 - Present</span>
-                    </div>
-                    <p className="text-gray-300 mb-2">Freelance</p>
-                    <ul className="list-disc list-inside text-gray-300 space-y-1">
-                      <li>Developed and deployed client websites, custom IoT solutions, and full-stack web applications</li>
-                      <li>Implemented responsive, user-centric UI designs using modern front-end frameworks</li>
-                      <li>Integrated third-party APIs, authentication systems, and payment gateways</li>
-                      <li>Collaborated with clients to gather requirements, propose solutions, and deliver results on time</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              
-              <h3 className="text-2xl font-bold text-white mt-8">My Skills</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <h4 className="font-medium text-emerald-400">Frontend</h4>
-                  <ul className="space-y-1 text-gray-300">
-                    <li>React / Next.js</li>
-                    <li>TypeScript</li>
-                    <li>Tailwind CSS</li>
-                    <li>PHP Laravel/Native</li>
-                    <li>React Native (Mobile)</li>
-                  </ul>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-medium text-emerald-400">Backend</h4>
-                  <ul className="space-y-1 text-gray-300">
-                    <li>Node.js / Express</li>
-                    <li>MongoDB / PostgreSQL</li>
-                    <li>AWS / Firebase</li>
-                    <li>ASP.NET</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div className="pt-6">
-                <button
-                  onClick={() => contactRef.current && scrollToSection(contactRef as React.RefObject<HTMLElement>)}
-                  className="rounded-full border border-solid border-emerald-400/30 transition-colors flex items-center justify-center hover:bg-emerald-400/10 font-medium text-sm h-12 px-8"
-                >
-                  Get In Touch
-                </button>
               </div>
             </div>
+          </div>
+          
+          {/* Call to Action */}
+          <div className="text-center mt-12 opacity-0 animate-fade-in" style={{ animationDelay: '1.3s', animationFillMode: 'forwards' }}>
+            <button
+              onClick={() => contactRef.current && scrollToSection(contactRef as React.RefObject<HTMLElement>)}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-emerald-400 to-blue-500 hover:from-emerald-500 hover:to-blue-600 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-emerald-400/25 transform hover:scale-105"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              Let's Work Together
+            </button>
           </div>
         </div>
       </section>
@@ -1159,7 +1328,7 @@ export default function Home() {
             subtitle="Interested in working together? Let's connect and discuss your project."
           />
           
-          <div className="max-w-2xl mx-auto bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700">
+          {/* <div className="max-w-2xl mx-auto bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700">
             <form className="space-y-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -1209,7 +1378,7 @@ export default function Home() {
                 Send Message
               </button>
             </form>
-          </div>
+          </div> */}
           
           {/* Alternative contact methods */}
           <div className="mt-12 flex flex-col md:flex-row justify-center gap-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
@@ -1217,13 +1386,13 @@ export default function Home() {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <span>artace23@gmail.com</span>
+              <span>artace011503@gmail.com</span>
             </a>
             <a href="tel:+639654298604" className="flex items-center gap-3 text-gray-300 hover:text-emerald-400 transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <span>+63 965 429 8604</span>
+              <span>+63 993 957 3856</span>
             </a>
           </div>
         </div>

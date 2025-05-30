@@ -362,7 +362,7 @@ canvas {
 
 /* Active state for mobile touch */
 @media (max-width: 768px) {
-  .group/card:active {
+  .group .card:active {
     transform: scale(0.98);
     transition: transform 0.2s;
   }
