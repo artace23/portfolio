@@ -224,7 +224,7 @@ const ClientAnimatedBackground = () => {
 
 
 
-// Project card component
+// Project card component with mobile-friendly interactions
 const ProjectCard = ({ 
   title, 
   description, 
@@ -248,8 +248,25 @@ const ProjectCard = ({
   const [tiltStyle, setTiltStyle] = useState({ transform: 'perspective(1000px)' });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMobile) return;
+    
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -267,20 +284,67 @@ const ProjectCard = ({
   };
   
   const handleMouseLeave = () => {
+    if (isMobile) return;
+    
     setTiltStyle({ transform: 'perspective(1000px)' });
     setMousePosition({ x: 0, y: 0 });
     setIsHovered(false);
   };
 
   const handleMouseEnter = () => {
+    if (isMobile) return;
     setIsHovered(true);
   };
 
-  const handleCardClick = () => {
-    if (link) {
-      window.open(link, '_blank', 'noopener,noreferrer');
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (isMobile) {
+      // On mobile, first click expands description
+      if (!isExpanded && description.length > 150) {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsExpanded(true);
+        return;
+      }
+      
+      // Second click or if description is short, open link
+      if (link) {
+        window.open(link, '_blank', 'noopener,noreferrer');
+      }
+    } else {
+      // Desktop behavior - direct link
+      if (link) {
+        window.open(link, '_blank', 'noopener,noreferrer');
+      }
     }
   };
+
+  const handleTouchStart = () => {
+    if (!isMobile) return;
+    
+    // Clear any existing timeout
+    if (clickTimeoutRef.current) {
+      clearTimeout(clickTimeoutRef.current);
+    }
+    
+    // Set a timeout to collapse description after 5 seconds if expanded
+    if (isExpanded) {
+      clickTimeoutRef.current = setTimeout(() => {
+        setIsExpanded(false);
+      }, 5000);
+    }
+  };
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const shouldShowDescription = isMobile ? isExpanded : (isHovered || description.length <= 150);
+  const isDescriptionTruncated = description.length > 150;
 
   return (
     <div 
@@ -289,10 +353,15 @@ const ProjectCard = ({
         animationDelay: `${delay}ms`,
       }}
       onClick={handleCardClick}
+      onTouchStart={handleTouchStart}
     >
       {/* Modified glow effect that follows cursor */}
       <div 
-        className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-75 transition-opacity duration-300 ease-in-out"
+        className={`absolute -inset-0.5 rounded-xl transition-opacity duration-300 ease-in-out ${
+          isMobile 
+            ? (isExpanded ? 'opacity-75' : 'opacity-0') 
+            : 'opacity-0 group-hover:opacity-75'
+        }`}
         style={{
           background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgb(52, 211, 153), rgb(59, 130, 246))`,
           filter: 'blur(8px)',
@@ -319,7 +388,11 @@ const ProjectCard = ({
             {banner.text}
           </div>
         )}
-        <div className="relative h-48 overflow-hidden group-hover:h-56 transition-all duration-300">
+        <div className={`relative h-48 overflow-hidden transition-all duration-300 ${
+          isMobile 
+            ? (isExpanded ? 'h-56' : 'h-48')
+            : 'group-hover:h-56'
+        }`}>
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-blue-500/20 z-10"></div>
           <div className="w-full h-full bg-gray-700 flex items-center justify-center text-4xl font-bold text-gray-600 overflow-hidden">
             {image ? (
@@ -328,7 +401,11 @@ const ProjectCard = ({
                   src={image} 
                   alt={title} 
                   fill
-                  className="object-cover transform group-hover:scale-110 transition-transform duration-300" 
+                  className={`object-cover transition-transform duration-300 ${
+                    isMobile 
+                      ? (isExpanded ? 'scale-110' : 'scale-100')
+                      : 'group-hover:scale-110'
+                  }`}
                   style={{
                     backfaceVisibility: 'hidden',
                     perspective: '1000px',
@@ -337,7 +414,11 @@ const ProjectCard = ({
                 />
               </div>
             ) : (
-              <span className="transform group-hover:scale-110 transition-transform duration-300">
+              <span className={`transition-transform duration-300 ${
+                isMobile 
+                  ? (isExpanded ? 'scale-110' : 'scale-100')
+                  : 'group-hover:scale-110'
+              }`}>
                 {title.substring(0, 2).toUpperCase()}
               </span>
             )}
@@ -345,14 +426,20 @@ const ProjectCard = ({
         </div>
         
         <div className="p-6 flex flex-col flex-grow backdrop-blur-sm">
-          <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text group-hover:bg-gradient-to-l transition-all duration-300">
+          <h3 className={`text-xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text transition-all duration-300 ${
+            isMobile 
+              ? (isExpanded ? 'bg-gradient-to-l' : 'bg-gradient-to-r')
+              : 'group-hover:bg-gradient-to-l'
+          }`}>
             {title}
           </h3>
           <div className="relative flex-grow">
-            <p className={`text-gray-300 mb-4 transition-all duration-300 ${isHovered ? 'line-clamp-none' : 'line-clamp-3'}`}>
+            <p className={`text-gray-300 mb-4 transition-all duration-300 ${
+              shouldShowDescription ? 'line-clamp-none' : 'line-clamp-3'
+            }`}>
               {description}
             </p>
-            {!isHovered && description.length > 150 && (
+            {!shouldShowDescription && isDescriptionTruncated && (
               <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-800 to-transparent"></div>
             )}
           </div>
@@ -360,19 +447,45 @@ const ProjectCard = ({
             {tags.map((tag, index) => (
               <span 
                 key={index} 
-                className="text-xs px-2 py-1 rounded-full bg-gray-700 text-emerald-400 group-hover:bg-emerald-400/10 transition-colors duration-300"
+                className={`text-xs px-2 py-1 rounded-full bg-gray-700 text-emerald-400 transition-colors duration-300 ${
+                  isMobile 
+                    ? (isExpanded ? 'bg-emerald-400/10' : 'bg-gray-700')
+                    : 'group-hover:bg-emerald-400/10'
+                }`}
               >
                 {tag}
               </span>
             ))}
           </div>
           
-          {/* Click indicator */}
-          <div className="mt-3 text-xs text-gray-500 group-hover:text-emerald-400 transition-colors duration-300 flex items-center justify-center">
-            <span>Click to view project</span>
-            <svg className="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
+          {/* Click indicator with different messages for mobile/desktop */}
+          <div className={`mt-3 text-xs transition-colors duration-300 flex items-center justify-center ${
+            isMobile 
+              ? (isExpanded ? 'text-emerald-400' : 'text-gray-500')
+              : 'text-gray-500 group-hover:text-emerald-400'
+          }`}>
+            {isMobile ? (
+              <>
+                <span>
+                  {isExpanded 
+                    ? 'Tap again to view project' 
+                    : (isDescriptionTruncated ? 'Tap to expand description' : 'Tap to view project')
+                  }
+                </span>
+                <svg className={`w-3 h-3 ml-1 transition-transform duration-300 ${
+                  isExpanded ? 'translate-x-1' : ''
+                }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </>
+            ) : (
+              <>
+                <span>Click to view project</span>
+                <svg className="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </>
+            )}
           </div>
         </div>
       </div>
