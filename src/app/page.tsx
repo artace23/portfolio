@@ -1038,6 +1038,9 @@ export default function Home() {
                     With a background in both front-end and back-end technologies, I create seamless, 
                     user-focused experiences that solve real-world problems.
                   </p>
+                  <p className="text-gray-400 leading-relaxed">
+                    Currently engaged in professional web and mobile application development, continuously expanding expertise in modern development practices and emerging technologies to deliver innovative solutions.
+                  </p>
                 </div>
               </div>
               
