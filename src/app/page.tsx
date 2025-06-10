@@ -1038,11 +1038,6 @@ export default function Home() {
                     With a background in both front-end and back-end technologies, I create seamless, 
                     user-focused experiences that solve real-world problems.
                   </p>
-                  <p className="text-gray-400 leading-relaxed">
-                    Currently working as a Front-End Developer Intern at Jairosoft Inc., I bring a unique blend of 
-                    academic excellence and practical experience. My journey includes representing my college at 
-                    international conferences and consistently achieving top performance in technical assessments.
-                  </p>
                 </div>
               </div>
               
@@ -1085,10 +1080,10 @@ export default function Home() {
                 <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-emerald-400/30 transition-all duration-300">
                   <div className="flex justify-between items-start mb-3">
                     <h4 className="font-semibold text-lg text-emerald-400">Front-End Developer Intern</h4>
-                    <span className="text-sm text-gray-400 bg-emerald-400/10 px-3 py-1 rounded-full">Current</span>
+                    <span className="text-sm text-gray-400 bg-emerald-400/10 px-3 py-1 rounded-full">Internship</span>
                   </div>
                   <p className="text-white font-medium mb-2">Jairosoft Inc.</p>
-                  <p className="text-sm text-gray-400 mb-3">Feb 2025 - Present</p>
+                  <p className="text-sm text-gray-400 mb-3">Feb 2025 - June 2025</p>
                   <ul className="space-y-2 text-gray-300 text-sm">
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
