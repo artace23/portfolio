@@ -849,7 +849,7 @@ export default function Home() {
           {/* Enhanced CTA Buttons with hover effects */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8 animate-slide-up" style={{ animationDelay: "0.5s" }}>
             <a
-              href="/resume.pdf"
+              href="/Art_III_Dela_Cruz_CV.pdf"
               target="_blank"
               rel="noopener noreferrer" 
               className="rounded-full border border-solid border-transparent transition-all duration-300 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-blue-600 text-white gap-2 hover:from-emerald-600 hover:to-blue-700 hover:scale-105 font-medium text-sm sm:text-base h-12 px-8 group cursor-pointer"
