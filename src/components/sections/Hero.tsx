@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ArrowRight, Download } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowRight, FileText } from "lucide-react";
 import Image from "next/image";
 
 interface HeroProps {
@@ -85,7 +85,7 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             <span className="relative flex items-center gap-2">
-              View Resume <Download className="w-4 h-4" />
+              View Resume <FileText className="w-4 h-4" />
             </span>
           </a>
           
