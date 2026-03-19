@@ -31,15 +31,16 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navLinks.map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + 120;
+      const scrollPosition = window.scrollY + 150; // Use a slightly larger offset for detection
 
-      for (const section of sections) {
+      for (const link of navLinks) {
+        const section = document.getElementById(link.id);
         if (section) {
-          const sectionTop = section.offsetTop;
+          const sectionTop = section.getBoundingClientRect().top + window.scrollY;
           const sectionHeight = section.offsetHeight;
+          
           if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            setActiveSection(section.id);
+            setActiveSection(link.id);
             break;
           }
         }
