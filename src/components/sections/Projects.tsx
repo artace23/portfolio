@@ -5,11 +5,19 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 
 const projects = [
   {
-    title: "Cross Blazers Cup Website",
-    description: "A responsive and collaborative website developed for the Cross Blazers Cup, highlighting achievements, schedules, and events. Implemented the tabulation system for tracking game results and team standings.",
-    tags: ["Next.js", "Supabase", "Tailwind CSS"],
-    image: "/images/projects/crossblazers_website.png",
-    link: "https://hcdc.crossblazerscup.com/",
+    title: "AwakenSystem",
+    description: "A gamified productivity platform with a real-time character development system. Integrated Supabase for dynamic data management of quests, stats, and achievements, featuring a personalized user dashboard.",
+    tags: ["React Native", "Supabase", "TypeScript", "Tailwind CSS"],
+    image: "/images/projects/AwakenSystem.png",
+    link: "https://github.com/artace23",
+    github: "https://github.com/artace23",
+  },
+  {
+    title: "ArdStreaming Platform",
+    description: "A modern movie streaming platform inspired by Netflix, featuring dynamic content browsing, search functionality, and responsive UI. Built to simulate real-world streaming applications with scalable frontend architecture.",
+    tags: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
+    image: "/images/projects/ArdStreaming.png",
+    link: "https://ardstreamingmovies.vercel.app",
     github: "https://github.com/artace23",
   },
   {
@@ -31,14 +39,6 @@ const projects = [
     image: "/images/projects/queue_project.png",
     link: "https://github.com/artace23/QMS_development",
     github: "https://github.com/artace23/QMS_development",
-  },
-  {
-    title: "District Management System",
-    description: "Comprehensive barangay administrative system for resident profiles, clearances, certificates, and official announcements.",
-    tags: ["PHP", "Laravel", "Blade", "Tailwind CSS"],
-    image: "/images/projects/barangay_system.png",
-    link: "http://sk-buhangin-district.great-site.net/",
-    github: "https://github.com/artace23",
   },
   {
     title: "Easy Budget App",
@@ -66,7 +66,7 @@ export const Projects = () => {
           title="Featured Projects"
           subtitle="Explore my latest work, ranging from web systems to mobile applications and IoT solutions."
         />
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {projects.map((project) => (
             <ProjectCard key={project.title} {...project} />
