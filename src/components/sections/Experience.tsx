@@ -6,6 +6,19 @@ import { Rocket, Calendar, CheckCircle2, Milestone } from "lucide-react";
 
 const experiences = [
   {
+    title: "Full Stack Developer",
+    company: "Freelance",
+    period: "June 2022 - Present",
+    type: "Contract",
+    impact: "Engineered responsive web applications and custom management tools for local businesses, focusing on high-performance delivery and user-centric design.",
+    milestones: [
+      "Developed 10+ custom websites and internal tools using React and Node.js.",
+      "Implemented SEO and performance optimizations that improved site traffic for clients by an average of 50%.",
+      "Managed end-to-end client relationships, from requirement gathering to deployment and maintenance.",
+    ],
+    color: "slate",
+  },
+  {
     title: "Product Engineer (Contract)",
     company: "Trixicon | Israel",
     period: "Jan 2026 - Feb 2026",
