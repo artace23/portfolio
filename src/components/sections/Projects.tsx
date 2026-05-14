@@ -28,8 +28,8 @@ const projects = [
     impact: "Created a high-retention environment for personal goal setting, currently being expanded with Supabase for real-time multiplayer features.",
     tags: ["React Native", "Supabase", "TypeScript", "Tailwind CSS"],
     image: "/images/projects/AwakenSystem.png",
-    link: "https://github.com/artace23",
-    github: "https://github.com/artace23",
+    link: "https://github.com/artace23/AwakenSystem",
+    github: "https://github.com/artace23/AwakenSystem",
     isFeatured: true,
   },
   {
@@ -56,8 +56,8 @@ const projects = [
     impact: "Boosted LCP by 25% and achieved a near-perfect Lighthouse performance score across all media-heavy pages.",
     tags: ["Next.js", "Tailwind CSS", "Media Optimization", "Vercel"],
     image: "/images/projects/ArdStreaming.png",
-    link: "https://github.com/artace23",
-    github: "https://github.com/artace23",
+    link: "https://ardstreamingmovies.vercel.app",
+    github: "https://github.com/artace23/ardstreamingmovies",
   },
   {
     title: "Queue Management System",

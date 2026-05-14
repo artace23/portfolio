@@ -8,7 +8,7 @@ const experiences = [
   {
     title: "Product Engineer (Contract)",
     company: "Trixicon | Israel",
-    period: "Jan 2026 - Present",
+    period: "Jan 2026 - Feb 2026",
     type: "Contract",
     impact: "Architecting cross-platform mobile solutions and WordPress ecosystems, focusing on seamless AWS integration for high-concurrency data handling.",
     milestones: [
@@ -44,10 +44,11 @@ const experiences = [
   {
     title: "Software Engineer",
     company: "DSG Son’s Group Inc. | Philippines",
-    period: "July 2025",
+    period: "July 2025 - Present",
     type: "Full-Time",
-    impact: "Spearheaded the development of internal web systems using Laravel, bridging legacy data with modern Python processing scripts.",
+    impact: "Spearheaded the development of internal web systems and cross-platform mobile applications, bridging legacy data with modern Python processing scripts.",
     milestones: [
+      "Developed and deployed a cross-platform mobile application for both Android and iOS platforms.",
       "Integrated Python-based data analysis modules into Laravel dashboards.",
       "Improved server-side processing efficiency for large-scale datasets.",
     ],
@@ -87,9 +88,8 @@ export const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={`relative flex flex-col md:flex-row gap-8 ${
-                i % 2 === 0 ? "md:flex-row-reverse" : ""
-              }`}
+              className={`relative flex flex-col md:flex-row gap-8 ${i % 2 === 0 ? "md:flex-row-reverse" : ""
+                }`}
             >
               {/* Timeline Indicator */}
               <div className="absolute left-[-4px] md:left-1/2 md:ml-[-4px] top-0 w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] z-10 hidden md:block" />
@@ -103,16 +103,16 @@ export const Experience = () => {
                         {exp.title}
                       </h4>
                       <div className="text-white/80 font-medium flex items-center gap-2 text-sm">
-                         <Milestone className="w-4 h-4 text-blue-500/50" /> {exp.company}
+                        <Milestone className="w-4 h-4 text-blue-500/50" /> {exp.company}
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-2">
-                        <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-500">
-                           {exp.type}
-                        </span>
-                        <div className="flex items-center gap-2 text-[10px] text-gray-500 uppercase tracking-wider">
-                          <Calendar className="w-3 h-3" /> {exp.period}
-                        </div>
+                      <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-500">
+                        {exp.type}
+                      </span>
+                      <div className="flex items-center gap-2 text-[10px] text-gray-500 uppercase tracking-wider">
+                        <Calendar className="w-3 h-3" /> {exp.period}
+                      </div>
                     </div>
                   </div>
 
