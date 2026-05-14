@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -8,57 +9,40 @@ interface LoadingScreenProps {
 
 export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
-  const [loadingText, setLoadingText] = useState('INITIALIZING');
-  const [particles] = useState(() => 
-    Array.from({ length: 20 }, () => ({
-      size: Math.random() * 4 + 1,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      delay: Math.random() * 2,
-      duration: Math.random() * 3 + 2
-    }))
-  );
+  const [loadingText, setLoadingText] = useState('SYNCING_CORE');
+  const [isExiting, setIsExiting] = useState(false);
   
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     
-    const loadingTexts = [
-      'INITIALIZING SYSTEMS',
-      'LOADING ASSETS',
-      'RENDERING ENVIRONMENT',
-      'ESTABLISHING CONNECTION',
-      'CALIBRATING INTERFACE',
-      'FINALIZING'
+    const loadingPhases = [
+      { text: 'BOOTING_PRODUCT_LAB', duration: 300 },
+      { text: 'SYST_CORE_V2.0', duration: 400 },
+      { text: 'OPTIMIZING_UX', duration: 300 },
+      { text: 'READY', duration: 200 }
     ];
 
-    // Simulate network requests for each loading phase
-    const simulateNetworkRequests = async () => {
-      for (let i = 0; i < loadingTexts.length; i++) {
-        try {
-          // Simulate network request with random delay between 0.5s and 1.5s
-          await new Promise(resolve => 
-            setTimeout(resolve, Math.random() * 1000 + 500)
-          );
-          
-          // Update loading text
-          setLoadingText(loadingTexts[i]);
-          
-          // Calculate progress based on completed phases
-          const progressIncrement = 100 / loadingTexts.length;
-          setProgress(prev => Math.min(100, (i + 1) * progressIncrement));
-          
-        } catch (error) {
-          console.error('Loading phase failed:', error);
+    const runPhases = async () => {
+      let currentProgress = 0;
+      for (const phase of loadingPhases) {
+        setLoadingText(phase.text);
+        const steps = 10;
+        const increment = (100 / loadingPhases.length) / steps;
+        
+        for (let i = 0; i < steps; i++) {
+          await new Promise(r => setTimeout(r, phase.duration / steps));
+          currentProgress += increment;
+          setProgress(Math.min(currentProgress, 100));
         }
       }
       
-      // Complete loading
+      setIsExiting(true);
       setTimeout(() => {
         onLoadingComplete();
       }, 500);
     };
 
-    simulateNetworkRequests();
+    runPhases();
     
     return () => {
       document.body.style.overflow = 'auto';
@@ -66,93 +50,71 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   }, [onLoadingComplete]);
   
   return (
-    <div className="fixed inset-0 bg-gray-900 flex justify-center items-center z-50 font-mono text-white overflow-hidden">
-      {/* Keep all background layers */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-900 via-gray-900 to-gray-800">
-        {/* Add animated grid lines */}
-        <div className="absolute inset-0 opacity-10">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div
-              key={`grid-${i}`}
-              className="absolute h-px w-full bg-emerald-400/20 transform animate-pulse"
-              style={{ top: `${i * 5}%`, animationDelay: `${i * 0.1}s` }}
-            />
-          ))}
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div
-              key={`grid-vertical-${i}`}
-              className="absolute w-px h-full bg-emerald-400/20 transform animate-pulse"
-              style={{ left: `${i * 5}%`, animationDelay: `${i * 0.1}s` }}
-            />
-          ))}
-        </div>
-      </div>
-      
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-full h-full">
-          {particles.map((particle, i) => (
-            <div
-              key={i}
-              className="absolute bg-emerald-400/10 rounded-full animate-pulse"
-              style={{
-                
-              }}
-            />
-          ))}
-        </div>
-      </div>
+    <AnimatePresence>
+      {!isExiting && (
+        <motion.div 
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="fixed inset-0 bg-[#0A0A0A] flex justify-center items-center z-50 font-mono text-white overflow-hidden"
+        >
+          {/* Minimal Grid Background */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+             <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+          </div>
+          
+          <div className="w-full max-w-md px-10 flex flex-col items-center gap-6 relative z-10">
+            {/* Terminal Style Header */}
+            <div className="flex items-center gap-3 mb-2">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500/20" />
+              </div>
+              <div className="h-px w-24 bg-white/10" />
+              <span className="text-[10px] text-white/30 tracking-[0.2em] uppercase font-bold">Art Dela Cruz / Lab</span>
+            </div>
 
-      {/* Add scanning line effect */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'linear-gradient(transparent, rgba(52, 211, 153, 0.05), transparent)',
-          backgroundSize: '100% 10px',
-          animation: 'scan 2s linear infinite'
-        }}
-      />
+            {/* Progress Display */}
+            <div className="w-full space-y-4">
+              <div className="flex justify-between items-end">
+                <div className="space-y-1">
+                  <div className="text-xs text-white/40 tracking-wider">PROCESS_STATE</div>
+                  <motion.div 
+                    key={loadingText}
+                    initial={{ opacity: 0, x: -5 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="text-sm font-bold text-white tracking-widest flex items-center gap-2"
+                  >
+                    <span className="text-blue-500">&gt;</span> {loadingText}
+                  </motion.div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-white/40 tracking-wider">COMPLETED</div>
+                  <div className="text-sm font-bold text-blue-500">{Math.floor(progress)}%</div>
+                </div>
+              </div>
 
-      <div className="w-4/5 max-w-2xl flex flex-col items-center gap-8 relative z-10">
-        {/* Title with enhanced glitch effect */}
-        <div className="text-4xl font-bold tracking-widest flex items-center">
-          <span className="text-emerald-400 mx-2 animate-pulse">[</span>
-          <span className="loading-text" data-text={loadingText}>
-            {loadingText}
-          </span>
-          <span className="text-emerald-400 mx-2 animate-pulse">]</span>
-        </div>
-        
-        {/* Progress bar with glitch effect */}
-        <div className="w-full h-2 bg-gray-800/50 rounded-full overflow-hidden relative">
-          <div 
-            className="h-full bg-gradient-to-r from-emerald-400 via-blue-500 to-emerald-400 rounded-full transition-all duration-300 relative overflow-hidden bg-[length:200%_auto] animate-gradient glitch-progress"
-            style={{ width: `${progress}%` }}
-          >
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white/30 rounded-full blur-sm animate-pulse"></div>
+              {/* Minimal Progress Bar */}
+              <div className="w-full h-[2px] bg-white/5 rounded-full overflow-hidden">
+                <motion.div 
+                  className="h-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Footer Info */}
+            <div className="flex justify-between w-full mt-2 text-[10px] text-white/20 tracking-widest uppercase">
+              <span>Stable Build v2.6</span>
+              <span>EST_00ms</span>
+            </div>
           </div>
-        </div>
-        
-        {/* Status display with enhanced glitch effects */}
-        <div className="w-full flex justify-between text-sm text-gray-400">
-          <div className="relative pl-5 flex items-center gap-2">
-            <span className="absolute left-0 text-emerald-400 animate-blink">&gt;</span>
-            <span className="text-emerald-400 font-bold glitch-small" data-text={`${Math.floor(progress)}%`}>
-              {Math.floor(progress)}%
-            </span>
-            <span className="h-4 w-[1px] bg-emerald-400/30"></span>
-            <span className="text-gray-400 uppercase tracking-wider glitch-small" data-text={loadingText}>
-              {loadingText}
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
-            <span className="text-emerald-400 glitch-small" data-text="SYSTEM ONLINE">
-              SYSTEM ONLINE
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+
+          {/* Vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,10,10,0.4)_100%)] pointer-events-none" />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
-}
+}

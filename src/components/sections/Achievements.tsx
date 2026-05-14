@@ -7,34 +7,34 @@ import { useRef } from "react";
 
 const achievements = [
   {
-    title: "Capstone Project Showcase",
-    description: "Officially selected to represent Holy Cross of Davao College at the CCCIS 2025 Conference in Hong Kong, China.",
+    title: "International Showcase",
+    description: "Selected to represent Holy Cross of Davao College at the CCCIS 2025 Conference in Hong Kong, China.",
     icon: <Target className="w-6 h-6" />,
-    color: "emerald",
+    color: "blue",
   },
   {
     title: "Best Presenter Award",
-    description: "Awarded 'Best Presenter' for the capstone project 'SmarTrax' in Parallel 1 - Data Innovation at CCCIS 2025.",
+    description: "Awarded 'Best Presenter' for the capstone project 'SmarTrax' in Data Innovation at CCCIS 2025.",
     icon: <Trophy className="w-6 h-6" />,
     color: "blue",
   },
   {
     title: "1st Place Programming",
-    description: "Secured 1st place in the Programming Competition organized by ITS organization in HCDC in 2023.",
+    description: "Secured 1st place in the Programming Competition organized by ITS organization in 2023.",
     icon: <Star className="w-6 h-6" />,
-    color: "teal",
+    color: "slate",
   },
   {
-    title: "TOPCIT Level 2 Achiever",
-    description: "Attained Level 2 certification in three consecutive TOPCIT examinations in the Philippines during 2023-2024.",
+    title: "TOPCIT Level 2",
+    description: "Attained Level 2 certification in three consecutive TOPCIT examinations during 2023-2024.",
     icon: <Lightbulb className="w-6 h-6" />,
-    color: "purple",
+    color: "slate",
   },
   {
-    title: "HCDC Intramurals Tabulation",
-    description: "Developed a comprehensive tabulation system for HCDC intramural games, enabling efficient scoring and results tracking.",
+    title: "Enterprise Systems",
+    description: "Developed an enterprise-grade tabulation system for high-stakes institutional events.",
     icon: <Target className="w-6 h-6" />,
-    color: "emerald",
+    color: "blue",
   },
 ];
 
@@ -50,68 +50,64 @@ export const Achievements = () => {
   };
 
   return (
-    <section id="achievements" className="py-24 px-4 relative z-10">
+    <section id="achievements" className="py-32 px-6 relative z-10 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          title="Key Achievements"
-          subtitle="A track record of excellence, recognition, and continuous growth in the field of technology."
+          title="Impact & Recognition"
+          subtitle="Acknowledged for engineering excellence and research contributions."
         />
 
         <div className="relative group/container">
           {/* Navigation Buttons */}
           <button
             onClick={() => scroll("left")}
-            className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 p-2 bg-gray-900 border border-white/10 rounded-full text-white opacity-0 group-hover/container:opacity-100 transition-opacity hidden lg:flex hover:border-emerald-500/50"
+            className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 p-3 bg-white/5 border border-white/10 rounded-full text-white opacity-0 group-hover/container:opacity-100 transition-all hidden lg:flex hover:bg-white/10 hover:border-blue-500/50"
           >
-            <ArrowLeft className="w-6 h-6" />
+            <ArrowLeft className="w-5 h-5" />
           </button>
           
           <button
             onClick={() => scroll("right")}
-            className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 p-2 bg-gray-900 border border-white/10 rounded-full text-white opacity-0 group-hover/container:opacity-100 transition-opacity hidden lg:flex hover:border-emerald-500/50"
+            className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 p-3 bg-white/5 border border-white/10 rounded-full text-white opacity-0 group-hover/container:opacity-100 transition-all hidden lg:flex hover:bg-white/10 hover:border-blue-500/50"
           >
-            <ArrowRight className="w-6 h-6" />
+            <ArrowRight className="w-5 h-5" />
           </button>
 
           {/* Scrollable Container */}
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-8 snap-x no-scrollbar scroll-smooth"
+            className="flex overflow-x-auto gap-8 pb-12 snap-x no-scrollbar scroll-smooth"
             style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
           >
             {achievements.map((achievement, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="min-w-[300px] md:min-w-[400px] snap-center group/card p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all duration-500"
+                className="min-w-[320px] md:min-w-[450px] snap-center group/card p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-blue-500/20 transition-all duration-500 flex flex-col justify-between"
               >
-                <div className="space-y-6">
+                <div className="space-y-8">
                   {/* Icon */}
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gray-900 border border-white/10 group-hover/card:scale-110 transition-transform duration-500 ${
-                    achievement.color === 'emerald' ? 'text-emerald-400' : 
-                    achievement.color === 'blue' ? 'text-blue-400' : 
-                    achievement.color === 'teal' ? 'text-teal-400' : 'text-purple-400'
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 group-hover/card:scale-110 group-hover/card:bg-blue-500/10 group-hover/card:border-blue-500/20 transition-all duration-500 ${
+                    achievement.color === 'blue' ? 'text-blue-500' : 'text-gray-400'
                   }`}>
                     {achievement.icon}
                   </div>
 
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-bold text-white group-hover/card:text-emerald-400 transition-colors">
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold text-white group-hover/card:text-blue-400 transition-colors">
                       {achievement.title}
                     </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-400 text-sm leading-relaxed font-light">
                       {achievement.description}
                     </p>
                   </div>
                 </div>
 
-                {/* Decorative dots */}
-                <div className="absolute top-6 right-6 flex gap-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/20" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500/20" />
+                <div className="mt-8 flex justify-end">
+                    <div className="w-8 h-[1px] bg-white/10 group-hover/card:w-16 group-hover/card:bg-blue-500 transition-all duration-500" />
                 </div>
               </motion.div>
             ))}
@@ -119,12 +115,14 @@ export const Achievements = () => {
         </div>
 
         {/* Mobile Swipe Hint */}
-        <div className="flex justify-center mt-6 lg:hidden">
-           <div className="px-4 py-2 bg-white/5 rounded-full border border-white/10">
-              <span className="text-xs text-gray-500 font-bold uppercase tracking-widest">Swipe to explore</span>
+        <div className="flex justify-center mt-4 lg:hidden">
+           <div className="px-4 py-2 bg-white/5 rounded-full border border-white/10 flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+              <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Swipe to explore</span>
            </div>
         </div>
       </div>
     </section>
   );
 };
+

@@ -2,45 +2,45 @@
 
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Layout, Server, Smartphone, Wrench, Database, Cloud } from "lucide-react";
+import { Layout, Server, Smartphone, Wrench, Database, Layers } from "lucide-react";
 
 const skillGroups = [
   {
-    title: "Frontend Development",
-    icon: <Layout className="w-6 h-6 text-emerald-400" />,
-    skills: ["React / Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Shadcn/UI"],
-    color: "emerald",
-  },
-  {
-    title: "Backend Development",
-    icon: <Server className="w-6 h-6 text-blue-400" />,
-    skills: ["Node.js / Express", "PHP / Laravel", "PostgreSQL", "MongoDB", "RESTful APIs"],
+    title: "Product Experience",
+    icon: <Layout className="w-6 h-6 text-blue-400" />,
+    skills: ["React / Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Radix UI"],
     color: "blue",
   },
   {
-    title: "Mobile & Hybrid",
-    icon: <Smartphone className="w-6 h-6 text-teal-400" />,
-    skills: ["React Native", "Expo", "Firebase", "App Store Deployment", "Mobile UX"],
-    color: "teal",
+    title: "System Architecture",
+    icon: <Server className="w-6 h-6 text-slate-400" />,
+    skills: ["Node.js / Express", "PHP / Laravel", "PostgreSQL", "Supabase", "Redis"],
+    color: "slate",
   },
   {
-    title: "Tools & DevOps",
-    icon: <Wrench className="w-6 h-6 text-purple-400" />,
-    skills: ["Git / GitHub", "Docker", "Vercel", "AWS", "Agile / Scrum"],
-    color: "purple",
+    title: "Mobile Ecosystem",
+    icon: <Smartphone className="w-6 h-6 text-blue-500" />,
+    skills: ["React Native", "Expo", "Firebase", "RevenueCat", "Mobile UX"],
+    color: "blue",
+  },
+  {
+    title: "Dev & Growth",
+    icon: <Layers className="w-6 h-6 text-slate-300" />,
+    skills: ["Git / CI/CD", "Docker", "Vercel / AWS", "PostHog", "SEO Optimization"],
+    color: "slate",
   },
 ];
 
 export const Skills = () => {
   return (
-    <section id="skills" className="py-24 px-4 relative z-10">
+    <section id="skills" className="py-32 px-6 relative z-10 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          title="Technical Arsenal"
-          subtitle="A comprehensive overview of the technologies and tools I master to bring digital visions to life."
+          title="Engineering Toolkit"
+          subtitle="A curated selection of technologies I use to build scalable products."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skillGroups.map((group, i) => (
             <motion.div
               key={i}
@@ -48,20 +48,20 @@ export const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/10"
+              className="group p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-blue-500/20 transition-all duration-500"
             >
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-500">
+              <div className="flex flex-col items-center text-center space-y-8">
+                <div className="p-5 rounded-[1.5rem] bg-white/5 border border-white/10 group-hover:scale-110 group-hover:bg-blue-500/10 group-hover:border-blue-500/20 transition-all duration-500">
                   {group.icon}
                 </div>
                 
-                <h3 className="text-xl font-bold text-white uppercase tracking-wider">{group.title}</h3>
+                <h3 className="text-xl font-bold text-white tracking-tight">{group.title}</h3>
                 
                 <div className="w-full flex flex-wrap justify-center gap-2">
                   {group.skills.map((skill, j) => (
                     <span
                       key={j}
-                      className="px-3 py-1 text-xs font-bold rounded-full bg-white/5 text-gray-400 border border-white/5 group-hover:text-white transition-colors"
+                      className="px-3 py-1.5 text-[10px] font-bold rounded-xl bg-white/[0.03] text-gray-500 border border-white/5 group-hover:text-gray-300 transition-colors"
                     >
                       {skill}
                     </span>
@@ -75,3 +75,4 @@ export const Skills = () => {
     </section>
   );
 };
+

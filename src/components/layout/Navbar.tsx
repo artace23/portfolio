@@ -11,6 +11,7 @@ const navLinks = [
   { name: "About", id: "about" },
   { name: "Projects", id: "projects" },
   { name: "Experience", id: "experience" },
+  { name: "Lab", id: "the-lab" },
   { name: "Contact", id: "contact" },
 ];
 
@@ -31,7 +32,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 150; // Use a slightly larger offset for detection
+      const scrollPosition = window.scrollY + 150;
 
       for (const link of navLinks) {
         const section = document.getElementById(link.id);
@@ -82,13 +83,13 @@ export const Navbar = () => {
         }}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="pointer-events-auto flex items-center gap-2 px-3 py-2 bg-gray-950/85 border border-white/10 rounded-full md:gap-4 lg:px-4 lg:py-3"
+        className="pointer-events-auto flex items-center gap-2 px-3 py-2 bg-black/40 border border-white/10 rounded-full md:gap-4 lg:px-4 lg:py-3"
       >
         {/* Logo */}
         <Magnetic strength={0.25}>
           <div 
             onClick={() => scrollToSection("hero")}
-            className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl cursor-pointer shadow-lg shadow-emerald-500/20 active:scale-90 transition-transform"
+            className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl cursor-pointer shadow-lg shadow-blue-500/20 active:scale-90 transition-transform"
           >
             A
           </div>
@@ -104,15 +105,15 @@ export const Navbar = () => {
                 onClick={() => scrollToSection(link.id)}
                 className={cn(
                   "relative px-4 py-2 text-sm font-medium transition-colors rounded-full",
-                  activeSection === link.id ? "text-white" : "text-gray-300 hover:text-white"
+                  activeSection === link.id ? "text-white" : "text-gray-400 hover:text-white"
                 )}
               >
                 {link.name}
                 {activeSection === link.id && (
                   <motion.div
                     layoutId="navbar-pill"
-                    className="absolute inset-0 bg-white/10 border border-white/10 rounded-full -z-10"
-                    transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+                    className="absolute inset-0 bg-white/5 border border-white/10 rounded-full -z-10"
+                    transition={{ type: "spring", duration: 0.5 }}
                   />
                 )}
               </button>
@@ -122,18 +123,17 @@ export const Navbar = () => {
 
         <div className="h-6 w-px bg-white/10 hidden md:block" />
 
-        {/* Resume CTA */}
-        <Magnetic strength={0.4}>
-          <a
-            href="/Art_III_Dela_Cruz_CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full text-sm font-bold shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:scale-105 active:scale-95 transition-all"
-          >
-            <FileText className="w-4 h-4" />
-            Resume
-          </a>
-        </Magnetic>
+        {/* Resume CTA - No Magnetic for clean browser behavior */}
+        <a
+          href="/Art_III_Dela_Cruz_CV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          type="application/pdf"
+          className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-white text-black rounded-full text-sm font-bold hover:scale-105 active:scale-95 transition-all pointer-events-auto"
+        >
+          <FileText className="w-4 h-4" />
+          Resume
+        </a>
 
         {/* Mobile Menu Button */}
         <button
@@ -151,7 +151,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed top-24 left-6 right-6 z-40 p-6 bg-gray-950/80 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl pointer-events-auto md:hidden"
+            className="fixed top-24 left-6 right-6 z-40 p-6 bg-black/80 backdrop-blur-3xl border border-white/10 rounded-3xl shadow-2xl pointer-events-auto md:hidden"
           >
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -160,7 +160,7 @@ export const Navbar = () => {
                   onClick={() => scrollToSection(link.id)}
                   className={cn(
                     "text-xl font-bold text-left py-2 px-4 rounded-2xl transition-all",
-                    activeSection === link.id ? "bg-white/10 text-emerald-400" : "text-gray-400"
+                    activeSection === link.id ? "bg-white/10 text-blue-400" : "text-gray-400"
                   )}
                 >
                   {link.name}
@@ -171,7 +171,8 @@ export const Navbar = () => {
                 href="/Art_III_Dela_Cruz_CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full py-4 bg-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20"
+                type="application/pdf"
+                className="flex items-center justify-center gap-3 w-full py-4 bg-white text-black font-bold rounded-2xl"
               >
                 <FileText className="w-5 h-5" />
                 View Resume

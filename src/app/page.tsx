@@ -12,14 +12,15 @@ import { Skills } from "@/components/sections/Skills";
 import { Achievements } from "@/components/sections/Achievements";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
-import { ScrollToTop } from "@/components/ui/ScrollToTop"; // I'll create this next
+import { BuilderLog } from "@/components/sections/BuilderLog";
+import { TheLab } from "@/components/sections/TheLab";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Smooth scroll polyfill or fixes if needed
     document.documentElement.style.scrollBehavior = "smooth";
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
@@ -29,7 +30,7 @@ export default function Home() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80; // Navbar height
+      const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -45,21 +46,19 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen bg-[#030712] text-white selection:bg-emerald-500/30 selection:text-emerald-200">
-      {/* Dynamic Background Layers */}
+    <div className="relative min-h-screen bg-[#0A0A0A] text-white selection:bg-blue-500/30 selection:text-blue-200">
       <Background />
-      
-      {/* Navigation */}
       <Navbar />
 
-      {/* Main Content */}
       <main>
         <Hero scrollToSection={scrollToSection} />
         
         <div className="space-y-0 relative">
+          <BuilderLog />
           <About />
           <Projects />
           <Experience />
+          <TheLab />
           <Skills />
           <Achievements />
           <Certifications />
@@ -67,11 +66,9 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
       <Footer />
-
-      {/* Utilities */}
       <ScrollToTop />
     </div>
   );
 }
+
