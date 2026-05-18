@@ -21,18 +21,6 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
         
         {/* Text Content */}
         <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-blue-400 tracking-wider uppercase"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            Currently Building: CoreGPass SaaS Platform
-          </motion.div>
 
           <div className="space-y-4">
             <motion.h1
