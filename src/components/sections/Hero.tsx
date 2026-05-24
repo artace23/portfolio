@@ -27,7 +27,7 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.1]"
+              className="text-3xl sm:text-4xl md:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.1] break-words"
             >
               Building products that <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40">
@@ -39,7 +39,7 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed"
             >
               Full-stack engineer with a founder mindset. I don&apos;t just write code; 
               I build scalable, high-performance solutions for real-world problems.
@@ -51,7 +51,7 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto justify-center lg:justify-start px-4 sm:px-0"
           >
             <button
               onClick={() => scrollToSection("projects")}
@@ -85,7 +85,7 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="pt-8 flex flex-wrap justify-center lg:justify-start gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500"
+            className="pt-6 sm:pt-8 flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500"
           >
             <div className="flex items-center gap-2 text-sm font-medium">
               <Zap className="w-4 h-4" /> 3+ Years Exp

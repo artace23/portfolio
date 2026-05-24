@@ -85,14 +85,14 @@ const projects = [
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-32 px-6 bg-[#0A0A0A] relative z-10">
+    <section id="projects" className="py-16 md:py-32 px-4 sm:px-6 bg-[#0A0A0A] relative z-10 w-full overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           title="Product Lab"
           subtitle="A selection of shipped products and engineered solutions."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 w-full">
           {projects.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}
