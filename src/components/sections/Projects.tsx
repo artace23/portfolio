@@ -5,6 +5,22 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 
 const projects = [
   {
+    title: "FocusFlow",
+    description: "A productivity and focus management mobile app built with Apache Cordova, helping users build better work habits through focus sessions, task tracking, and analytics.",
+    problem: "Users struggle to maintain consistent work habits due to fragmented tools for focus, task management, and progress tracking.",
+    solution: "Built a cross-platform mobile app with a Pomodoro-style Flow Ring timer, priority-based task management, real-time session statistics, and configurable preferences — all stored locally for a privacy-first experience.",
+    impact: "Delivered a fully offline-capable mobile app running natively on Android via Cordova, featuring animated progress rings, daily goal tracking, and a 7-day activity chart.",
+    tags: ["Apache Cordova", "JavaScript", "HTML/CSS", "Android"],
+    image: "/images/projects/FocusFlow.png",
+    link: "https://github.com/artace23",
+    github: "https://github.com/artace23",
+    isFeatured: true,
+    banner: {
+      text: "Cross-Platform Mobile",
+      color: "bg-gradient-to-r from-orange-500 to-amber-500",
+    },
+  },
+  {
     title: "CoreGPass",
     description: "A premium SaaS gym management ecosystem with real-time QR check-in capabilities and multi-tenant admin dashboards.",
     problem: "Gym owners struggle with manual check-ins, fragmented member data, and lack of real-time attendance tracking.",
