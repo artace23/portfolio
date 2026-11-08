@@ -1,12 +1,13 @@
-import { Suspense } from 'react';
 import './globals.css';
-import ClientLoadingWrapper from '@/components/ClientLoadingWrapper';
-import { Providers } from './providers';
 import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+
+const sans = Geist({ subsets: ['latin'], variable: '--font-geist-sans', display: 'swap' });
+const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' });
 
 const siteTitle = 'Art Dela Cruz | Full-Stack & Mobile Developer';
 const siteDescription =
-  'Full-stack and mobile developer working with Next.js, React Native, Laravel and Supabase. Selected projects, experience and contact details.';
+  'Full-stack and mobile developer in the Philippines. I build web apps, mobile apps and device-connected systems with Next.js, React Native and Laravel. Available for full-time roles and freelance projects.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://artdelacruz.vercel.app'),
@@ -17,38 +18,27 @@ export const metadata: Metadata = {
     description: siteDescription,
     url: 'https://artdelacruz.vercel.app',
     siteName: 'Art Dela Cruz',
-    images: [{ url: '/images/profile_avatar.png', alt: 'Art Dela Cruz' }],
+    images: [{ url: '/images/profile.jpg', alt: 'Art Dela Cruz' }],
     type: 'website',
   },
   twitter: {
     card: 'summary',
     title: siteTitle,
     description: siteDescription,
-    images: ['/images/profile_avatar.png'],
+    images: ['/images/profile.jpg'],
   },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  colorScheme: 'light dark',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
-        <Providers>
-          <Suspense fallback={null}>
-            <ClientLoadingWrapper>
-              {children}
-            </ClientLoadingWrapper>
-          </Suspense>
-        </Providers>
-      </body>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <body className="font-sans bg-bg text-ink antialiased">{children}</body>
     </html>
   );
 }
