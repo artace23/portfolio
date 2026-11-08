@@ -1,6 +1,6 @@
 import { ArrowRight, FileText } from "lucide-react";
 import { contact } from "@/data/site";
-import { LocalTime } from "@/components/ui/LocalTime";
+// import { LocalTime } from "@/components/ui/LocalTime";
 import { HeroGlobe } from "@/components/ui/HeroGlobe";
 
 // Kept short so each cell fits on one or two lines at every width.
@@ -30,9 +30,9 @@ export function Hero() {
               Native and Laravel, and I&apos;ve built for teams in Israel and the USA. I&apos;m
               currently a software engineer at DSG Son&apos;s Group.
             </p>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <LocalTime />
-            </div>
+            </div> */}
 
             <div className="mt-9 flex flex-wrap gap-3">
               <a
