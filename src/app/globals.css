@@ -12,8 +12,9 @@
   --ok: #16a34a;
 }
 
+/* Dark follows the system, unless the visitor picked a theme with the toggle. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0f0f11;
     --surface: #17171a;
     --ink: #f3f3f4;
@@ -22,7 +23,24 @@
     --accent: #8fa3ff;
     --accent-ink: #0b0b0f;
     --ok: #4ade80;
+    color-scheme: dark;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f0f11;
+  --surface: #17171a;
+  --ink: #f3f3f4;
+  --muted: #a1a1aa;
+  --line: #2a2a30;
+  --accent: #8fa3ff;
+  --accent-ink: #0b0b0f;
+  --ok: #4ade80;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 
 @theme inline {
@@ -62,7 +80,38 @@ body {
   border-radius: 6px;
 }
 
+/* Scroll reveal. Only hides content when JS is running (the .js class is set in the head). */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 500;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+  }
   html {
     scroll-behavior: auto;
   }

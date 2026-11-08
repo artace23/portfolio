@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { contact } from "@/data/site";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const links = [
   { label: "Work", href: "#work" },
@@ -31,6 +32,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <a
             href={contact.resume}
             target="_blank"
@@ -46,7 +48,7 @@ export function Header() {
             Hire me
           </a>
           <button
-            className="md:hidden p-2 -mr-2 text-muted"
+            className="md:hidden inline-flex h-10 w-10 items-center justify-center -mr-2 text-muted"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((o) => !o)}

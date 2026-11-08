@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/ui/Section";
+import { Reveal } from "@/components/ui/Reveal";
 import { services, process } from "@/data/site";
 
 export function Services() {
@@ -10,11 +11,13 @@ export function Services() {
       intro="For companies hiring and for people with a project of their own."
     >
       <div className="grid sm:grid-cols-2 gap-5">
-        {services.map((s) => (
-          <div key={s.title} className="rounded-2xl border border-line bg-surface p-6">
-            <h3 className="font-semibold">{s.title}</h3>
-            <p className="mt-2 text-muted leading-relaxed">{s.text}</p>
-          </div>
+        {services.map((s, i) => (
+          <Reveal key={s.title} delay={(i % 2) * 80} className="h-full">
+            <div className="h-full rounded-2xl border border-line bg-surface p-6 hover:border-ink/25 transition-colors">
+              <h3 className="font-semibold">{s.title}</h3>
+              <p className="mt-2 text-muted leading-relaxed">{s.text}</p>
+            </div>
+          </Reveal>
         ))}
       </div>
 

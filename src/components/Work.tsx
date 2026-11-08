@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight, Github } from "lucide-react";
 import { Section } from "@/components/ui/Section";
+import { Reveal } from "@/components/ui/Reveal";
 import { featured, more, type Project } from "@/data/site";
 
 function Links({ project }: { project: Project }) {
@@ -52,7 +53,8 @@ export function Work() {
     >
       <div className="space-y-16 md:space-y-24">
         {featured.map((p, i) => (
-          <article key={p.title} className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+          <Reveal key={p.title}>
+          <article className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
             <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-2" : ""}`}>
               <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-line bg-surface">
                 <Image
@@ -89,14 +91,16 @@ export function Work() {
               <Links project={p} />
             </div>
           </article>
+          </Reveal>
         ))}
       </div>
 
       <div className="mt-24">
         <h3 className="text-xl font-semibold tracking-tight mb-6">More projects</h3>
         <div className="grid sm:grid-cols-2 gap-5">
-          {more.map((p) => (
-            <article key={p.title} className="rounded-2xl border border-line bg-surface p-6 flex flex-col gap-4">
+          {more.map((p, i) => (
+            <Reveal key={p.title} delay={(i % 2) * 80} className="h-full">
+            <article className="h-full rounded-2xl border border-line bg-surface p-6 flex flex-col gap-4 hover:border-ink/25 transition-colors">
               <div>
                 <h4 className="font-semibold">{p.title}</h4>
                 <p className="text-sm text-muted">{p.tagline}</p>
@@ -107,6 +111,7 @@ export function Work() {
                 <Links project={p} />
               </div>
             </article>
+            </Reveal>
           ))}
         </div>
       </div>

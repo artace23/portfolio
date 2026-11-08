@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, FileText } from "lucide-react";
 import { contact } from "@/data/site";
+import { LocalTime } from "@/components/ui/LocalTime";
 
 const proof = [
   { label: "Software Engineer", detail: "DSG Son's Group, since Jul 2025" },
@@ -36,13 +37,17 @@ export function Hero() {
         </h1>
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-muted leading-relaxed">
           I&apos;m Art, a full-stack developer in the Philippines. I work with Next.js, React
-          Native and Laravel, and I&apos;m currently a software engineer at DSG Son&apos;s Group.
+          Native and Laravel, and I&apos;ve built for teams in Israel and the USA. I&apos;m currently
+          a software engineer at DSG Son&apos;s Group.
         </p>
+        <div className="mt-4">
+          <LocalTime />
+        </div>
 
         <div className="mt-9 flex flex-wrap gap-3">
           <a
             href="#work"
-            className="group inline-flex h-12 items-center gap-2 rounded-full bg-accent px-6 font-medium text-accent-ink hover:opacity-90 transition-opacity"
+            className="group inline-flex h-12 items-center gap-2 rounded-full bg-accent px-6 font-medium text-accent-ink hover:opacity-90 active:scale-[0.98] transition"
           >
             See my work
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />

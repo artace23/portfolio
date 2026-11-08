@@ -7,6 +7,51 @@ export const contact = {
   resume: "/Art_III_Dela_Cruz_CV.pdf",
 };
 
+// Locations shown on the globe. "home" is where I work from; arcs run from it to the others.
+export type PlaceKind = "home" | "work" | "event";
+
+export const places: {
+  id: string;
+  name: string;
+  lat: number;
+  lng: number;
+  kind: PlaceKind;
+  note: string;
+}[] = [
+  {
+    id: "ph",
+    name: "Philippines",
+    lat: 12.88,
+    lng: 121.77,
+    kind: "home",
+    note: "Home base. DSG Son's Group, Jairosoft and my freelance clients.",
+  },
+  {
+    id: "il",
+    name: "Israel",
+    lat: 31.05,
+    lng: 34.85,
+    kind: "work",
+    note: "Remote contract with Trixicon, Jan–Feb 2026.",
+  },
+  {
+    id: "us",
+    name: "United States",
+    lat: 39.8,
+    lng: -98.6,
+    kind: "work",
+    note: "Remote contract with CoreThink AI, Dec 2025.",
+  },
+  {
+    id: "hk",
+    name: "Hong Kong",
+    lat: 22.32,
+    lng: 114.17,
+    kind: "event",
+    note: "Presented SmarTrax at CCCIS 2025 and won Best Presenter.",
+  },
+];
+
 export type Project = {
   title: string;
   tagline: string;
