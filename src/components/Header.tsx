@@ -6,10 +6,10 @@ import { contact } from "@/data/site";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const links = [
+  { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
   { label: "Services", href: "#services" },
   { label: "Experience", href: "#experience" },
-  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
