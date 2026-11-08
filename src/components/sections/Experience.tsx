@@ -10,7 +10,7 @@ const experiences = [
     company: "Freelance",
     period: "June 2022 - Present",
     type: "Contract",
-    impact: "Engineered responsive web applications and custom management tools for local businesses, focusing on high-performance delivery and user-centric design.",
+    impact: "Websites and internal management tools for local businesses, from first call to deployment and upkeep.",
     milestones: [
       "Developed 10+ custom websites and internal tools using React and Node.js.",
       "Implemented SEO and performance optimizations that improved site traffic for clients by an average of 50%.",
@@ -23,7 +23,7 @@ const experiences = [
     company: "Trixicon | Israel",
     period: "Jan 2026 - Feb 2026",
     type: "Contract",
-    impact: "Architecting cross-platform mobile solutions and WordPress ecosystems, focusing on seamless AWS integration for high-concurrency data handling.",
+    impact: "Short contract for an Israeli company: cross-platform mobile work and WordPress sites, with AWS on the backend.",
     milestones: [
       "Engineered mobile applications with React Native for international markets.",
       "Optimized backend data pipelines using Amazon Web Services (AWS).",
@@ -35,7 +35,7 @@ const experiences = [
     company: "CoreThink AI Inc. | USA",
     period: "Dec 2025",
     type: "Contract",
-    impact: "Enhanced model reliability by stress-testing coding LLMs against real-world production scenarios and edge cases.",
+    impact: "Reviewed code written by coding LLMs and tested it against realistic scenarios and edge cases.",
     milestones: [
       "Identified and mitigated 30+ critical logic errors in AI-generated code.",
       "Developed standardized benchmarking protocols for model performance evaluation.",
@@ -47,7 +47,7 @@ const experiences = [
     company: "Freelance | Philippines",
     period: "Sept 2025 – Feb 2026",
     type: "Contract",
-    impact: "Built and deployed a production-grade POS & Inventory system for a local enterprise, automating sales tracking and stock management.",
+    impact: "Built and deployed a POS and inventory system for a local business, covering sales tracking and stock management.",
     milestones: [
       "Reduced manual inventory reconciliation time by 80%.",
       "Designed a custom reporting engine for real-time business insights.",
@@ -59,7 +59,7 @@ const experiences = [
     company: "DSG Son’s Group Inc. | Philippines",
     period: "July 2025 - Present",
     type: "Full-Time",
-    impact: "Spearheaded the development of internal web systems and cross-platform mobile applications, bridging legacy data with modern Python processing scripts.",
+    impact: "Build and maintain internal web systems and a mobile app, and connect older data sources to Python processing scripts.",
     milestones: [
       "Developed and deployed a cross-platform mobile application for both Android and iOS platforms.",
       "Integrated Python-based data analysis modules into Laravel dashboards.",
@@ -86,8 +86,8 @@ export const Experience = () => {
     <section id="experience" className="py-32 px-6 relative z-10 bg-[#0A0A0A]">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
-          title="Product Roadmap"
-          subtitle="A history of shipping, engineering, and solving complex problems."
+          title="Experience"
+          subtitle="Full-time work plus contract and freelance projects, most recent first."
         />
 
         <div className="relative space-y-20">
@@ -130,7 +130,7 @@ export const Experience = () => {
                   </div>
 
                   <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
-                    <span className="text-blue-500 font-bold mr-2">Impact:</span> {exp.impact}
+                    {exp.impact}
                   </p>
 
                   <div className="space-y-3 pt-6 border-t border-white/5">

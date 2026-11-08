@@ -2,18 +2,35 @@ import { Suspense } from 'react';
 import './globals.css';
 import ClientLoadingWrapper from '@/components/ClientLoadingWrapper';
 import { Providers } from './providers';
-import type { Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 
-export const metadata = {
-  title: 'Art III Dela Cruz - Portfolio',
-  description: 'Professional portfolio showcasing my work and skills',
+const siteTitle = 'Art Dela Cruz | Full-Stack & Mobile Developer';
+const siteDescription =
+  'Full-stack and mobile developer working with Next.js, React Native, Laravel and Supabase. Selected projects, experience and contact details.';
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://artdelacruz.vercel.app'),
+  title: siteTitle,
+  description: siteDescription,
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    url: 'https://artdelacruz.vercel.app',
+    siteName: 'Art Dela Cruz',
+    images: [{ url: '/images/profile_avatar.png', alt: 'Art Dela Cruz' }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: siteTitle,
+    description: siteDescription,
+    images: ['/images/profile_avatar.png'],
+  },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export default function RootLayout({

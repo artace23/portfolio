@@ -11,7 +11,6 @@ const navLinks = [
   { name: "About", id: "about" },
   { name: "Projects", id: "projects" },
   { name: "Experience", id: "experience" },
-  { name: "Lab", id: "the-lab" },
   { name: "Contact", id: "contact" },
 ];
 
@@ -138,6 +137,7 @@ export const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           className="md:hidden p-2 text-gray-400 hover:text-white"
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X /> : <Menu />}

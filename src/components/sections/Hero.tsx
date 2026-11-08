@@ -29,9 +29,9 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-3xl sm:text-4xl md:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.1] break-words"
             >
-              Building products that <br className="hidden md:block" />
+              Full-stack and mobile developer <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40">
-                bridge code and business value.
+                building tools for real businesses.
               </span>
             </motion.h1>
             
@@ -41,8 +41,9 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed"
             >
-              Full-stack engineer with a founder mindset. I don&apos;t just write code; 
-              I build scalable, high-performance solutions for real-world problems.
+              I&apos;m Art, a software engineer in the Philippines. I work mostly with Next.js,
+              React Native and Laravel, and I&apos;ve built web apps, mobile apps and one
+              IoT bike-rental system.
             </motion.p>
           </div>
 
@@ -58,7 +59,7 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
               className="group relative px-8 py-4 bg-white text-black rounded-full font-bold overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl shadow-white/10"
             >
               <span className="relative flex items-center gap-2">
-                See My Builds <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                View Projects <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
             
@@ -85,16 +86,16 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="pt-6 sm:pt-8 flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500"
+            className="pt-6 sm:pt-8 flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-8 text-gray-400"
           >
             <div className="flex items-center gap-2 text-sm font-medium">
-              <Zap className="w-4 h-4" /> 3+ Years Exp
+              <Zap className="w-4 h-4" /> Freelancing since 2022
             </div>
             <div className="flex items-center gap-2 text-sm font-medium">
-              <Globe className="w-4 h-4" /> 15+ Shipped
+              <Globe className="w-4 h-4" /> Philippines
             </div>
             <div className="flex items-center gap-2 text-sm font-medium">
-              <Cpu className="w-4 h-4" /> IoT Specialist
+              <Cpu className="w-4 h-4" /> Open to full-time &amp; freelance
             </div>
           </motion.div>
         </div>
@@ -116,7 +117,7 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
             />
             <div className="absolute bottom-8 left-8 right-8 z-20">
                <div className="text-white font-bold text-2xl">Art Dela Cruz</div>
-               <div className="text-white/50 text-sm tracking-widest uppercase">Product Engineer</div>
+               <div className="text-white/50 text-sm tracking-widest uppercase">Software Engineer</div>
             </div>
           </div>
           
@@ -155,7 +156,7 @@ export const Hero = ({ scrollToSection }: HeroProps) => {
       >
         <div className="w-[1px] h-12 bg-gradient-to-b from-blue-500 to-transparent group-hover:h-16 transition-all duration-500" />
         <span className="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold group-hover:text-white transition-colors">
-          Explore Builds
+          Projects
         </span>
       </motion.div>
     </section>

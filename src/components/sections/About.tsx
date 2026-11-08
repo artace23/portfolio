@@ -6,10 +6,9 @@ import { User, Rocket, Target, Lightbulb } from "lucide-react";
 import Image from "next/image";
 
 const stats = [
-  { label: "Engineering", value: "3+ Yrs", icon: <Rocket className="w-5 h-5" /> },
-  { label: "Products Shipped", value: "15+", icon: <Target className="w-5 h-5" /> },
-  { label: "Problem Solving", value: "100%", icon: <Lightbulb className="w-5 h-5" /> },
-  { label: "Tech Stack", value: "Full", icon: <Rocket className="w-5 h-5" /> },
+  { label: "Freelancing since", value: "2022", icon: <Rocket className="w-5 h-5" /> },
+  { label: "Projects listed below", value: "7", icon: <Target className="w-5 h-5" /> },
+  { label: "CCCIS 2025 Best Presenter", value: "HK", icon: <Lightbulb className="w-5 h-5" /> },
 ];
 
 export const About = () => {
@@ -17,8 +16,8 @@ export const About = () => {
     <section id="about" className="py-32 px-6 relative z-10 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          title="The Builder Mindset"
-          subtitle="I don't just build features; I build solutions that drive real-world impact."
+          title="About"
+          subtitle="A bit about how I work and what I've been building."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -39,12 +38,6 @@ export const About = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
               
-              <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-                  <span className="text-[10px] font-bold text-white tracking-[0.2em] uppercase">Status: Iterating on New Ideas</span>
-                </div>
-              </div>
             </div>
           </motion.div>
 
@@ -58,25 +51,25 @@ export const About = () => {
           >
             <div className="space-y-6">
                <h3 className="text-3xl md:text-4xl font-bold leading-tight">
-                 Bridging the gap between <span className="text-blue-500">Vision</span> and <span className="text-white">Reality</span>.
+                 I like building things people use every day.
                </h3>
-               
+
                <p className="text-gray-400 text-lg leading-relaxed font-light">
-                 My journey as a developer started with a simple question: <span className="text-white font-medium italic">&quot;How can I make this work better?&quot;</span> 
-                 Since then, I&apos;ve evolved into a Product Engineer who obsesses over the intersection of clean code, 
-                 intuitive UX, and business goals.
+                 I started out making small websites for local businesses in 2022 and kept going from there.
+                 Today I work as a software engineer at DSG Son&apos;s Group, building internal web systems
+                 and mobile apps, and I take on freelance projects on the side.
                </p>
 
                <p className="text-gray-400 text-lg leading-relaxed font-light">
-                 I specialize in <span className="text-white font-medium">Next.js, React Native, and IoT architectures</span>. 
-                 But more than my stack, I bring a founder&apos;s energy to every project—treating every line of code 
-                 as an investment in a product&apos;s future. Whether it&apos;s a gamified productivity app or a 
-                 smart bike rental system, I build with the end-user in mind.
+                 My main tools are <span className="text-white font-medium">Next.js, React Native and Laravel</span>.
+                 My capstone, SmarTrax, a bike-rental app that unlocks hardware over QR, won Best Presenter
+                 at CCCIS 2025 in Hong Kong. I&apos;m currently looking for a full-time role where I can keep
+                 working across web and mobile.
                </p>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -98,7 +91,7 @@ export const About = () => {
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="flex items-center gap-2 text-white font-medium group hover:text-blue-400 transition-colors"
               >
-                Let&apos;s build the future together <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Get in touch <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </motion.div>

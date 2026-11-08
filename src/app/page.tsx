@@ -12,8 +12,6 @@ import { Skills } from "@/components/sections/Skills";
 import { Achievements } from "@/components/sections/Achievements";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
-import { BuilderLog } from "@/components/sections/BuilderLog";
-import { TheLab } from "@/components/sections/TheLab";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export default function Home() {
@@ -54,11 +52,9 @@ export default function Home() {
         <Hero scrollToSection={scrollToSection} />
         
         <div className="space-y-0 relative">
-          <BuilderLog />
           <About />
           <Projects />
           <Experience />
-          <TheLab />
           <Skills />
           <Achievements />
           <Certifications />

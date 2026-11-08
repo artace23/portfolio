@@ -22,10 +22,10 @@ const projects = [
   },
   {
     title: "CoreGPass",
-    description: "A premium SaaS gym management ecosystem with real-time QR check-in capabilities and multi-tenant admin dashboards.",
+    description: "A gym management web app with QR check-in and a separate admin dashboard for each gym.",
     problem: "Gym owners struggle with manual check-ins, fragmented member data, and lack of real-time attendance tracking.",
-    solution: "Architected a high-performance SaaS platform with sub-second QR verification, automated membership billing, and a centralized management hub.",
-    impact: "Optimized operations for multiple gym facilities, enabling 100% automated check-ins and providing owners with data-driven growth insights.",
+    solution: "Built a multi-tenant web app where each gym gets its own admin dashboard, member records, membership billing and QR-code check-in.",
+    impact: "Live and usable today. Members scan a QR code at the door and attendance shows up on the owner's dashboard right away.",
     tags: ["ReactJS", "Supabase", "TypeScript", "SaaS"],
     image: "/images/projects/coregpass.png",
     link: "https://coregpass.vercel.app/login",
@@ -38,10 +38,10 @@ const projects = [
   },
   {
     title: "AwakenSystem",
-    description: "A gamified productivity ecosystem that bridges the gap between daily tasks and RPG-style character progression.",
-    problem: "Traditional productivity tools fail to sustain long-term user motivation due to lack of immediate feedback loops.",
-    solution: "Integrated a real-time character development system where task completion translates directly into attribute growth and unlockable rewards.",
-    impact: "Created a high-retention environment for personal goal setting, currently being expanded with Supabase for real-time multiplayer features.",
+    description: "A to-do app that works like an RPG: your tasks level up a character.",
+    problem: "I kept dropping to-do apps because finishing a task gave no feedback.",
+    solution: "Turned tasks into XP: finishing a task raises character attributes and unlocks rewards, in the style of an RPG.",
+    impact: "Working app, still in progress. I'm moving the backend to Supabase to add shared features.",
     tags: ["React Native", "Supabase", "TypeScript", "Tailwind CSS"],
     image: "/images/projects/AwakenSystem.png",
     link: "https://github.com/artace23/AwakenSystem",
@@ -50,10 +50,10 @@ const projects = [
   },
   {
     title: "SmarTrax Mobile",
-    description: "An end-to-end IoT solution for smart micro-mobility management, from hardware unlocking to wallet payments.",
-    problem: "Urban micro-mobility faces friction in seamless vehicle unlocking and secure, transparent payment processing.",
-    solution: "Developed a cross-platform mobile app with QR-based hardware integration, real-time Firebase tracking, and an automated wallet system.",
-    impact: "Awarded Best Presenter @ CCCIS 2025. Successfully demonstrated zero-latency hardware response for bike rental operations.",
+    description: "My capstone: a mobile app for renting smart bikes, from unlocking to payment.",
+    problem: "Renting a shared bike usually means a clumsy unlock step and unclear payments.",
+    solution: "Built a React Native app that unlocks the bike hardware by scanning a QR code, tracks rides with Firebase, and handles payments through an in-app wallet. A PHP backend supports it.",
+    impact: "Demonstrated working on real hardware and presented at CCCIS 2025 in Hong Kong, where it won Best Presenter.",
     tags: ["React Native", "Firebase", "PHP", "IoT"],
     image: "/images/projects/smartrax_project.jpg",
     link: "https://github.com/artace23/smartrax",
@@ -66,10 +66,10 @@ const projects = [
   },
   {
     title: "ArdStreaming",
-    description: "A high-performance media streaming platform engineered for zero-latency content delivery and optimized visual experiences.",
-    problem: "Large media assets and high-resolution streaming often lead to significant layout shifts and slow initial load times (LCP).",
-    solution: "Engineered a custom media delivery pipeline with automated image optimization and lazy-loading strategies.",
-    impact: "Boosted LCP by 25% and achieved a near-perfect Lighthouse performance score across all media-heavy pages.",
+    description: "A movie browsing site built with Next.js, with image-heavy pages that stay fast.",
+    problem: "Poster-heavy pages tend to load slowly and jump around while images arrive.",
+    solution: "Used next/image, lazy loading and fixed image dimensions so the layout doesn't shift while posters load.",
+    impact: "Deployed on Vercel. Open it and try it yourself.",
     tags: ["Next.js", "Tailwind CSS", "Media Optimization", "Vercel"],
     image: "/images/projects/ArdStreaming.png",
     link: "https://ardstreamingmovies.vercel.app",
@@ -77,10 +77,10 @@ const projects = [
   },
   {
     title: "Queue Management System",
-    description: "Enterprise-grade service flow optimization tool designed for high-traffic office environments.",
-    problem: "Physical queuing leads to operational inefficiencies and poor user experiences in public service offices.",
-    solution: "Built a multi-module system featuring staff dashboards, service window management, and real-time live transaction feeds.",
-    impact: "Reduced perceived wait times by 35% through better queue distribution and transparent status updates.",
+    description: "A queueing system for busy service offices, built with Laravel.",
+    problem: "Walk-in offices lose time to paper tickets and people not knowing when they'll be called.",
+    solution: "Built ticket issuing, staff dashboards, service window management and a live board showing who is being served.",
+    impact: "Complete working system with separate staff and public views. Source is on GitHub.",
     tags: ["Laravel", "PHP", "MySQL", "Blade"],
     image: "/images/projects/queue_project.png",
     link: "https://github.com/artace23/QMS_development",
@@ -88,10 +88,10 @@ const projects = [
   },
   {
     title: "Easy Budget",
-    description: "A precision-focused personal finance manager designed for rapid expense tracking and financial health visualization.",
-    problem: "Complexity in financial apps often leads to user churn and inconsistent expense logging.",
-    solution: "Streamlined the data entry process to under 3 seconds using a custom UI architecture and automated categorization.",
-    impact: "Helping users achieve 20% higher savings rates through clear, actionable financial insights.",
+    description: "A simple expense tracker for React Native.",
+    problem: "Most budgeting apps ask for too many fields, so people stop logging expenses.",
+    solution: "Kept entry to a few taps with category shortcuts, and stored data in Firebase so it syncs across devices.",
+    impact: "Personal project, working on Android. Source is on GitHub.",
     tags: ["React Native", "Firebase", "Typescript"],
     image: "/images/projects/easybudget_project.jpg",
     link: "https://github.com/artace23/EasyBudget-App",
@@ -104,8 +104,8 @@ export const Projects = () => {
     <section id="projects" className="py-16 md:py-32 px-4 sm:px-6 bg-[#0A0A0A] relative z-10 w-full overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          title="Product Lab"
-          subtitle="A selection of shipped products and engineered solutions."
+          title="Projects"
+          subtitle="Things I've built, with links to the live site or source where I can share them."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 w-full">

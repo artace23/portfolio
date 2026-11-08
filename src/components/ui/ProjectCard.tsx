@@ -34,7 +34,9 @@ export const ProjectCard = ({
   github,
   banner,
 }: ProjectCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [, setIsHovered] = useState(false);
+  // Only show the "live site" arrow when the link isn't just the GitHub repo.
+  const hasLiveSite = Boolean(link) && link !== github;
 
   return (
     <motion.div
@@ -68,32 +70,35 @@ export const ProjectCard = ({
             <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
               {title}
             </h3>
-            <p className="text-gray-400 text-sm leading-relaxed font-light italic">
+            <p className="text-gray-400 text-sm leading-relaxed font-light">
               {description}
             </p>
           </div>
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all group/link"
-          >
-            <ArrowUpRight className="w-5 h-5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-          </a>
+          {hasLiveSite && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${title} live site`}
+              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all group/link"
+            >
+              <ArrowUpRight className="w-5 h-5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+            </a>
+          )}
         </div>
 
         {/* The Narrative */}
         <div className="grid grid-cols-1 gap-6 py-2 border-y border-white/5">
           <div className="space-y-1">
-            <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-blue-500/80">The Problem</div>
+            <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-blue-500/80">Problem</div>
             <p className="text-gray-400 text-xs leading-relaxed">{problem}</p>
           </div>
           <div className="space-y-1">
-            <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-blue-500/80">The Solution</div>
+            <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-blue-500/80">What I built</div>
             <p className="text-gray-400 text-xs leading-relaxed">{solution}</p>
           </div>
           <div className="space-y-1">
-            <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-emerald-400/80">The Impact</div>
+            <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-emerald-400/80">Status</div>
             <p className="text-gray-400 text-xs leading-relaxed font-medium">{impact}</p>
           </div>
         </div>
@@ -116,6 +121,7 @@ export const ProjectCard = ({
               href={github}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${title} source code on GitHub`}
               className="text-gray-500 hover:text-white transition-colors"
             >
               <Github className="w-5 h-5" />

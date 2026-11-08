@@ -6,27 +6,27 @@ import { Layout, Server, Smartphone, Wrench, Database, Layers } from "lucide-rea
 
 const skillGroups = [
   {
-    title: "Product Experience",
+    title: "Frontend",
     icon: <Layout className="w-6 h-6 text-blue-400" />,
-    skills: ["React / Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Radix UI"],
+    skills: ["React / Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     color: "blue",
   },
   {
-    title: "System Architecture",
+    title: "Backend & Data",
     icon: <Server className="w-6 h-6 text-slate-400" />,
-    skills: ["Node.js / Express", "PHP / Laravel", "PostgreSQL", "Supabase", "Redis"],
+    skills: ["Node.js / Express", "PHP / Laravel", "MySQL / PostgreSQL", "Supabase"],
     color: "slate",
   },
   {
-    title: "Mobile Ecosystem",
+    title: "Mobile",
     icon: <Smartphone className="w-6 h-6 text-blue-500" />,
-    skills: ["React Native", "Expo", "Firebase", "RevenueCat", "Mobile UX"],
+    skills: ["React Native", "Expo", "Firebase", "Apache Cordova"],
     color: "blue",
   },
   {
-    title: "Dev & Growth",
+    title: "Tools & Deploy",
     icon: <Layers className="w-6 h-6 text-slate-300" />,
-    skills: ["Git / CI/CD", "Docker", "Vercel / AWS", "PostHog", "SEO Optimization"],
+    skills: ["Git", "Docker", "Vercel", "AWS", "Python"],
     color: "slate",
   },
 ];
@@ -36,8 +36,8 @@ export const Skills = () => {
     <section id="skills" className="py-32 px-6 relative z-10 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          title="Engineering Toolkit"
-          subtitle="A curated selection of technologies I use to build scalable products."
+          title="Skills"
+          subtitle="Technologies I've used in the projects above and at work."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
