@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Splash, SplashHandoff } from '@/components/Splash';
 
 const sans = Geist({ subsets: ['latin'], variable: '--font-geist-sans', display: 'swap' });
 const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' });
@@ -48,10 +49,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans bg-bg text-ink antialiased">
+        <Splash />
         <a href="#work" className="skip-link">
           Skip to content
         </a>
         {children}
+        <SplashHandoff />
       </body>
     </html>
   );

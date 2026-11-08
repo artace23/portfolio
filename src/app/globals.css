@@ -151,3 +151,120 @@ html.js .reveal.in {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Splash: plays on every load, pure CSS plus a measuring script (components/Splash.tsx).
+   The rings draw in, a wireframe globe focuses out of a blur and turns, arcs fly from the
+   Philippines, and the name sharpens into place. On exit the text dissolves, the rings
+   open outward and the globe glides into the hero globe while the backdrop melts away.
+   Hidden without JS. */
+.splash{display:none}
+html.js .splash{
+  --ow:min(125vmin,980px);
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;
+  color:var(--ink);pointer-events:none;
+  animation:splash-done .01s linear 3.2s forwards;
+}
+.splash-bg{
+  position:absolute;inset:0;background:var(--bg);pointer-events:auto;
+  animation:splash-fade-out .8s cubic-bezier(.4,0,.2,1) 2.35s forwards;
+}
+.splash-bg::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(color-mix(in srgb,var(--ink) 16%,transparent) 1px,transparent 1.4px);
+  background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(circle at center,#000 0,transparent 70%);
+  mask-image:radial-gradient(circle at center,#000 0,transparent 70%);
+  animation:splash-fade 1.2s ease both;
+}
+
+/* Orbit rings */
+.splash-orbit{
+  position:absolute;left:50%;top:50%;width:var(--ow);aspect-ratio:1;transform:translate(-50%,-50%);
+  animation:splash-rings-out 1s cubic-bezier(.65,0,.35,1) 2.05s forwards;
+}
+.splash-orbit .ring{stroke-dasharray:1;stroke-dashoffset:1;animation:splash-draw 1.4s cubic-bezier(.65,0,.35,1) forwards}
+.splash-orbit .ring.r2{animation-delay:.15s}
+.splash-orbit .ring.r3{animation-delay:.3s}
+.splash-orbit .spin{transform-origin:400px 400px;animation:orbit-spin 9s linear infinite,splash-fade 1.4s ease .5s both}
+
+/* Globe: same proportions as the hero canvas globe so the handoff lines up. */
+.splash-globe{
+  position:absolute;left:50%;top:50%;
+  width:calc(var(--ow) * .39);aspect-ratio:1;
+  margin:calc(var(--ow) * -.195) 0 0 calc(var(--ow) * -.195);
+  will-change:transform,opacity,filter;
+  animation:
+    splash-globe-in 1.3s cubic-bezier(.22,1,.36,1) .1s both,
+    splash-fly 1s cubic-bezier(.7,0,.25,1) 2.1s forwards;
+}
+.splash-globe .mer{transform-box:fill-box;transform-origin:center;animation:splash-mer 6s linear infinite}
+.splash-arc{stroke-dasharray:1;stroke-dashoffset:1;animation:splash-draw .8s cubic-bezier(.65,0,.35,1) forwards}
+.splash-pin{transform-box:fill-box;transform-origin:center;animation:splash-pin-in .7s cubic-bezier(.22,1,.36,1) both}
+.splash-ping{transform-box:fill-box;transform-origin:center;opacity:0;animation:splash-ping 1.4s cubic-bezier(.22,1,.36,1) .7s 1}
+
+/* Name */
+.splash-core{
+  position:relative;text-align:center;padding:0 20px;
+  transform:translateY(calc(var(--ow) * .19 + 54px));
+}
+.splash-name{
+  font-size:clamp(32px,7vw,60px);font-weight:600;letter-spacing:-.035em;line-height:1.05;white-space:nowrap;
+  animation:
+    splash-name-in 1.2s cubic-bezier(.22,1,.36,1) .75s both,
+    splash-text-out .6s cubic-bezier(.4,0,.2,1) 1.95s forwards;
+}
+.splash-name span{color:var(--accent)}
+.splash-role{
+  margin-top:14px;font-family:var(--font-geist-mono),monospace;font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--muted);
+  animation:
+    splash-role-in 1s cubic-bezier(.22,1,.36,1) 1.1s both,
+    splash-text-out .5s cubic-bezier(.4,0,.2,1) 1.9s forwards;
+}
+
+@keyframes splash-draw{to{stroke-dashoffset:0}}
+@keyframes splash-fade{from{opacity:0}to{opacity:1}}
+@keyframes splash-fade-out{to{opacity:0}}
+@keyframes splash-done{to{visibility:hidden}}
+@keyframes splash-globe-in{from{opacity:0;filter:blur(12px);transform:scale(.88)}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes splash-fly{
+  from{opacity:1;filter:blur(0);transform:none}
+  65%{opacity:1}
+  to{opacity:0;filter:blur(0);transform:translate(var(--gx,0px),var(--gy,0px)) scale(var(--gs,1.35))}
+}
+@keyframes splash-rings-out{to{opacity:0;scale:1.3}}
+/* Width of a meridian is |cos| of its angle; sampled so the turn reads as real rotation. */
+@keyframes splash-mer{
+  0%,100%{transform:scaleX(1)}
+  6.25%,93.75%{transform:scaleX(.981)}
+  12.5%,87.5%{transform:scaleX(.924)}
+  18.75%,81.25%{transform:scaleX(.831)}
+  25%,75%{transform:scaleX(.707)}
+  31.25%,68.75%{transform:scaleX(.556)}
+  37.5%,62.5%{transform:scaleX(.383)}
+  43.75%,56.25%{transform:scaleX(.195)}
+  50%{transform:scaleX(0)}
+}
+@keyframes splash-pin-in{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
+@keyframes splash-ping{from{opacity:.6;transform:none}to{opacity:0;transform:scale(4.5)}}
+@keyframes splash-name-in{from{opacity:0;filter:blur(14px);letter-spacing:.14em}to{opacity:1;filter:blur(0);letter-spacing:-.035em}}
+@keyframes splash-role-in{from{opacity:0;filter:blur(6px);translate:0 8px}to{opacity:1;filter:blur(0);translate:none}}
+@keyframes splash-text-out{to{opacity:0;filter:blur(10px);translate:0 -10px}}
+
+/* The hero settles in under the lifting splash; its globe only fades, so the splash globe
+   can land exactly on it. */
+@keyframes hero-in{from{opacity:0;translate:0 24px}to{opacity:1;translate:none}}
+@keyframes hero-fade{from{opacity:0}to{opacity:1}}
+html.js #top>div>.grid>div:nth-child(1){animation:hero-in 1s cubic-bezier(.22,1,.36,1) 2.4s both}
+html.js #top>div>.grid>div:nth-child(2){animation:hero-fade .45s ease 2.7s both}
+html.js #top>div>dl{animation:hero-in 1s cubic-bezier(.22,1,.36,1) 2.6s both}
+
+/* Reduced motion: nothing moves; the intro holds briefly and fades. */
+@media (prefers-reduced-motion:reduce){
+  html.js .splash{animation:splash-done .01s linear 2.4s forwards}
+  .splash-bg{animation:splash-fade-out .5s ease 1.8s forwards}
+  .splash-bg::before,.splash-orbit .spin,.splash-globe .mer,.splash-pin,.splash-ping{animation:none}
+  .splash-orbit .ring,.splash-arc{animation:none;stroke-dashoffset:0}
+  .splash-orbit,.splash-globe,.splash-name,.splash-role{animation:splash-fade-out .5s ease 1.8s forwards}
+  html.js #top>div>.grid>div,html.js #top>div>dl{animation:none}
+}

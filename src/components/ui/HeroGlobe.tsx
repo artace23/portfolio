@@ -12,7 +12,7 @@ export function HeroGlobe() {
 
   return (
     <div className="mx-auto w-full max-w-[420px]">
-      <div className="relative">
+      <div className="relative" data-hero-globe>
       {/* Decorative orbit rings and a small satellite, sized a little larger than the globe. */}
       <svg
         aria-hidden
