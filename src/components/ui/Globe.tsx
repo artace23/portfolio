@@ -52,6 +52,10 @@ const rgba = (hex: string, a: number) => {
   return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
 };
 
+const SPIN_DEG_PER_SEC = 7; // one full turn in about 51 seconds
+const SPIN_DELAY_MS = 2500; // pause after focusing a place before spinning again
+const IDLE_TILT = -18;
+
 const angleDiff = (to: number, from: number) => ((to - from + 540) % 360) - 180;
 const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 
@@ -68,6 +72,8 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
   const size = useRef(320);
   const hits = useRef<{ id: string; x: number; y: number }[]>([]);
   const snap = useRef(false);
+  // When the globe last turned toward a place or was touched. Idle spin resumes a few seconds later.
+  const focusAt = useRef(0);
 
   useEffect(() => {
     selectRef.current = onSelect;
@@ -77,6 +83,7 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
   // Point the globe at the active place.
   useEffect(() => {
     activeRef.current = activeId;
+    focusAt.current = performance.now();
     const p = places.find((x) => x.id === activeId);
     if (p) target.current = { l: -p.lng, p: -p.lat };
   }, [activeId, places]);
@@ -94,6 +101,7 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
     let running = false;
     let last = performance.now();
     let dragging = false;
+    let hovering = false;
     let moved = 0;
     let lastX = 0;
     let lastY = 0;
@@ -235,9 +243,17 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       if (!dragging) {
-        const k = reduceMotion || snap.current ? 1 : 1 - Math.exp(-dt * 4.5);
-        rot.current.l += angleDiff(target.current.l, rot.current.l) * k;
-        rot.current.p += (target.current.p - rot.current.p) * k;
+        const idle = !reduceMotion && !hovering && now - focusAt.current > SPIN_DELAY_MS;
+        if (idle) {
+          // Endless slow rotation, with a gentle tilt so the globe reads as a planet.
+          rot.current.l += SPIN_DEG_PER_SEC * dt;
+          rot.current.p += (IDLE_TILT - rot.current.p) * (1 - Math.exp(-dt * 1.2));
+          target.current = { ...rot.current };
+        } else {
+          const k = reduceMotion || snap.current ? 1 : 1 - Math.exp(-dt * 4.5);
+          rot.current.l += angleDiff(target.current.l, rot.current.l) * k;
+          rot.current.p += (target.current.p - rot.current.p) * k;
+        }
         snap.current = false;
       }
       draw(now);
@@ -297,6 +313,7 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
     const onUp = (e: PointerEvent) => {
       if (!dragging) return;
       dragging = false;
+      focusAt.current = performance.now();
       if (moved < 5) {
         const id = pick(e.clientX, e.clientY);
         if (id) selectRef.current(id);
@@ -305,6 +322,14 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
     };
     const onCancel = () => {
       dragging = false;
+      focusAt.current = performance.now();
+    };
+    const onEnter = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") hovering = true;
+    };
+    const onLeave = () => {
+      hovering = false;
+      focusAt.current = performance.now();
     };
 
     const observer = new IntersectionObserver(
@@ -327,6 +352,8 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerup", onUp);
     canvas.addEventListener("pointercancel", onCancel);
+    canvas.addEventListener("pointerenter", onEnter);
+    canvas.addEventListener("pointerleave", onLeave);
     canvas.style.cursor = "grab";
 
     return () => {
@@ -339,6 +366,8 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
       canvas.removeEventListener("pointermove", onMove);
       canvas.removeEventListener("pointerup", onUp);
       canvas.removeEventListener("pointercancel", onCancel);
+      canvas.removeEventListener("pointerenter", onEnter);
+      canvas.removeEventListener("pointerleave", onLeave);
     };
   }, []);
 

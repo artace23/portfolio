@@ -80,6 +80,34 @@ body {
   border-radius: 6px;
 }
 
+/* Page backdrop: a faint dot grid that fades out down the screen, like a map's graticule. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--ink) 16%, transparent) 1px,
+    transparent 1.3px
+  );
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 0%, transparent 78%);
+  opacity: 0.55;
+}
+
+/* Slow orbit rings behind the hero globe. */
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.orbit-spin {
+  transform-origin: 400px 400px;
+  animation: orbit-spin 90s linear infinite;
+}
+
 /* Scroll reveal. Only hides content when JS is running (the .js class is set in the head). */
 html.js .reveal {
   opacity: 0;
@@ -108,6 +136,9 @@ html.js .reveal.in {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .orbit-spin {
+    animation: none;
+  }
   html.js .reveal {
     opacity: 1;
     transform: none;

@@ -63,6 +63,19 @@ export function Experience() {
             <span className="font-medium text-ink">{current.name}.</span> {current.note}
           </p>
 
+          <ul className="hidden md:block mt-2 space-y-1 text-sm text-muted" aria-label={`Roles in ${current.name}`}>
+            {experience
+              .filter((e) => locOf(e.place) === active)
+              .map((e) => (
+                <li key={e.role + e.dates} className="flex gap-2">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                  <span>
+                    <span className="text-ink">{e.role}</span>, {e.org}
+                  </span>
+                </li>
+              ))}
+          </ul>
+
           <ul className="hidden md:flex flex-wrap gap-2 mt-4">
             {places.map((p) => (
               <li key={p.id}>

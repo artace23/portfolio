@@ -59,6 +59,8 @@ export type Project = {
   highlights?: string[];
   stack: string[];
   image: string;
+  // "contain" shows the whole image (for phone mockups); the default crops to fill the frame.
+  fit?: "cover" | "contain";
   live?: string;
   code?: string;
   badge?: string;
@@ -77,6 +79,7 @@ export const featured: Project[] = [
     ],
     stack: ["React Native", "Firebase", "PHP", "IoT"],
     image: "/images/projects/smartrax_project.jpg",
+    fit: "contain",
     code: "https://github.com/artace23/smartrax",
     badge: "Best Presenter, CCCIS 2025",
   },
