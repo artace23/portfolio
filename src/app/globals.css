@@ -158,6 +158,8 @@ html.js .reveal.in {
    open outward and the globe glides into the hero globe while the backdrop melts away.
    Hidden without JS. */
 .splash{display:none}
+/* Safety net: a script removes the splash after its run, even if its animations stall. */
+html.splash-off .splash{display:none!important}
 html.js .splash{
   --ow:min(125vmin,980px);
   position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;
@@ -165,7 +167,7 @@ html.js .splash{
   animation:splash-done .01s linear 3.2s forwards;
 }
 .splash-bg{
-  position:absolute;inset:0;background:var(--bg);pointer-events:auto;
+  position:absolute;inset:0;background:var(--bg);
   animation:splash-fade-out .8s cubic-bezier(.4,0,.2,1) 2.35s forwards;
 }
 .splash-bg::before{

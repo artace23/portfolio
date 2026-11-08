@@ -71,7 +71,7 @@ export function Splash() {
 // to land. The values go on <html>, never on the splash, so React hydration is untouched. Re-measured just before the exit in case fonts shifted the layout. If the hero
 // globe is off screen (phones), the splash globe zooms through and fades instead.
 const handoff =
-  "(function(){var s=document.documentElement;function m(){var t=document.querySelector('[data-hero-globe]');if(!t)return;var r=t.getBoundingClientRect(),W=innerWidth,H=innerHeight,w=Math.min(1.25*Math.min(W,H),980)*.39,cy=r.top+r.height/2;if(!r.width||cy>H||cy<0){s.style.removeProperty('--gx');s.style.removeProperty('--gy');s.style.removeProperty('--gs');return}s.style.setProperty('--gx',(r.left+r.width/2-W/2)+'px');s.style.setProperty('--gy',(cy-H/2)+'px');s.style.setProperty('--gs',String(r.width/w))}m();setTimeout(m,1800)})()";
+  "(function(){var s=document.documentElement;function m(){var t=document.querySelector('[data-hero-globe]');if(!t)return;var r=t.getBoundingClientRect(),W=innerWidth,H=innerHeight,w=Math.min(1.25*Math.min(W,H),980)*.39,cy=r.top+r.height/2;if(!r.width||cy>H||cy<0){s.style.removeProperty('--gx');s.style.removeProperty('--gy');s.style.removeProperty('--gs');return}s.style.setProperty('--gx',(r.left+r.width/2-W/2)+'px');s.style.setProperty('--gy',(cy-H/2)+'px');s.style.setProperty('--gs',String(r.width/w))}m();setTimeout(m,1800);setTimeout(function(){s.classList.add('splash-off')},3600)})()";
 
 export function SplashHandoff() {
   return <script dangerouslySetInnerHTML={{ __html: handoff }} />;
