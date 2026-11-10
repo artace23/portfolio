@@ -62,11 +62,29 @@ export type Project = {
   // "contain" shows the whole image (for phone mockups); the default crops to fill the frame.
   fit?: "cover" | "contain";
   live?: string;
+  // App Store listing, for apps that are published there.
+  store?: string;
   code?: string;
   badge?: string;
 };
 
 export const featured: Project[] = [
+  {
+    title: "IAM",
+    tagline: "Integrated Approval Management, now on the App Store",
+    summary:
+      "A secure mobile app that brings an organization's approval workflows into one place. Approvers review submitted requests, check the details and act on them from their phone, with a push notification for anything waiting on them.",
+    highlights: [
+      "Published on the App Store, free, for iPhone and iPad",
+      "Real-time push notifications for pending approvals",
+      "Review, track and approve requests from one app instead of several systems",
+      "Built at DSG Son's Group",
+    ],
+    stack: ["iOS", "iPad", "Push notifications"],
+    image: "/images/projects/iam.png",
+    store: "https://apps.apple.com/ph/app/iam-integrated-approval-mngmnt/id6764195174",
+    badge: "Latest · Live on the App Store",
+  },
   {
     title: "SmarTrax",
     tagline: "Smart bike rental app with hardware unlocking",

@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, Smartphone } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { featured, more, type Project } from "@/data/site";
 
 function Links({ project }: { project: Project }) {
-  if (!project.live && !project.code) return null;
+  if (!project.live && !project.store && !project.code) return null;
   return (
     <div className="flex flex-wrap gap-4 text-sm font-medium">
       {project.live && (
@@ -16,6 +16,16 @@ function Links({ project }: { project: Project }) {
           className="inline-flex items-center gap-1 text-accent hover:underline underline-offset-4"
         >
           Live site <ArrowUpRight className="w-4 h-4" />
+        </a>
+      )}
+      {project.store && (
+        <a
+          href={project.store}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-accent hover:underline underline-offset-4"
+        >
+          <Smartphone className="w-4 h-4" /> View on App Store <ArrowUpRight className="w-4 h-4" />
         </a>
       )}
       {project.code && (
@@ -46,7 +56,7 @@ function Stack({ items }: { items: string[] }) {
 
 // "Web app", "Mobile app", or "Mobile + IoT", read from the stack so it can't drift from the facts.
 function kindOf(p: Project) {
-  const mobile = p.stack.some((s) => /react native|cordova|expo/i.test(s));
+  const mobile = p.stack.some((s) => /react native|cordova|expo|ios/i.test(s));
   const iot = p.stack.some((s) => /iot/i.test(s));
   if (mobile && iot) return "Mobile + IoT";
   return mobile ? "Mobile app" : "Web app";
@@ -54,12 +64,12 @@ function kindOf(p: Project) {
 
 // Short address for the window bar: the live host, or the repo path.
 function addressOf(p: Project) {
-  const href = p.live ?? p.code;
+  const href = p.live ?? p.store ?? p.code;
   if (!href) return p.title.toLowerCase();
   try {
     const u = new URL(href);
     const path = u.pathname.replace(/\/$/, "");
-    return u.hostname.replace(/^www\./, "") + (p.live ? "" : path);
+    return u.hostname.replace(/^www\./, "") + (p.live || p.store ? "" : path);
   } catch {
     return p.title.toLowerCase();
   }
@@ -78,7 +88,7 @@ function Shot({
   sizes: string;
   compact?: boolean;
 }) {
-  const href = project.live ?? project.code;
+  const href = project.live ?? project.store ?? project.code;
   const frame = (
     <div className="relative">
       {!compact && (
@@ -121,7 +131,7 @@ function Shot({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Open ${project.title} ${project.live ? "live site" : "source code"}`}
+      aria-label={`Open ${project.title} ${project.live ? "live site" : project.store ? "App Store listing" : "source code"}`}
       className="group/shot block"
     >
       {frame}
@@ -134,7 +144,7 @@ export function Work() {
     <Section
       id="work"
       title="Selected work"
-      intro="Three projects I'd show first, with the part I played and where you can see them."
+      intro="Four projects I'd show first, newest first, with where you can see each one."
       className="relative overflow-hidden"
     >
       {/* Soft accent wash behind the featured projects */}
