@@ -59,6 +59,7 @@ function kindOf(p: Project) {
   const mobile = p.stack.some((s) => /react native|cordova|expo|ios/i.test(s));
   const iot = p.stack.some((s) => /iot/i.test(s));
   if (mobile && iot) return "Mobile + IoT";
+  if (p.stack.includes("Web") && p.stack.includes("Mobile")) return "Web + Mobile";
   return mobile ? "Mobile app" : "Web app";
 }
 

@@ -86,6 +86,22 @@ export const featured: Project[] = [
     badge: "Latest · Live on the App Store",
   },
   {
+    title: "BioLeaf",
+    tagline: "AI plant identification for Philippine medicinal plants",
+    summary:
+      "An AI-powered medicinal plant identification website and mobile application. It uses machine learning to recognize a plant from a photo, shows a confidence score with each result, and can identify plants offline.",
+    highlights: [
+      "Image-based plant recognition with machine learning",
+      "Confidence score shown on every result",
+      "Offline identification, no connection needed",
+      "Plant information in English and Tagalog",
+    ],
+    stack: ["Machine learning", "Image recognition", "Web", "Mobile"],
+    image: "/images/projects/bioleaf.png",
+    live: "https://bioleaf-website.vercel.app",
+    badge: "AI-powered",
+  },
+  {
     title: "SmarTrax",
     tagline: "Smart bike rental app with hardware unlocking",
     summary:
@@ -114,21 +130,6 @@ export const featured: Project[] = [
     stack: ["React", "TypeScript", "Supabase"],
     image: "/images/projects/coregpass.png",
     live: "https://coregpass.vercel.app/login",
-  },
-  {
-    title: "ArdStreaming",
-    tagline: "Movie browsing site built for speed",
-    summary:
-      "A Next.js site for browsing movies. Poster-heavy pages use image optimization and lazy loading to load quickly and avoid layout jumps.",
-    highlights: [
-      "Image optimization with next/image",
-      "Lazy loading for image-heavy pages",
-      "Deployed on Vercel",
-    ],
-    stack: ["Next.js", "Tailwind CSS", "Vercel"],
-    image: "/images/projects/ArdStreaming.png",
-    live: "https://ardstreamingmovies.vercel.app",
-    code: "https://github.com/artace23/ardstreamingmovies",
   },
 ];
 
@@ -164,6 +165,16 @@ export const more: Project[] = [
     stack: ["React Native", "Firebase", "TypeScript"],
     image: "/images/projects/easybudget_project.jpg",
     code: "https://github.com/artace23/EasyBudget-App",
+  },
+  {
+    title: "ArdStreaming",
+    tagline: "Movie browsing site built for speed",
+    summary:
+      "A Next.js site for browsing movies. Poster-heavy pages use image optimization and lazy loading to load quickly and avoid layout jumps.",
+    stack: ["Next.js", "Tailwind CSS", "Vercel"],
+    image: "/images/projects/ArdStreaming.png",
+    live: "https://ardstreamingmovies.vercel.app",
+    code: "https://github.com/artace23/ardstreamingmovies",
   },
 ];
 
