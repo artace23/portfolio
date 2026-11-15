@@ -1,4 +1,4 @@
-// Intro shown once per browser tab (the head script in layout.tsx skips it after that). Pure CSS (see "Splash" in globals.css) plus one tiny inline
+// Intro shown on every page load. Pure CSS (see "Splash" in globals.css) plus one tiny inline
 // script that measures where the hero globe sits, so the splash globe can fly into it.
 
 // Meridians spaced 30 degrees apart; their staggered delays make the wireframe rotate.

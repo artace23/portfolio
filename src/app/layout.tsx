@@ -41,12 +41,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable} ${display.variable}`} suppressHydrationWarning>
       <head>
-        {/* Runs before first paint: restores a saved theme, enables scroll reveals, and skips the
-            intro when it has already played in this tab. */}
+        {/* Runs before first paint: restores a saved theme, enables scroll reveals and makes a refresh start at the top. The intro
+            plays on every load. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{var d=document.documentElement;d.classList.add('js');try{if(sessionStorage.getItem('intro'))d.classList.add('splash-off');else sessionStorage.setItem('intro','1')}catch(e){}var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}",
+              "try{var d=document.documentElement;d.classList.add('js');if('scrollRestoration' in history)history.scrollRestoration='manual';var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}",
           }}
         />
       </head>
