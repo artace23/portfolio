@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ArrowRight, FileText } from "lucide-react";
 import { contact } from "@/data/site";
 import { LocalTime } from "@/components/ui/LocalTime";
@@ -18,24 +17,7 @@ export function Hero() {
       <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           <div className="lg:col-span-7" data-hero="a">
-            <p className="flex items-center gap-3 text-sm text-muted">
-              <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-line bg-surface">
-                <Image
-                  src="/images/profile.jpg"
-                  alt=""
-                  fill
-                  sizes="44px"
-                  priority
-                  className="object-cover object-[50%_12%]"
-                />
-              </span>
-              <span>
-                <span className="block font-medium text-ink">Art Dela Cruz</span>
-                Full-stack and mobile developer
-              </span>
-            </p>
-
-            <h1 className="mt-7 font-display font-semibold tracking-[-0.035em] leading-[0.95] text-[clamp(2.75rem,12vw,4rem)] sm:text-6xl lg:text-[4rem] xl:text-[4.5rem] 2xl:text-[5rem]">
+            <h1 className="font-display font-semibold tracking-[-0.035em] leading-[0.95] text-[clamp(2.75rem,12vw,4rem)] sm:text-6xl lg:text-[4rem] xl:text-[4.5rem] 2xl:text-[5rem]">
               I build web and mobile apps for{" "}
               <span className="text-accent">real businesses.</span>
             </h1>
