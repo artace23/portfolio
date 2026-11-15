@@ -1,46 +1,79 @@
 @import "tailwindcss";
 
-/* Design tokens. Light by default, dark follows the visitor's system setting. */
+/* Design tokens. Warm paper in light, warm near-black in dark. The UI itself stays close to
+   monochrome so the project colours carry the page. Values stay 6-digit hex: the globe
+   canvas reads them. */
 :root {
-  --bg: #fafaf8;
-  --surface: #ffffff;
-  --ink: #131314;
-  --muted: #5b5b63;
-  --line: #e6e4df;
-  --accent: #2447f5;
+  --bg: #f6f2ea;
+  --surface: #fffdf8;
+  --ink: #16150f;
+  --muted: #5a574f;
+  --line: #e3ddd0;
+  --accent: #c23a17;
   --accent-ink: #ffffff;
-  --ok: #16a34a;
+  --ok: #2f7d43;
 }
 
 /* Dark follows the system, unless the visitor picked a theme with the toggle. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f0f11;
-    --surface: #17171a;
-    --ink: #f3f3f4;
-    --muted: #a1a1aa;
-    --line: #2a2a30;
-    --accent: #8fa3ff;
-    --accent-ink: #0b0b0f;
-    --ok: #4ade80;
+    --bg: #100f0d;
+    --surface: #1a1815;
+    --ink: #f1efe8;
+    --muted: #aeab9f;
+    --line: #302d27;
+    --accent: #ff865f;
+    --accent-ink: #1a0e09;
+    --ok: #5fce7d;
     color-scheme: dark;
+  }
+  :root:not([data-theme="light"]) .panel-invert {
+    --bg: #f6f2ea;
+    --surface: #fffdf8;
+    --ink: #16150f;
+    --muted: #5a574f;
+    --line: #e3ddd0;
+    --accent: #c23a17;
+    --accent-ink: #ffffff;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #0f0f11;
-  --surface: #17171a;
-  --ink: #f3f3f4;
-  --muted: #a1a1aa;
-  --line: #2a2a30;
-  --accent: #8fa3ff;
-  --accent-ink: #0b0b0f;
-  --ok: #4ade80;
+  --bg: #100f0d;
+  --surface: #1a1815;
+  --ink: #f1efe8;
+  --muted: #aeab9f;
+  --line: #302d27;
+  --accent: #ff865f;
+  --accent-ink: #1a0e09;
+  --ok: #5fce7d;
   color-scheme: dark;
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
+}
+
+/* A block in the opposite theme (used for the contact panel). */
+.panel-invert {
+  --bg: #16150f;
+  --surface: #23221e;
+  --ink: #f1efe8;
+  --muted: #aeab9f;
+  --line: #3a3832;
+  --accent: #ff865f;
+  --accent-ink: #1a0e09;
+  background: var(--bg);
+  color: var(--ink);
+}
+:root[data-theme="dark"] .panel-invert {
+  --bg: #f6f2ea;
+  --surface: #fffdf8;
+  --ink: #16150f;
+  --muted: #5a574f;
+  --line: #e3ddd0;
+  --accent: #c23a17;
+  --accent-ink: #ffffff;
 }
 
 @theme inline {
@@ -54,6 +87,7 @@
   --color-ok: var(--ok);
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-display: var(--font-display-face), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 html {
@@ -63,10 +97,30 @@ html {
 }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(60rem 36rem at 85% -8%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 70%),
+    radial-gradient(48rem 30rem at -10% 40%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Buttons and links respond to the pointer: a small lift on hover, a press on click. */
+a[class*="bg-ink"],
+a[class*="border-line"] {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s, background-color 0.2s;
+}
+@media (hover: hover) {
+  a[class*="bg-ink"]:hover,
+  a[class*="border-line"]:hover {
+    transform: translateY(-1px);
+  }
+}
+a[class*="bg-ink"]:active,
+a[class*="border-line"]:active {
+  transform: translateY(0) scale(0.98);
 }
 
 ::selection {
@@ -80,21 +134,12 @@ body {
   border-radius: 6px;
 }
 
-/* Page backdrop: a faint dot grid that fades out down the screen, like a map's graticule. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--ink) 16%, transparent) 1px,
-    transparent 1.3px
-  );
-  background-size: 26px 26px;
-  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 0%, transparent 78%);
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 0%, transparent 78%);
-  opacity: 0.55;
+.tint-text {
+  color: color-mix(in srgb, var(--tint) 62%, var(--ink));
+}
+.tint-chip {
+  background: color-mix(in srgb, var(--tint) 16%, transparent);
+  color: color-mix(in srgb, var(--tint) 55%, var(--ink));
 }
 
 /* Slow orbit rings behind the hero globe. */
@@ -152,7 +197,7 @@ html.js .reveal.in {
   }
 }
 
-/* Splash: plays on every load, pure CSS plus a measuring script (components/Splash.tsx).
+/* Splash: plays once per tab, pure CSS plus a measuring script (components/Splash.tsx).
    The rings draw in, a wireframe globe focuses out of a blur and turns, arcs fly from the
    Philippines, and the name sharpens into place. On exit the text dissolves, the rings
    open outward and the globe glides into the hero globe while the backdrop melts away.
@@ -170,15 +215,6 @@ html.js .splash{
   position:absolute;inset:0;background:var(--bg);
   animation:splash-fade-out .8s cubic-bezier(.4,0,.2,1) 2.35s forwards;
 }
-.splash-bg::before{
-  content:"";position:absolute;inset:0;
-  background-image:radial-gradient(color-mix(in srgb,var(--ink) 16%,transparent) 1px,transparent 1.4px);
-  background-size:26px 26px;
-  -webkit-mask-image:radial-gradient(circle at center,#000 0,transparent 70%);
-  mask-image:radial-gradient(circle at center,#000 0,transparent 70%);
-  animation:splash-fade 1.2s ease both;
-}
-
 /* Orbit rings */
 .splash-orbit{
   position:absolute;left:50%;top:50%;width:var(--ow);aspect-ratio:1;transform:translate(-50%,-50%);
@@ -210,7 +246,7 @@ html.js .splash{
   transform:translateY(calc(var(--ow) * .19 + 54px));
 }
 .splash-name{
-  font-size:clamp(32px,7vw,60px);font-weight:600;letter-spacing:-.035em;line-height:1.05;white-space:nowrap;
+  font-family:var(--font-display-face),sans-serif;font-size:clamp(32px,7vw,60px);font-weight:600;letter-spacing:-.035em;line-height:1.05;white-space:nowrap;
   animation:
     splash-name-in 1.2s cubic-bezier(.22,1,.36,1) .75s both,
     splash-text-out .6s cubic-bezier(.4,0,.2,1) 1.95s forwards;
@@ -257,16 +293,16 @@ html.js .splash{
    can land exactly on it. */
 @keyframes hero-in{from{opacity:0;translate:0 24px}to{opacity:1;translate:none}}
 @keyframes hero-fade{from{opacity:0}to{opacity:1}}
-html.js #top>div>.grid>div:nth-child(1){animation:hero-in 1s cubic-bezier(.22,1,.36,1) 2.4s both}
-html.js #top>div>.grid>div:nth-child(2){animation:hero-fade .45s ease 2.7s both}
-html.js #top>div>dl{animation:hero-in 1s cubic-bezier(.22,1,.36,1) 2.6s both}
+html.js:not(.splash-off) [data-hero="a"]{animation:hero-in 1s cubic-bezier(.22,1,.36,1) 2.4s both}
+html.js:not(.splash-off) [data-hero="b"]{animation:hero-fade .45s ease 2.7s both}
+html.js:not(.splash-off) [data-hero="c"]{animation:hero-in 1s cubic-bezier(.22,1,.36,1) 2.6s both}
 
 /* Reduced motion: nothing moves; the intro holds briefly and fades. */
 @media (prefers-reduced-motion:reduce){
   html.js .splash{animation:splash-done .01s linear 2.4s forwards}
   .splash-bg{animation:splash-fade-out .5s ease 1.8s forwards}
-  .splash-bg::before,.splash-orbit .spin,.splash-globe .mer,.splash-pin,.splash-ping{animation:none}
+  .splash-orbit .spin,.splash-globe .mer,.splash-pin,.splash-ping{animation:none}
   .splash-orbit .ring,.splash-arc{animation:none;stroke-dashoffset:0}
   .splash-orbit,.splash-globe,.splash-name,.splash-role{animation:splash-fade-out .5s ease 1.8s forwards}
-  html.js #top>div>.grid>div,html.js #top>div>dl{animation:none}
+  html.js #top>div>.grid>div,html.js:not(.splash-off) [data-hero="c"]{animation:none}
 }

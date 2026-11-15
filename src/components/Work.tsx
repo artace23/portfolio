@@ -1,32 +1,24 @@
 import Image from "next/image";
 import { ArrowUpRight, Github, Smartphone } from "lucide-react";
 import { Section } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
 import { HoverPreview } from "@/components/ui/HoverPreview";
 import { featured, more, type Project } from "@/data/site";
 
-function Links({ project }: { project: Project }) {
+function Links({ project, strong }: { project: Project; strong?: boolean }) {
   if (!project.live && !project.store && !project.code) return null;
+  const main = strong
+    ? "inline-flex h-10 items-center gap-1.5 rounded-lg bg-ink px-4 text-bg hover:opacity-85 transition-opacity"
+    : "inline-flex items-center gap-1 text-accent hover:underline underline-offset-4";
   return (
-    <div className="flex flex-wrap gap-4 text-sm font-medium">
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
       {project.live && (
-        <a
-          href={project.live}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-accent hover:underline underline-offset-4"
-        >
+        <a href={project.live} target="_blank" rel="noopener noreferrer" className={main}>
           Live site <ArrowUpRight className="w-4 h-4" />
         </a>
       )}
       {project.store && (
-        <a
-          href={project.store}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-accent hover:underline underline-offset-4"
-        >
-          <Smartphone className="w-4 h-4" /> View on App Store <ArrowUpRight className="w-4 h-4" />
+        <a href={project.store} target="_blank" rel="noopener noreferrer" className={main}>
+          <Smartphone className="w-4 h-4" /> View on the App Store <ArrowUpRight className="w-4 h-4" />
         </a>
       )}
       {project.code && (
@@ -34,24 +26,16 @@ function Links({ project }: { project: Project }) {
           href={project.code}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-muted hover:text-ink"
+          className={
+            strong && !project.live && !project.store
+              ? main
+              : "inline-flex items-center gap-1.5 text-muted hover:text-ink"
+          }
         >
           <Github className="w-4 h-4" /> Source code
         </a>
       )}
     </div>
-  );
-}
-
-function Stack({ items }: { items: string[] }) {
-  return (
-    <ul className="flex flex-wrap gap-2">
-      {items.map((s) => (
-        <li key={s} className="rounded-full border border-line px-3 py-1 text-xs text-muted font-mono">
-          {s}
-        </li>
-      ))}
-    </ul>
   );
 }
 
@@ -64,59 +48,19 @@ function kindOf(p: Project) {
   return mobile ? "Mobile app" : "Web app";
 }
 
-// Short address for the window bar: the live host, or the repo path.
-function addressOf(p: Project) {
-  const href = p.live ?? p.store ?? p.code;
-  if (!href) return p.title.toLowerCase();
-  try {
-    const u = new URL(href);
-    const path = u.pathname.replace(/\/$/, "");
-    return u.hostname.replace(/^www\./, "") + (p.live || p.store ? "" : path);
-  } catch {
-    return p.title.toLowerCase();
-  }
-}
-
-// One window-style frame for every screenshot so the projects read as a set.
-// The address bar, glow and kind label give each one the same polish. Links to the live site or code.
-function Shot({
-  project,
-  ratio,
-  sizes,
-}: {
-  project: Project;
-  ratio: string;
-  sizes: string;
-}) {
+function Shot({ project }: { project: Project }) {
   const href = project.live ?? project.store ?? project.code;
   const frame = (
-    <div className="relative">
-      <div
-        aria-hidden
-        className="absolute -inset-3 -z-10 rounded-[2rem] bg-accent/10 blur-2xl transition-colors duration-500 group-hover/shot:bg-accent/20"
+    <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-line bg-surface">
+      <Image
+        src={project.image}
+        alt={`${project.title} screenshot`}
+        fill
+        sizes="(min-width: 1024px) 600px, 100vw"
+        className={`${
+          project.fit === "contain" ? "object-contain p-3" : "object-cover object-top"
+        } transition-transform duration-500 group-hover/shot:scale-[1.02]`}
       />
-      <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_24px_60px_-34px_rgba(0,0,0,0.45)]">
-        <div className="flex items-center gap-1.5 border-b border-line bg-bg px-3 h-8">
-          <span className="h-2 w-2 rounded-full bg-ink/20" />
-          <span className="h-2 w-2 rounded-full bg-ink/20" />
-          <span className="h-2 w-2 rounded-full bg-ink/20" />
-          <span className="ml-2 truncate font-mono text-[11px] text-muted">{addressOf(project)}</span>
-          <span className="ml-auto shrink-0 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
-            {kindOf(project)}
-          </span>
-        </div>
-        <div className={`relative ${ratio}`}>
-          <Image
-            src={project.image}
-            alt={`${project.title} screenshot`}
-            fill
-            sizes={sizes}
-            className={`${
-              project.fit === "contain" ? "object-contain p-3" : "object-cover object-top"
-            } transition-transform duration-500 group-hover/shot:scale-[1.02]`}
-          />
-        </div>
-      </div>
     </div>
   );
   if (!href) return frame;
@@ -133,6 +77,48 @@ function Shot({
   );
 }
 
+function FeaturedCard({ project: p, index: i }: { project: Project; index: number }) {
+  const flip = i % 2 === 1;
+  return (
+    <article className="grid items-center gap-x-14 gap-y-8 py-14 lg:grid-cols-12">
+      <div className={`lg:col-span-7 ${flip ? "lg:order-2" : ""}`}>
+        <Shot project={p} />
+      </div>
+
+      <div className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
+        <p className="font-mono text-xs text-muted">
+          {String(i + 1).padStart(2, "0")} &mdash; {kindOf(p)}
+          {p.badge && <span className="text-ink"> &middot; {p.badge}</span>}
+        </p>
+
+        <h3 className="mt-4 font-display text-4xl sm:text-5xl font-semibold tracking-[-0.03em] leading-none">
+          {p.title}
+        </h3>
+        <p className="mt-3 text-lg text-muted">{p.tagline}</p>
+
+        <p className="mt-6 max-w-[34rem] leading-relaxed">{p.summary}</p>
+
+        {p.results && (
+          <p className="mt-5 text-sm text-muted">
+            {p.results.map((r, k) => (
+              <span key={r.label}>
+                {k > 0 && " · "}
+                <span className="font-semibold text-ink tabular-nums">{r.value}</span> {r.label}
+              </span>
+            ))}
+          </p>
+        )}
+
+        <p className="mt-6 font-mono text-xs text-muted">{p.stack.join(" / ")}</p>
+
+        <div className="mt-6">
+          <Links project={p} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
 // Show this many rows up front; the rest sit behind a native <details> (no client JS).
 const LIST_LIMIT = 6;
 
@@ -140,14 +126,14 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
   return (
     <li
       data-preview={index}
-      className="grid gap-x-8 gap-y-3 py-5 transition-colors md:-mx-4 md:grid-cols-12 md:items-center md:px-4 md:hover:bg-surface"
+      className="grid items-center gap-x-4 gap-y-2 py-5 transition-colors md:-mx-4 md:grid-cols-12 md:gap-x-8 md:px-4 md:hover:bg-surface"
     >
-      <div className="md:col-span-5">
-        <h4 className="font-semibold">{project.title}</h4>
+      <div className="md:col-span-4">
+        <h4 className="font-display text-lg font-semibold tracking-tight">{project.title}</h4>
         <p className="text-sm text-muted">{project.tagline}</p>
       </div>
-      <p className="font-mono text-xs leading-relaxed text-muted md:col-span-4">
-        {project.stack.join(" · ")}
+      <p className="font-mono text-xs leading-relaxed text-muted md:col-span-5">
+        {project.stack.join(" / ")}
       </p>
       <div className="md:col-span-3 md:flex md:justify-end">
         <Links project={project} />
@@ -161,66 +147,21 @@ export function Work() {
     <Section
       id="work"
       title="Selected work"
-      intro="Four projects I'd show first, with where you can see each one."
-      className="relative overflow-hidden"
+      intro="Four projects I'd show first. Each one links to where you can see it running or read the code."
     >
-      {/* Soft accent wash behind the featured projects */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[38%] -z-10 h-[420px] w-[min(900px,90vw)] -translate-x-1/2 rounded-full bg-accent/[0.07] blur-3xl"
-      />
-
-      <div className="space-y-20 md:space-y-28">
+      <div className="divide-y divide-line border-y border-ink/80">
         {featured.map((p, i) => (
-          <Reveal key={p.title}>
-            <article className="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
-              <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-2" : ""}`}>
-                <Shot project={p} ratio="aspect-[16/10]" sizes="(min-width: 768px) 58vw, 100vw" />
-              </div>
-              <div className="md:col-span-5 space-y-5">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-sm text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                    <span className="text-muted"> / {String(featured.length).padStart(2, "0")}</span>
-                  </span>
-                  <span className="h-px flex-1 bg-line" />
-                </div>
-                {p.badge && (
-                  <p className="inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
-                    {p.badge}
-                  </p>
-                )}
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">{p.title}</h3>
-                  <p className="mt-1 text-muted">{p.tagline}</p>
-                </div>
-                <p className="leading-relaxed">{p.summary}</p>
-                {p.highlights && (
-                  <ul className="space-y-2 text-sm text-muted">
-                    {p.highlights.map((h) => (
-                      <li key={h} className="flex gap-2">
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <Stack items={p.stack} />
-                <Links project={p} />
-              </div>
-            </article>
-          </Reveal>
+          <FeaturedCard key={p.title} project={p} index={i} />
         ))}
       </div>
 
-      <div className="mt-28">
-        <div className="flex items-center gap-3 mb-8">
-          <h3 className="text-xl font-semibold tracking-tight">More projects</h3>
-          <span className="h-px flex-1 bg-line" />
+      <div className="mt-24">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">More projects</h3>
           <span className="font-mono text-sm text-muted">{String(more.length).padStart(2, "0")}</span>
         </div>
         <HoverPreview items={more.map(({ title, image, fit }) => ({ title, image, fit }))}>
-          <ul className="divide-y divide-line border-y border-line">
+          <ul className="divide-y divide-line border-y border-ink/80">
             {more.slice(0, LIST_LIMIT).map((p, i) => (
               <ProjectRow key={p.title} project={p} index={i} />
             ))}

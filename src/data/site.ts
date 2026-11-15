@@ -66,11 +66,17 @@ export type Project = {
   store?: string;
   code?: string;
   badge?: string;
+  // Measured outcomes only. Each needs a number I can back up if asked.
+  // Brand colour of the project, used to tint its card.
+  tint?: string;
+  results?: { value: string; label: string }[];
+  resultsNote?: string;
 };
 
 export const featured: Project[] = [
   {
     title: "IAM",
+    tint: "#d83a3a",
     tagline: "Integrated Approval Management, now on the App Store",
     summary:
       "A secure mobile app that brings an organization's approval workflows into one place. Approvers review submitted requests, check the details and act on them from their phone, with a push notification for anything waiting on them.",
@@ -87,6 +93,7 @@ export const featured: Project[] = [
   },
   {
     title: "BioLeaf",
+    tint: "#3c9a4a",
     tagline: "AI plant identification for Philippine medicinal plants",
     summary:
       "An AI-powered medicinal plant identification website and mobile application. It uses machine learning to recognize a plant from a photo, shows a confidence score with each result, and can identify plants offline.",
@@ -100,9 +107,16 @@ export const featured: Project[] = [
     image: "/images/projects/bioleaf.png",
     live: "https://bioleaf-website.vercel.app",
     badge: "AI-powered",
+    results: [
+      { value: "98.3%", label: "validation accuracy" },
+      { value: "10", label: "medicinal plants recognised" },
+      { value: "2.5 MB", label: "model, runs on the phone" },
+    ],
+    resultsNote: "Trained on 12,398 photos and checked against 2,253 it had never seen.",
   },
   {
     title: "AwakenSystem",
+    tint: "#4c6fe0",
     tagline: "RPG-style to-do app",
     summary: "Finishing tasks levels up a character. Built with React Native, with a Supabase backend in progress.",
     stack: ["React Native", "Supabase", "TypeScript"],
@@ -111,6 +125,7 @@ export const featured: Project[] = [
   },
   {
     title: "FocusFlow",
+    tint: "#e8862a",
     tagline: "Offline focus timer and task tracker",
     summary: "A Pomodoro-style timer with task priorities, daily goals and a 7-day activity chart. Data stays on the device.",
     stack: ["Apache Cordova", "JavaScript", "Android"],
@@ -256,8 +271,8 @@ export const experience = [
     dates: "Feb 2025 – May 2025",
     type: "Internship",
     points: [
-      "Improved core web vitals on production Next.js apps.",
-      "Shipped feature modules in an Agile team.",
+      "Built responsive Next.js and Tailwind CSS apps and improved their performance by about 40%.",
+      "Shipped feature modules in an Agile team and took part in code reviews.",
     ],
   },
   {
@@ -280,6 +295,15 @@ export const skills = [
   { group: "Tools", items: ["Git", "Docker", "Vercel", "AWS"] },
 ];
 
+export const education = [
+  {
+    degree: "BS in Information Technology",
+    school: "Holy Cross of Davao College",
+    place: "Davao City, Philippines",
+    dates: "2021 – 2025",
+  },
+];
+
 export const awards = [
   { title: "Best Presenter, CCCIS 2025", text: "Awarded for my capstone SmarTrax (Data Innovation) at the conference in Hong Kong, representing Holy Cross of Davao College." },
   { title: "1st place, programming competition", text: "Organized by the ITS organization, 2023." },
@@ -288,9 +312,9 @@ export const awards = [
 ];
 
 export const certificates = [
-  { title: "PHP Laravel: Build Amazing Streaming Service", href: "https://www.udemy.com/certificate/UC-03444cc4-0302-407c-9c70-f19530198a19/" },
-  { title: "Python for Everyone: Master the Basics of Programming", href: "https://www.udemy.com/certificate/UC-4b209ae5-1315-4a55-b8c8-2ad59b5640a3/" },
-  { title: "React JS: TypeScript, Redux, RTK & Modern Web Dev 2025", href: "https://www.udemy.com/certificate/UC-8a783253-2605-460d-bf0a-37a0544a694d/" },
-  { title: "PHP Laravel: Build Real Estate Management System", href: "https://www.udemy.com/certificate/UC-d5cb88b7-1ec6-45bf-976d-95bf5e133db4/" },
-  { title: "PHP Master Class: The Complete PHP Developer Course", href: "https://www.udemy.com/certificate/UC-110dca23-7f75-4ab1-b399-30ed78173557/" },
+  { title: "PHP Laravel: Build Amazing Streaming Service", image: "/images/certificates/Certificate Laravel Streaming Service.jpg", href: "https://www.udemy.com/certificate/UC-03444cc4-0302-407c-9c70-f19530198a19/" },
+  { title: "Python for Everyone: Master the Basics of Programming", image: "/images/certificates/Certificate Python master basics programming.jpg", href: "https://www.udemy.com/certificate/UC-4b209ae5-1315-4a55-b8c8-2ad59b5640a3/" },
+  { title: "React JS: TypeScript, Redux, RTK & Modern Web Dev 2025", image: "/images/certificates/Certificate React,typescript 2025.jpg", href: "https://www.udemy.com/certificate/UC-8a783253-2605-460d-bf0a-37a0544a694d/" },
+  { title: "PHP Laravel: Build Real Estate Management System", image: "/images/certificates/Certificate Laravel Estate Management.jpg", href: "https://www.udemy.com/certificate/UC-d5cb88b7-1ec6-45bf-976d-95bf5e133db4/" },
+  { title: "PHP Master Class: The Complete PHP Developer Course", image: "/images/certificates/Certificate PHP Master Class.jpg", href: "https://www.udemy.com/certificate/UC-110dca23-7f75-4ab1-b399-30ed78173557/" },
 ];

@@ -21,8 +21,9 @@ export function HoverPreview({ items, children }: { items: Item[]; children: Rea
     if (!el) return;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    let left = x + GAP;
-    if (left + W > vw - 12) left = x - GAP - W;
+    // Sits to the left of the pointer; flips to the right only when there is no room.
+    let left = x - GAP - W;
+    if (left < 12) left = Math.min(x + GAP, vw - W - 12);
     const top = Math.min(Math.max(y - H / 2, 12), vh - H - 12);
     el.style.transform = `translate3d(${Math.max(left, 12)}px, ${top}px, 0)`;
   };

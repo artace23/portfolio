@@ -1,9 +1,10 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Bricolage_Grotesque } from 'next/font/google';
 import { Splash, SplashHandoff } from '@/components/Splash';
 
 const sans = Geist({ subsets: ['latin'], variable: '--font-geist-sans', display: 'swap' });
+const display = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display-face', display: 'swap' });
 const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' });
 
 const siteTitle = 'Art Dela Cruz | Full-Stack & Mobile Developer';
@@ -38,13 +39,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${mono.variable} ${display.variable}`} suppressHydrationWarning>
       <head>
-        {/* Runs before first paint: restores a saved theme and enables scroll reveals. */}
+        {/* Runs before first paint: restores a saved theme, enables scroll reveals, and skips the
+            intro when it has already played in this tab. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{var d=document.documentElement;d.classList.add('js');var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}",
+              "try{var d=document.documentElement;d.classList.add('js');try{if(sessionStorage.getItem('intro'))d.classList.add('splash-off');else sessionStorage.setItem('intro','1')}catch(e){}var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}",
           }}
         />
       </head>

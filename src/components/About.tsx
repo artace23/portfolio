@@ -4,43 +4,67 @@ import { skills } from "@/data/site";
 
 export function About() {
   return (
-    <Section id="about" title="About">
+    <Section id="about" title="About me">
       <div className="grid md:grid-cols-12 gap-10 md:gap-14">
         <div className="md:col-span-4">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-surface max-w-sm">
-            <Image
-              src="/images/profile.jpg"
-              alt="Portrait of Art Dela Cruz"
-              fill
-              sizes="(min-width: 768px) 30vw, 80vw"
-              className="object-cover object-[50%_10%]"
-            />
-          </div>
+          <figure className="max-w-sm md:sticky md:top-24">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-surface">
+              <Image
+                src="/images/profile.jpg"
+                alt="Portrait of Art Dela Cruz"
+                fill
+                sizes="(min-width: 768px) 30vw, 80vw"
+                className="object-cover object-[50%_10%]"
+              />
+            </div>
+            <figcaption className="mt-3 flex items-baseline justify-between gap-4 border-t border-ink/80 pt-3 text-sm">
+              <span className="font-medium">Art Dela Cruz</span>
+              <span className="font-mono text-xs text-muted">
+                Software engineer
+              </span>
+            </figcaption>
+          </figure>
         </div>
-        <div className="md:col-span-8 space-y-5 text-lg leading-relaxed">
-          <p>
-            I started out making small websites for local businesses in 2022 and kept going from
-            there. Today I&apos;m a software engineer at DSG Son&apos;s Group, building internal
-            web systems and mobile apps, and I take on freelance projects alongside.
+        <div className="md:col-span-8">
+          <p className="font-display text-2xl sm:text-3xl font-medium leading-snug tracking-tight">
+            I started out making small websites for local businesses in 2022 and
+            kept going from there.
           </p>
-          <p className="text-muted">
-            My main tools are Next.js, React Native and Laravel. My capstone, SmarTrax, a bike
-            rental app that unlocks real hardware over QR, won Best Presenter at CCCIS 2025 in Hong
-            Kong. I&apos;m looking for a full-time role where I can keep working across web and
-            mobile.
-          </p>
+          <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted max-w-2xl">
+            <p>
+              Today I&apos;m a software engineer at DSG Son&apos;s Group,
+              building internal web systems and mobile apps, and I take on
+              freelance projects alongside. My main tools are Next.js, React
+              Native and Laravel.
+            </p>
+            <p>
+              My capstone, SmarTrax, a bike rental app that unlocks real
+              hardware over QR, won Best Presenter at CCCIS 2025 in Hong Kong.
+              I&apos;m looking for a full-time role where I can keep working
+              across web and mobile.
+            </p>
+          </div>
 
-          <dl className="pt-4 grid sm:grid-cols-2 gap-x-8 gap-y-6 text-base">
+          <dl className="mt-12 border-t border-ink/80">
             {skills.map((g) => (
-              <div key={g.group}>
-                <dt className="text-sm font-medium">{g.group}</dt>
-                <dd className="mt-1 text-muted">{g.items.join(", ")}</dd>
+              <div
+                key={g.group}
+                className="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[8rem_1fr] sm:items-baseline"
+              >
+                <dt className="font-mono text-xs text-muted">{g.group}</dt>
+                <dd className="font-display text-lg leading-snug tracking-tight">
+                  {g.items.map((s, i) => (
+                    <span key={s}>
+                      {i > 0 && <span className="mx-2 text-accent">/</span>}
+                      {s}
+                    </span>
+                  ))}
+                </dd>
               </div>
             ))}
           </dl>
         </div>
       </div>
-
     </Section>
   );
 }

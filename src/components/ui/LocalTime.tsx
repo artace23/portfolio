@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Clock } from "lucide-react";
 
-// Shows the current time in the Philippines, handy for clients and teams in other time zones.
+// The current time in Davao, so teams in other time zones can see when I'm around.
 export function LocalTime() {
   const [time, setTime] = useState<string | null>(null);
 
@@ -19,10 +18,5 @@ export function LocalTime() {
     return () => clearInterval(id);
   }, []);
 
-  return (
-    <p className="inline-flex items-center gap-2 text-sm text-muted min-h-5">
-      <Clock className="w-4 h-4" />
-      {time ? <span>{time} in the Philippines (UTC+8)</span> : <span>Philippines (UTC+8)</span>}
-    </p>
-  );
+  return <span className="tabular-nums">{time ? `${time} in Davao (UTC+8)` : "Davao (UTC+8)"}</span>;
 }

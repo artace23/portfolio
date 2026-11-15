@@ -82,7 +82,7 @@ export function Experience() {
                 <button
                   onClick={() => setActive(p.id)}
                   aria-pressed={active === p.id}
-                  className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition-colors ${
+                  className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm transition-colors ${
                     active === p.id ? "border-ink bg-surface" : "border-line text-muted hover:text-ink"
                   }`}
                 >
@@ -99,16 +99,16 @@ export function Experience() {
           </ul>
         </div>
 
-        <ol ref={listRef} className="md:col-span-7 divide-y divide-line border-y border-line">
+        <ol ref={listRef} className="md:col-span-7 divide-y divide-line border-y border-ink/80">
           {experience.map((e) => {
             const loc = locOf(e.place);
             return (
               <li key={e.role + e.dates} data-loc={loc} className="py-8 md:py-10">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
                   <span className="font-mono">{e.dates}</span>
-                  <span className="rounded-full border border-line px-2 py-0.5 text-xs">{e.type}</span>
+                  <span className="rounded-md border border-line px-2 py-0.5 text-xs">{e.type}</span>
                 </div>
-                <h3 className="mt-3 text-xl font-semibold tracking-tight">{e.role}</h3>
+                <h3 className="mt-3 font-display text-2xl sm:text-3xl font-semibold tracking-tight">{e.role}</h3>
                 <p className="mt-1 flex flex-wrap items-center gap-x-2 text-muted">
                   <span>{e.org}</span>
                   <button
