@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, Github, Smartphone } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { HoverPreview } from "@/components/ui/HoverPreview";
 import { featured, more, type Project } from "@/data/site";
 
 function Links({ project }: { project: Project }) {
@@ -135,9 +136,12 @@ function Shot({
 // Show this many rows up front; the rest sit behind a native <details> (no client JS).
 const LIST_LIMIT = 6;
 
-function ProjectRow({ project }: { project: Project }) {
+function ProjectRow({ project, index }: { project: Project; index: number }) {
   return (
-    <li className="grid gap-x-8 gap-y-3 py-5 md:grid-cols-12 md:items-center">
+    <li
+      data-preview={index}
+      className="grid gap-x-8 gap-y-3 py-5 transition-colors md:-mx-4 md:grid-cols-12 md:items-center md:px-4 md:hover:bg-surface"
+    >
       <div className="md:col-span-5">
         <h4 className="font-semibold">{project.title}</h4>
         <p className="text-sm text-muted">{project.tagline}</p>
@@ -215,23 +219,25 @@ export function Work() {
           <span className="h-px flex-1 bg-line" />
           <span className="font-mono text-sm text-muted">{String(more.length).padStart(2, "0")}</span>
         </div>
-        <ul className="divide-y divide-line border-y border-line">
-          {more.slice(0, LIST_LIMIT).map((p) => (
-            <ProjectRow key={p.title} project={p} />
-          ))}
-        </ul>
-        {more.length > LIST_LIMIT && (
-          <details className="group/more">
-            <summary className="flex cursor-pointer list-none items-center justify-center gap-2 border-b border-line py-4 text-sm font-medium text-accent hover:underline underline-offset-4 group-open/more:hidden [&::-webkit-details-marker]:hidden">
-              Show {more.length - LIST_LIMIT} more projects
-            </summary>
-            <ul className="divide-y divide-line border-b border-line">
-              {more.slice(LIST_LIMIT).map((p) => (
-                <ProjectRow key={p.title} project={p} />
-              ))}
-            </ul>
-          </details>
-        )}
+        <HoverPreview items={more.map(({ title, image, fit }) => ({ title, image, fit }))}>
+          <ul className="divide-y divide-line border-y border-line">
+            {more.slice(0, LIST_LIMIT).map((p, i) => (
+              <ProjectRow key={p.title} project={p} index={i} />
+            ))}
+          </ul>
+          {more.length > LIST_LIMIT && (
+            <details className="group/more">
+              <summary className="flex cursor-pointer list-none items-center justify-center gap-2 border-b border-line py-4 text-sm font-medium text-accent hover:underline underline-offset-4 group-open/more:hidden [&::-webkit-details-marker]:hidden">
+                Show {more.length - LIST_LIMIT} more projects
+              </summary>
+              <ul className="divide-y divide-line border-b border-line">
+                {more.slice(LIST_LIMIT).map((p, i) => (
+                  <ProjectRow key={p.title} project={p} index={LIST_LIMIT + i} />
+                ))}
+              </ul>
+            </details>
+          )}
+        </HoverPreview>
       </div>
     </Section>
   );
