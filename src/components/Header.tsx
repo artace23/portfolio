@@ -45,7 +45,7 @@ export function Header() {
           : "border-transparent bg-bg/40"
       }`}
     >
-      <div className="mx-auto max-w-6xl px-5 h-16 flex items-center justify-between">
+      <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12 h-16 flex items-center justify-between">
         <a href="#top" className="font-display text-lg font-semibold tracking-tight">
           Art Dela Cruz
         </a>
@@ -97,7 +97,7 @@ export function Header() {
 
       {open && (
         <nav aria-label="Mobile" className="md:hidden border-t border-line bg-bg">
-          <div className="mx-auto max-w-6xl px-5 py-3 flex flex-col">
+          <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12 py-3 flex flex-col">
             {links.map((l) => (
               <a
                 key={l.href}

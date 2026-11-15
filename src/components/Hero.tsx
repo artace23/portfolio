@@ -14,8 +14,8 @@ const proof = [
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-10 md:pt-16 pb-16 md:pb-24">
-      <div className="mx-auto max-w-6xl px-5">
+    <section id="top" className="relative isolate overflow-hidden pt-10 md:pt-16 pb-16 md:pb-24">
+      <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           <div className="lg:col-span-7" data-hero="a">
             <p className="flex items-center gap-3 text-sm text-muted">
@@ -35,7 +35,7 @@ export function Hero() {
               </span>
             </p>
 
-            <h1 className="mt-7 font-display font-semibold tracking-[-0.035em] leading-[0.95] text-[clamp(2.75rem,12vw,4rem)] sm:text-7xl lg:text-[4.75rem] xl:text-[5.5rem]">
+            <h1 className="mt-7 font-display font-semibold tracking-[-0.035em] leading-[0.95] text-[clamp(2.75rem,12vw,4rem)] sm:text-6xl lg:text-[4rem] xl:text-[4.5rem] 2xl:text-[5rem]">
               I build web and mobile apps for{" "}
               <span className="text-accent">real businesses.</span>
             </h1>
@@ -80,7 +80,7 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="lg:col-span-5" data-hero="b">
+          <div className="contents lg:col-span-5 lg:block lg:self-end">
             <HeroGlobe />
           </div>
         </div>

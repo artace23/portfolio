@@ -4,7 +4,7 @@ import { contact } from "@/data/site";
 export function Footer() {
   return (
     <footer className="pb-10">
-      <div className="mx-auto max-w-6xl px-5 flex flex-col sm:flex-row gap-4 justify-between text-sm text-muted">
+      <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row gap-4 justify-between text-sm text-muted">
         <p>&copy; {new Date().getFullYear()} Art Dela Cruz. Davao City, Philippines.</p>
         <p className="flex flex-wrap gap-x-5 gap-y-2">
           <a href={contact.github} target="_blank" rel="noopener noreferrer" className="hover:text-ink">GitHub</a>

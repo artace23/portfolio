@@ -43,8 +43,8 @@ export function Contact() {
 
   return (
     <section id="contact" className="border-t border-line py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5">
-        <h2 className="max-w-4xl font-display text-5xl font-semibold leading-[0.95] tracking-[-0.035em] sm:text-6xl md:text-7xl">
+      <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12">
+        <h2 className="max-w-4xl font-display text-5xl font-semibold leading-[0.95] tracking-[-0.035em] sm:text-6xl lg:text-[4.25rem]">
           Hiring, or have a project? <span className="text-accent">Let&apos;s talk.</span>
         </h2>
         <p className="mt-6 max-w-md text-lg leading-relaxed text-muted">

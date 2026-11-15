@@ -52,11 +52,15 @@ export function About() {
                 className="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[8rem_1fr] sm:items-baseline"
               >
                 <dt className="font-mono text-xs text-muted">{g.group}</dt>
-                <dd className="font-display text-lg leading-snug tracking-tight">
+                <dd className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1 font-display text-lg leading-snug tracking-tight">
                   {g.items.map((s, i) => (
-                    <span key={s}>
-                      {i > 0 && <span className="mx-2 text-accent">/</span>}
-                      {s}
+                    <span key={s} className="inline-flex items-baseline gap-2">
+                      {i > 0 && (
+                        <span aria-hidden className="text-accent">
+                          /
+                        </span>
+                      )}
+                      <span>{s}</span>
                     </span>
                   ))}
                 </dd>
