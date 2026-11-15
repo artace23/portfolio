@@ -161,7 +161,7 @@ export function Work() {
     <Section
       id="work"
       title="Selected work"
-      intro="Four projects I'd show first, newest first, with where you can see each one."
+      intro="Four projects I'd show first, with where you can see each one."
       className="relative overflow-hidden"
     >
       {/* Soft accent wash behind the featured projects */}

@@ -102,6 +102,25 @@ export const featured: Project[] = [
     badge: "AI-powered",
   },
   {
+    title: "AwakenSystem",
+    tagline: "RPG-style to-do app",
+    summary: "Finishing tasks levels up a character. Built with React Native, with a Supabase backend in progress.",
+    stack: ["React Native", "Supabase", "TypeScript"],
+    image: "/images/projects/AwakenSystem.png",
+    code: "https://github.com/artace23/AwakenSystem",
+  },
+  {
+    title: "FocusFlow",
+    tagline: "Offline focus timer and task tracker",
+    summary: "A Pomodoro-style timer with task priorities, daily goals and a 7-day activity chart. Data stays on the device.",
+    stack: ["Apache Cordova", "JavaScript", "Android"],
+    image: "/images/projects/FocusFlow.png",
+    code: "https://github.com/artace23",
+  },
+];
+
+export const more: Project[] = [
+  {
     title: "SmarTrax",
     tagline: "Smart bike rental app with hardware unlocking",
     summary:
@@ -131,17 +150,6 @@ export const featured: Project[] = [
     image: "/images/projects/coregpass.png",
     live: "https://coregpass.vercel.app/login",
   },
-];
-
-export const more: Project[] = [
-  {
-    title: "AwakenSystem",
-    tagline: "RPG-style to-do app",
-    summary: "Finishing tasks levels up a character. Built with React Native, with a Supabase backend in progress.",
-    stack: ["React Native", "Supabase", "TypeScript"],
-    image: "/images/projects/AwakenSystem.png",
-    code: "https://github.com/artace23/AwakenSystem",
-  },
   {
     title: "Queue Management System",
     tagline: "Queueing for busy service offices",
@@ -149,14 +157,6 @@ export const more: Project[] = [
     stack: ["Laravel", "PHP", "MySQL"],
     image: "/images/projects/queue_project.png",
     code: "https://github.com/artace23/QMS_development",
-  },
-  {
-    title: "FocusFlow",
-    tagline: "Offline focus timer and task tracker",
-    summary: "A Pomodoro-style timer with task priorities, daily goals and a 7-day activity chart. Data stays on the device.",
-    stack: ["Apache Cordova", "JavaScript", "Android"],
-    image: "/images/projects/FocusFlow.png",
-    code: "https://github.com/artace23",
   },
   {
     title: "Easy Budget",
