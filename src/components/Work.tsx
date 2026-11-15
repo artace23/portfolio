@@ -82,27 +82,19 @@ function Shot({
   project,
   ratio,
   sizes,
-  compact = false,
 }: {
   project: Project;
   ratio: string;
   sizes: string;
-  compact?: boolean;
 }) {
   const href = project.live ?? project.store ?? project.code;
   const frame = (
     <div className="relative">
-      {!compact && (
-        <div
-          aria-hidden
-          className="absolute -inset-3 -z-10 rounded-[2rem] bg-accent/10 blur-2xl transition-colors duration-500 group-hover/shot:bg-accent/20"
-        />
-      )}
       <div
-        className={`overflow-hidden border-line bg-surface ${
-          compact ? "border-b" : "rounded-2xl border shadow-[0_24px_60px_-34px_rgba(0,0,0,0.45)]"
-        }`}
-      >
+        aria-hidden
+        className="absolute -inset-3 -z-10 rounded-[2rem] bg-accent/10 blur-2xl transition-colors duration-500 group-hover/shot:bg-accent/20"
+      />
+      <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_24px_60px_-34px_rgba(0,0,0,0.45)]">
         <div className="flex items-center gap-1.5 border-b border-line bg-bg px-3 h-8">
           <span className="h-2 w-2 rounded-full bg-ink/20" />
           <span className="h-2 w-2 rounded-full bg-ink/20" />
@@ -137,6 +129,26 @@ function Shot({
     >
       {frame}
     </a>
+  );
+}
+
+// Show this many rows up front; the rest sit behind a native <details> (no client JS).
+const LIST_LIMIT = 6;
+
+function ProjectRow({ project }: { project: Project }) {
+  return (
+    <li className="grid gap-x-8 gap-y-3 py-5 md:grid-cols-12 md:items-center">
+      <div className="md:col-span-5">
+        <h4 className="font-semibold">{project.title}</h4>
+        <p className="text-sm text-muted">{project.tagline}</p>
+      </div>
+      <p className="font-mono text-xs leading-relaxed text-muted md:col-span-4">
+        {project.stack.join(" · ")}
+      </p>
+      <div className="md:col-span-3 md:flex md:justify-end">
+        <Links project={project} />
+      </div>
+    </li>
   );
 }
 
@@ -203,26 +215,23 @@ export function Work() {
           <span className="h-px flex-1 bg-line" />
           <span className="font-mono text-sm text-muted">{String(more.length).padStart(2, "0")}</span>
         </div>
-        <div className="grid sm:grid-cols-2 gap-5">
-          {more.map((p, i) => (
-            <Reveal key={p.title} delay={(i % 2) * 80} className="h-full">
-              <article className="group/card h-full overflow-hidden rounded-2xl border border-line bg-surface flex flex-col transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_20px_40px_-28px_rgba(0,0,0,0.5)]">
-                <Shot project={p} ratio="aspect-[16/9]" sizes="(min-width: 640px) 45vw, 100vw" compact />
-                <div className="p-6 flex flex-col gap-4 flex-1">
-                  <div>
-                    <h4 className="font-semibold">{p.title}</h4>
-                    <p className="text-sm text-muted">{p.tagline}</p>
-                  </div>
-                  <p className="text-sm leading-relaxed">{p.summary}</p>
-                  <div className="mt-auto space-y-4">
-                    <Stack items={p.stack} />
-                    <Links project={p} />
-                  </div>
-                </div>
-              </article>
-            </Reveal>
+        <ul className="divide-y divide-line border-y border-line">
+          {more.slice(0, LIST_LIMIT).map((p) => (
+            <ProjectRow key={p.title} project={p} />
           ))}
-        </div>
+        </ul>
+        {more.length > LIST_LIMIT && (
+          <details className="group/more">
+            <summary className="flex cursor-pointer list-none items-center justify-center gap-2 border-b border-line py-4 text-sm font-medium text-accent hover:underline underline-offset-4 group-open/more:hidden [&::-webkit-details-marker]:hidden">
+              Show {more.length - LIST_LIMIT} more projects
+            </summary>
+            <ul className="divide-y divide-line border-b border-line">
+              {more.slice(LIST_LIMIT).map((p) => (
+                <ProjectRow key={p.title} project={p} />
+              ))}
+            </ul>
+          </details>
+        )}
       </div>
     </Section>
   );
