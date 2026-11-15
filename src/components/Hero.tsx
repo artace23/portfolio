@@ -12,7 +12,7 @@ const proof = [
 
 export function Hero() {
   return (
-    <section id="top" className="relative isolate overflow-hidden pt-10 md:pt-16 pb-16 md:pb-24">
+    <section id="top" className="relative isolate overflow-hidden pt-28 md:pt-36 lg:pt-48 pb-16 md:pb-24">
       <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           <div className="lg:col-span-7" data-hero="a">

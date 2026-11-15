@@ -25,6 +25,8 @@ interface GlobeProps {
   activeId: string;
   onSelect: (id: string) => void;
   label: string;
+  /** Keep turning even while the pointer is over the globe (dragging still takes over). */
+  alwaysSpin?: boolean;
 }
 
 const topology = landTopo as unknown as Topology;
@@ -59,7 +61,8 @@ const IDLE_TILT = -18;
 const angleDiff = (to: number, from: number) => ((to - from + 540) % 360) - 180;
 const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 
-export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
+export function Globe({ places, activeId, onSelect, label, alwaysSpin = false }: GlobeProps) {
+  const alwaysRef = useRef(alwaysSpin);
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -78,7 +81,8 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
   useEffect(() => {
     selectRef.current = onSelect;
     placesRef.current = places;
-  }, [onSelect, places]);
+    alwaysRef.current = alwaysSpin;
+  }, [onSelect, places, alwaysSpin]);
 
   // Point the globe at the active place.
   useEffect(() => {
@@ -243,7 +247,8 @@ export function Globe({ places, activeId, onSelect, label }: GlobeProps) {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       if (!dragging) {
-        const idle = !reduceMotion && !hovering && now - focusAt.current > SPIN_DELAY_MS;
+        const idle =
+          !reduceMotion && (alwaysRef.current || (!hovering && now - focusAt.current > SPIN_DELAY_MS));
         if (idle) {
           // Endless slow rotation, with a gentle tilt so the globe reads as a planet.
           rot.current.l += SPIN_DEG_PER_SEC * dt;

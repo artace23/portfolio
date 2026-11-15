@@ -18,7 +18,7 @@ export function HeroGlobe() {
       <div
         data-hero="b"
         className="pointer-events-none absolute right-0 top-1/2 -z-10 -translate-y-1/2 translate-x-[38%] lg:pointer-events-auto"
-        style={{ width: "clamp(380px, min(54vw, 72svh), 760px)" }}
+        style={{ width: "clamp(440px, min(62vw, 88svh), 960px)" }}
       >
         <div className="relative opacity-30 lg:opacity-100" data-hero-globe>
           <svg
@@ -51,6 +51,7 @@ export function HeroGlobe() {
             places={places}
             activeId={active}
             onSelect={setActive}
+            alwaysSpin
             label="Interactive globe. Pins mark the Philippines, Israel, the United States and Hong Kong."
           />
         </div>
