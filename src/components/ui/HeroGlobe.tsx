@@ -18,7 +18,7 @@ export function HeroGlobe() {
       <div
         data-hero="b"
         className="pointer-events-none absolute right-0 top-1/2 -z-10 -translate-y-1/2 translate-x-[38%] lg:pointer-events-auto"
-        style={{ width: "clamp(420px, 56vw, 860px)" }}
+        style={{ width: "clamp(380px, min(54vw, 72svh), 760px)" }}
       >
         <div className="relative opacity-30 lg:opacity-100" data-hero-globe>
           <svg

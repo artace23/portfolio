@@ -1,6 +1,5 @@
 import { ArrowRight, FileText } from "lucide-react";
 import { contact } from "@/data/site";
-import { LocalTime } from "@/components/ui/LocalTime";
 import { HeroGlobe } from "@/components/ui/HeroGlobe";
 
 // Kept short so each cell fits on one or two lines at every width.
@@ -51,15 +50,6 @@ export function Hero() {
                 <FileText className="w-4 h-4" /> Resume
               </a>
             </div>
-
-            <p className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-muted">
-              <span className="inline-flex items-center gap-2 text-ink">
-                <span className="h-2 w-2 rounded-full bg-ok" />
-                Open to full-time roles
-              </span>
-              <span aria-hidden>/</span>
-              <LocalTime />
-            </p>
           </div>
 
           <div className="contents lg:col-span-5 lg:block lg:self-end">
@@ -67,14 +57,11 @@ export function Hero() {
           </div>
         </div>
 
-        <dl
-          data-hero="c"
-          className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-x-8 border-t border-ink/80"
-        >
+        <dl data-hero="c" className="mt-20 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-ink/80 pt-6 lg:grid-cols-4">
           {proof.map((p) => (
-            <div key={p.label} className="border-b border-line py-5 lg:border-b-0">
-              <dt className="font-display text-xl font-semibold tracking-tight">{p.label}</dt>
-              <dd className="mt-1 text-sm text-muted">{p.detail}</dd>
+            <div key={p.label}>
+              <dt className="font-mono text-xs text-muted">{p.detail}</dt>
+              <dd className="mt-1.5 font-display text-lg font-semibold tracking-tight">{p.label}</dd>
             </div>
           ))}
         </dl>

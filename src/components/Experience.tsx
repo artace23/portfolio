@@ -82,8 +82,8 @@ export function Experience() {
                 <button
                   onClick={() => setActive(p.id)}
                   aria-pressed={active === p.id}
-                  className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm transition-colors ${
-                    active === p.id ? "border-ink bg-surface" : "border-line text-muted hover:text-ink"
+                  className={`inline-flex items-center gap-2 border-b py-1 text-sm transition-colors ${
+                    active === p.id ? "border-ink text-ink" : "border-transparent text-muted hover:text-ink"
                   }`}
                 >
                   <span className={`h-2 w-2 rounded-full ${dot[p.kind]}`} />
@@ -106,14 +106,15 @@ export function Experience() {
               <li key={e.role + e.dates} data-loc={loc} className="py-8 md:py-10">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
                   <span className="font-mono">{e.dates}</span>
-                  <span className="rounded-md border border-line px-2 py-0.5 text-xs">{e.type}</span>
+                  <span aria-hidden>&middot;</span>
+                  <span>{e.type}</span>
                 </div>
                 <h3 className="mt-3 font-display text-2xl sm:text-3xl font-semibold tracking-tight">{e.role}</h3>
                 <p className="mt-1 flex flex-wrap items-center gap-x-2 text-muted">
                   <span>{e.org}</span>
                   <button
                     onClick={() => setActive(loc)}
-                    className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 -ml-1 text-sm hover:bg-surface hover:text-ink transition-colors"
+                    className="inline-flex items-center gap-1 text-sm underline decoration-line underline-offset-4 hover:text-ink hover:decoration-accent transition-colors"
                     aria-label={`Show ${e.place} on the globe`}
                   >
                     <MapPin className="w-3.5 h-3.5" />

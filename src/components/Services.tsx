@@ -26,13 +26,11 @@ export function Services() {
         ))}
       </div>
 
-      <div className="mt-16 rounded-2xl border border-line bg-surface p-6 sm:p-10">
-        <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-8">
-          How a project works
-        </h3>
-        <ol className="grid md:grid-cols-3 gap-8">
+      <div className="mt-20">
+        <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">How a project works</h3>
+        <ol className="mt-8 grid gap-x-10 gap-y-8 border-t border-ink/80 pt-6 md:grid-cols-3">
           {process.map((p) => (
-            <li key={p.step} className="border-t border-ink/80 pt-4">
+            <li key={p.step}>
               <span className="font-mono text-xs text-accent">{p.step}</span>
               <h4 className="mt-2 font-display text-lg font-semibold">{p.title}</h4>
               <p className="mt-1 text-muted leading-relaxed">{p.text}</p>
