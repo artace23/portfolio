@@ -1,5 +1,4 @@
-
-<div align="center">
+ <div align="center">
 
 # Art Dela Cruz
 
@@ -13,32 +12,26 @@ Building thoughtful digital experiences through code, interaction, and experimen
 
 ---
 
-### About
+### About Me
 
-I'm a developer focused on building modern web and mobile applications. I enjoy exploring new technologies, experimenting with interactive interfaces, and turning ideas into practical products.
+I'm a developer passionate about building modern web and mobile applications. I enjoy exploring new technologies, experimenting with interactive interfaces, and transforming ideas into practical digital experiences.
 
-Currently working with React, Next.js, React Native, and TypeScript.
+My current focus is on **React, Next.js, React Native, and TypeScript**, with an interest in creating intuitive, responsive, and well-crafted applications.
 
 ### Tech Stack
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,threejs,nodejs,php,laravel,supabase,git&perline=10" />
+<img src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,threejs,nodejs,php,laravel,supabase,git&perline=10" alt="Tech Stack" />
 
 </div>
 
-### GitHub Activity
-
-<div align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=artace23&show_icons=true&hide_border=true&theme=transparent&rank_icon=github&cache_seconds=86400" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=artace23&layout=compact&hide_border=true&theme=transparent&cache_seconds=86400" />
-</div>
+---
 
 <div align="center">
 
-**Designed & developed by Art Dela Cruz**
+**Designed & Developed by Art Dela Cruz**
 
 [artdelacruz.vercel.app](https://artdelacruz.vercel.app)
 
 </div>
-
